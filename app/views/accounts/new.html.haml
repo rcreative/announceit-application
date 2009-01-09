@@ -2,23 +2,27 @@
 
 - form_for :account, :url => {:action => :create} do |f|
   = error_messages_for :account
-  .set
-    = f.label :name
-    = f.text_field :name
-  .set
-    = f.label :email
-    = f.text_field :email
-  .set
-    = f.label :login
-    = f.text_field :login
-  .set
-    = f.label :password
-    = f.password_field :password
-  .set
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
-  .set
-    = f.label :subdomain
-    = f.text_field :subdomain
+  %fieldset
+    %p
+      = f.label :name
+      = f.text_field :name, :class => "textbox", :size => 33
+    %p
+      = f.label :email, "E-mail"
+      = f.text_field :email, :class => "textbox", :size => 33
+    %p
+      = f.label :login, "Username"
+      = f.text_field :login, :class => "textbox", :size => 33
+    .set
+      %p
+        = f.label :password
+        = f.password_field :password, :class => "textbox", :size => 15
+      %p
+        = f.label :password_confirmation, "Confirm Password"
+        = f.password_field :password_confirmation, :class => "textbox", :size => 15
+      .clear &nbsp;
+    %p
+      = f.label :subdomain
+      = f.text_field :subdomain, :class => "textbox", :size => 33
+      = ".#{application_domain}"
   .buttons
-    = f.submit
+    = f.submit "Signup", :class => "button"
