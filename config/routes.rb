@@ -41,8 +41,12 @@ ActionController::Routing::Routes.draw do |map|
   # map.connect ':controller/:action/:id'
   # map.connect ':controller/:action/:id.:format'
   
-  map.root :controller => 'welcome'
-
+  map.connect '/', :controller => 'welcome', :action => 'index',
+    :conditions => { :subdomain => '' }
+  
+  map.connect '/', :controller => 'teasers', :action => 'show',
+    :conditions => { :subdomain => Account.subdomain_regex }
+  
   map.unimplemented '/unimplemented', :controller => 'welcome', :action => 'unimplemented'
 
   map.signup '/signup', :controller => 'accounts', :action => 'new'

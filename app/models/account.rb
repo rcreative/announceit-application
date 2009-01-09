@@ -4,7 +4,10 @@ class Account < ActiveRecord::Base
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
-
+  
+  cattr_accessor :subdomain_regex
+  self.subdomain_regex = /\w+/
+  
   validates_presence_of     :login
   validates_length_of       :login, :within => 3..40
   validates_uniqueness_of   :login
