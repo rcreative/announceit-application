@@ -1,15 +1,16 @@
 !!! Strict
 %html{:xmlns=>"http://www.w3.org/1999/xhtml"}
   %head
-    %title= @title || "AnnounceIt"
+    %title= [@title, "AnnounceIt"].compact.join(" - ")
   %body
     #header
       #navigation
         %ul
           %li
-            %a{:href=>"/signup/"} Sign Up
+            = link_to "Sign Up", signup_url
           %li
-            %a{:href=>"/login/"} Login
+            = link_to "Login", unimplemented_url
     #content
+      %h1= @title
       = yield
     = render :partial => "/layouts/footer"

@@ -42,6 +42,7 @@ ActionController::Routing::Routes.draw do |map|
   # map.connect ':controller/:action/:id.:format'
   
   map.root :controller => 'welcome'
+  map.unimplemented '/unimplemented', :controller => 'welcome', :action => 'unimplemented'
   map.signup '/signup', :controller => 'accounts', :action => 'new'
   map.resources :accounts
 end
