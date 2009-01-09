@@ -33,6 +33,21 @@ describe Account do
     end.should_not change(Account, :count)
   end
 
+  it 'requires subdomain' do
+    lambda do
+      u = create_account(:subdomain => nil)
+      u.errors.on(:subdomain).should_not be_nil
+    end.should_not change(Account, :count)
+  end
+  
+  it 'requires unique subdomain' do
+    lambda do
+      create_account(:subdomain => 'taken')
+      u = create_account(:subdomain => 'taken')
+      u.errors.on(:subdomain).should_not be_nil
+    end.should change(Account, :count).by(1)
+  end
+  
   describe 'allows legitimate logins:' do
     ['123', '1234567890_234567890_234567890_234567890',
      'hello.-_there@funnychar.com'].each do |login_str|
@@ -220,7 +235,11 @@ describe Account do
 
 protected
   def create_account(options = {})
-    record = Account.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
+    record = Account.new({
+      :login => 'quire', :email => 'quire@example.com',
+      :password => 'quire69', :password_confirmation => 'quire69',
+      :subdomain => 'quire'
+    }.merge(options))
     record.save
     record
   end
