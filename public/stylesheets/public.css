@@ -60,11 +60,15 @@ form .set {
     float: left;
     margin: 0 1em 0 0; }
 form label {
-  display: block; }
+  display: block;
+  margin-bottom: 0.2em; }
   form label.inline, form label.checkbox {
-    display: inline; }
+    display: inline;
+    margin-bottom: 0; }
 form input.textbox {
   font-size: 100%; }
+  form input.textbox.big {
+    font-size: 140%; }
 form input.button {
   font-size: 140%; }
 form .buttons {
