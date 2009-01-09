@@ -2,17 +2,18 @@
 %html{:xmlns=>"http://www.w3.org/1999/xhtml"}
   %head
     %title= @title || "AnnounceIt"
+    %link{:href=>"/stylesheets/application.css", :rel=>"stylesheet", :type=>"text/css", :media=>"all"}/
   %body
     #header
       #navigation
         %ul
-          %li
+          %li{:class=>(@selected == :overview) ? "here" : nil}
             %a{:href=>"/overview/"} Overview
-          %li
+          %li{:class=>(@selected == :teaser) ? "here" : nil}
             %a{:href=>"/teaser/"} Teaser Page
-          %li
+          %li{:class=>(@selected == :subscribers) ? "here" : nil}
             %a{:href=>"/subscribers/"} Subscribers
-          %li
+          %li{:class=>(@selected == :settings) ? "here" : nil}
             %a{:href=>"/settings/"} Settings
     #content
       = yield

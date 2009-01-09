@@ -2,13 +2,14 @@
 %html{:xmlns=>"http://www.w3.org/1999/xhtml"}
   %head
     %title= [@title, "AnnounceIt"].compact.join(" - ")
+    %link{:href=>"/stylesheets/public.css", :rel=>"stylesheet", :type=>"text/css", :media=>"all"}/
   %body
     #header
       #navigation
         %ul
-          %li
-            = link_to "Sign Up", signup_url
-          %li
+          %li{:class=>(@selected == :signup) ? "here" : nil}
+            = link_to "Signup", signup_url
+          %li{:class=>(@selected == :login) ? "here" : nil}
             = link_to "Login", unimplemented_url
     #content
       %h1= @title
