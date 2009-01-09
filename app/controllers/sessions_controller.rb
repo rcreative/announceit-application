@@ -1,9 +1,7 @@
 # This controller handles the login/logout function of the site.  
 class SessionsController < ApplicationController
-  # render new.rhtml
-  def new
-  end
-
+  layout 'public'
+  
   def create
     logout_keeping_session!
     account = Account.authenticate(params[:login], params[:password])
