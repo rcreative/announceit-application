@@ -42,6 +42,12 @@ ActionController::Routing::Routes.draw do |map|
   # map.connect ':controller/:action/:id.:format'
   
   map.root :controller => 'welcome'
+
   map.signup '/signup', :controller => 'accounts', :action => 'new'
+  map.login  '/login',  :controller => 'sessions', :action => 'new'
+  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
+  map.dashboard '/dashboard', :controller => 'dashboards', :action => 'show'
+
   map.resources :accounts
+  map.resource :session
 end

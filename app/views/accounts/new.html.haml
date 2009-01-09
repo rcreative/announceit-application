@@ -1,0 +1,22 @@
+- form_for :account, :url => {:action => :create} do |f|
+  = error_messages_for :account
+  .set
+    = f.label :name
+    = f.text_field :name
+  .set
+    = f.label :email
+    = f.text_field :email
+  .set
+    = f.label :login
+    = f.password_field :login
+  .set
+    = f.label :password
+    = f.password_field :password
+  .set
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+  .set
+    = f.label :subdomain
+    = f.text_field :subdomain
+  .buttons
+    = f.submit
