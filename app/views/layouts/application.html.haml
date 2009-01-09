@@ -1,0 +1,19 @@
+!!! Strict
+%html
+  %head
+    %title= @title || "AnnounceIt"
+  %body
+    #header
+      #navigation
+        %ul
+          %li
+            %a{:href=>"/overview/"} Overview
+          %li
+            %a{:href=>"/teaser/"} Teaser Page
+          %li
+            %a{:href=>"/subscribers/"} Subscribers
+          %li
+            %a{:href=>"/settings/"} Settings
+    #content
+      = yield
+    = render :partial => "/layouts/footer"

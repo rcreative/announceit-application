@@ -1,0 +1,15 @@
+!!! Strict
+%html
+  %head
+    %title= @title || "AnnounceIt"
+  %body
+    #header
+      #navigation
+        %ul
+          %li
+            %a{:href=>"/signup/"} Sign Up
+          %li
+            %a{:href=>"/login/"} Login
+    #content
+      = yield
+    = render :partial => "/layouts/footer"
