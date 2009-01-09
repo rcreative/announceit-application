@@ -1,6 +1,5 @@
 class AccountsController < ApplicationController
-  # Be sure to include AuthenticationSystem in Application Controller instead
-  include AuthenticatedSystem
+  layout "public"
   
   def create
     logout_keeping_session!

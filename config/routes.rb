@@ -43,6 +43,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.root :controller => 'welcome'
 
+  map.unimplemented '/unimplemented', :controller => 'welcome', :action => 'unimplemented'
+
   map.signup '/signup', :controller => 'accounts', :action => 'new'
   map.login  '/login',  :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
