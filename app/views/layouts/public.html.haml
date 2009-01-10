@@ -4,13 +4,6 @@
     %title= [@title, "AnnounceIt"].compact.join(" - ")
     %link{:href=>"/stylesheets/public.css", :rel=>"stylesheet", :type=>"text/css", :media=>"all"}/
   %body
-    #header
-      #navigation
-        %ul
-          %li{:class=>(@selected == :signup) ? "here" : nil}
-            = link_to "Signup", signup_url
-          %li{:class=>(@selected == :login) ? "here" : nil}
-            = link_to "Login", login_url
     #content
       %h1= @title
       = yield
