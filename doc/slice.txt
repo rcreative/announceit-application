@@ -1,0 +1,9 @@
+created slice recursive1
+sudo apt-get update
+
+Secure the slice: http://articles.slicehost.com/2008/4/25/ubuntu-hardy-setup-page-1
+Setup git: http://waveweb2.com/installing-git-on-ubuntu-hardy
+Get Apache installed: http://articles.slicehost.com/2008/4/25/ubuntu-hardy-installing-apache-and-php5
+Passenger: http://articles.slicehost.com/2008/5/1/ubuntu-hardy-mod_rails-installation
+Application: http://articles.slicehost.com/2008/5/1/ubuntu-hardy-using-mod_rails-to-serve-your-application
+  capified application
