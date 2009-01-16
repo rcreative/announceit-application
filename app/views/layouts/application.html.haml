@@ -11,7 +11,5 @@
         %small= "(#{ link_to 'Logout', logout_url })"
       = render :partial => "/layouts/navigation"
     #content
-      - if @title
-        %h1= @title
       = yield
     = render :partial => "/layouts/footer"
