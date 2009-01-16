@@ -5,6 +5,10 @@
     %link{:href=>"/stylesheets/application.css", :rel=>"stylesheet", :type=>"text/css", :media=>"all"}/
   %body
     #header
+      %p.info
+        Logged in as
+        %strong= current_account.name
+        %small= "(#{ link_to 'Logout', logout_url })"
       = render :partial => "/layouts/navigation"
     #content
       - if @title
