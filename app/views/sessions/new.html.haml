@@ -1,6 +1,8 @@
-- @title = "Log In"
+- @title = "Login"
 
 - form_tag session_path do
+  - if flash[:error]
+    %p.message.error= flash[:error]
   %fieldset
     %p
       = label_tag 'login'

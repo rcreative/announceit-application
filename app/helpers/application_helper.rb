@@ -16,4 +16,11 @@ module ApplicationHelper
     end
   end
   
+  def errors_on?(*objects)
+    objects.any? do |object|
+      object = instance_variable_get("@#{object}") if object.kind_of?(Symbol)
+      (!object.nil?) && (object.errors.count > 0)
+    end
+  end
+  
 end

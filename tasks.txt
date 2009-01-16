@@ -1,0 +1,1 @@
++ rename User#login to User#username; update interface to reflect changes
