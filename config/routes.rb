@@ -52,8 +52,13 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'accounts', :action => 'new'
   map.login  '/login',  :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
-  map.dashboard '/dashboard', :controller => 'dashboards', :action => 'show'
-
+  
+  map.namespace :admin, :path_prefix => "" do |admin|
+    admin.resource :dashboard
+    admin.resource :teaser
+    admin.resources :subscribers
+  end
+  
   map.resources :accounts
   map.resource :session
 end
