@@ -1,1 +1,8 @@
-%h1= @account.name
+- if @account
+  %h1= @account.name
+  %p Public teaser page
+- else
+  %h1 Not found
+  %p
+    We do not have a teaser page for subdomain
+    = "'#{request.subdomains.join('.')}'."

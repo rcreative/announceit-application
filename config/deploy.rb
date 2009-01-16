@@ -31,7 +31,7 @@ namespace :slicehost do
   task :config_vhost do
     vhost_config =<<-EOF
 <VirtualHost *:80>  
-  ServerName 173.45.235.36
+  ServerName ai.recursivecreative.net
   DocumentRoot #{current_path}/public
 </VirtualHost>
     EOF
