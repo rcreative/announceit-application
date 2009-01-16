@@ -1,8 +1,9 @@
 !!! Strict
 %html{:xmlns=>"http://www.w3.org/1999/xhtml"}
   %head
-    %title= [@title, "AnnounceIt"].compact.uniq.join(" | ")
+    %title= ["AnnounceIt", @title ].compact.uniq.join(": ")
     %link{:href=>"/stylesheets/application.css", :rel=>"stylesheet", :type=>"text/css", :media=>"all"}/
+    = javascript_include_tag :all
   %body
     #header
       %p.info

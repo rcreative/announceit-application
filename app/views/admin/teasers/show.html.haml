@@ -17,9 +17,18 @@
 .box
   %h3 Logo
   %p
-    %span.logo{:style=>"border: 1px solid silver; display: block; width: 300px; line-height: 200px; text-align: center"} none
-  %p
-    %a{:href=>"#"} Change
+    %span.logo{:style=>"border: 1px solid #ddd; display: block; width: 300px; line-height: 200px; text-align: center"} none
+  %p#change_logo
+    %a{:href=>"javascript:void(0);", :onclick=>"Element.hide('change_logo'); Element.show('upload_logo'); Event.stop(event)"} Change
+  %form#upload_logo{:style=>"display: none"}
+    %p{:style=>"background: white; border: 1px solid #ddd; padding: 10px; width: 280px"}
+      %label{:for=>""}
+      %input{:type=>"file", :name=>"account[logo]", :id=>"account_logo"}/
+    %p
+      %input{:type=>"submit", :value=>"Upload"}/
+      or
+      %a{:class=>"cancel", :href=>"javascript:void(0);", :onclick=>"Element.hide('upload_logo'); Element.show('change_logo'); Event.stop(event)"} Cancel
+
 .box
   %h3 Title and Description
   %h4 [Your Title Here]

@@ -31,6 +31,14 @@ body {
   font-family: Verdana, Helvetica, Arial, sans-serif;
   font-size: 80%; }
 
+a {
+  color: #2285cc; }
+  a:hover {
+    color: #44b0ee;
+    text-decoration: none; }
+  a.cancel {
+    color: #e33; }
+
 big {
   font-size: 130%; }
 
@@ -50,7 +58,7 @@ h3 {
   margin-top: 1em;
   margin-bottom: 0.5em; }
 
-p, fieldset {
+p, fieldset, table, ul, ol {
   margin-top: 1em;
   margin-bottom: 1em; }
 
@@ -165,6 +173,8 @@ form .field_error {
     #content table.index td {
       padding: 10px 2px;
       border-top: 1px solid #e5e5e5; }
+    #content table.index a {
+      padding: 0 5px; }
   #content .box {
     background-color: #f0f0f0;
     border: 1px solid #e5e5e5;
@@ -173,7 +183,7 @@ form .field_error {
     #content .box h3 {
       margin-top: 13px; }
     #content .box big.domain {
-      color: #669; }
+      color: #759; }
 
 #footer {
   background: #f5f5f5;
