@@ -1,20 +1,13 @@
 !!! Strict
 %html{:xmlns=>"http://www.w3.org/1999/xhtml"}
   %head
-    %title= @title || "AnnounceIt"
+    %title= [@title, "AnnounceIt"].compact.uniq.join(" | ")
     %link{:href=>"/stylesheets/application.css", :rel=>"stylesheet", :type=>"text/css", :media=>"all"}/
   %body
     #header
-      #navigation
-        %ul
-          %li{:class=>(@selected == :overview) ? "here" : nil}
-            %a{:href=>"/overview/"} Overview
-          %li{:class=>(@selected == :teaser) ? "here" : nil}
-            %a{:href=>"/teaser/"} Teaser Page
-          %li{:class=>(@selected == :subscribers) ? "here" : nil}
-            %a{:href=>"/subscribers/"} Subscribers
-          %li{:class=>(@selected == :settings) ? "here" : nil}
-            %a{:href=>"/settings/"} Settings
+      = render :partial => "/layouts/navigation"
     #content
+      - if @title
+        %h1= @title
       = yield
     = render :partial => "/layouts/footer"
