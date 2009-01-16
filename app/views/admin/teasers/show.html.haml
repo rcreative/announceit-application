@@ -1,2 +1,28 @@
 - @selected = :teaser
 - @title = "Teaser Page"
+
+.box
+  %h3 Domain
+  %p
+    %big.domain= "subdomain.#{application_domain}"
+    %a{:href=>"#"} Customize
+
+.box
+  %h3 Template
+  %p
+    %select
+      %option Black Background
+      %option White Background
+
+.box
+  %h3 Logo
+  %p
+    %span.logo{:style=>"border: 1px solid silver; display: block; width: 300px; line-height: 200px; text-align: center"} none
+  %p
+    %a{:href=>"#"} Change
+.box
+  %h3 Title and Description
+  %h4 [Your Title Here]
+  %p [Your Description Here]
+  %p
+    %a{:href=>"#"} Edit

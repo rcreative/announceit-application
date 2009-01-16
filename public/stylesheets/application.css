@@ -31,9 +31,24 @@ body {
   font-family: Verdana, Helvetica, Arial, sans-serif;
   font-size: 80%; }
 
+big {
+  font-size: 130%; }
+
+small {
+  font-size: 80%; }
+
 h1 {
   font-size: 220%;
   margin: 0.75em 0 0.75em; }
+
+h2 {
+  font-size: 180%;
+  margin-top: 1em; }
+
+h3 {
+  font-size: 140%;
+  margin-top: 1em;
+  margin-bottom: 0.5em; }
 
 p, fieldset {
   margin-top: 1em;
@@ -144,12 +159,21 @@ form .field_error {
       color: #999;
       font-size: 80%;
       font-weight: normal;
-      padding: 4px 2px;
+      padding: 5px 2px 4px;
       letter-spacing: 0.1em;
       text-transform: uppercase; }
     #content table.index td {
       padding: 10px 2px;
       border-top: 1px solid #e5e5e5; }
+  #content .box {
+    background-color: #f0f0f0;
+    border: 1px solid #e5e5e5;
+    margin: 1em 0;
+    padding: 0 15px; }
+    #content .box h3 {
+      margin-top: 13px; }
+    #content .box big.domain {
+      color: #669; }
 
 #footer {
   background: #f5f5f5;
