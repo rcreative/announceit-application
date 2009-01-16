@@ -3,6 +3,6 @@
     %li{:class=>(@selected == :dashboard) ? "here" : nil}
       = link_to "Dashboard", dashboard_path
     %li{:class=>(@selected == :teaser) ? "here" : nil}
-      %a{:href=>"/teaser/"} Teaser Page
+      = link_to "Teaser Page", "/teaser"
     %li{:class=>(@selected == :subscribers) ? "here" : nil}
-      %a{:href=>"/subscribers/"} Subscribers
+      = link_to "Subscribers", "/subscribers"
