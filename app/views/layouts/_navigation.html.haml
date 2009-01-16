@@ -1,8 +1,8 @@
 #navigation
   %ul
     %li{:class=>(@selected == :dashboard) ? "here" : nil}
-      = link_to "Dashboard", dashboard_path
+      = link_to "Dashboard", admin_dashboard_path
     %li{:class=>(@selected == :teaser) ? "here" : nil}
-      = link_to "Teaser Page", "/teaser"
+      = link_to "Teaser Page", admin_teaser_path
     %li{:class=>(@selected == :subscribers) ? "here" : nil}
-      = link_to "Subscribers", "/subscribers"
+      = link_to "Subscribers", admin_subscribers_path
