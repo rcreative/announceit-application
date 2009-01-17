@@ -23,8 +23,4 @@ module ApplicationHelper
     end
   end
   
-  def link_to_email(email, options={})
-    link_to email, "mailto:#{email}", options
-  end
-  
 end

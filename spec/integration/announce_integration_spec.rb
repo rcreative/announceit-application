@@ -5,6 +5,11 @@ describe 'welcome' do
     navigate_to 'http://test.host'
     response.should be_showing('/signup')
   end
+  
+  it 'should not count ai as a subdomain, since we are using that for recursivecreative.net' do
+    navigate_to 'http://ai.test.host'
+    response.should be_showing('/signup')
+  end
 end
 
 describe 'signup' do

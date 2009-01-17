@@ -11,6 +11,23 @@ class ReleaseOne < ActiveRecord::Migration
       t.datetime :remember_token_expires_at
       t.timestamps
     end
+    
+    create_table :teasers, :force => true do |t|
+      t.belongs_to :account
+      t.string :background_color, :limit => 15
+      t.string :logo_file_name
+      t.string :logo_content_type
+      t.integer :logo_file_size
+      t.datetime :logo_updated_at
+      t.timestamps
+    end
+    
+    create_table :subscribers, :force => true do |t|
+      t.belongs_to :teaser
+      t.string :name
+      t.string :email, :limit => 100
+      t.timestamps
+    end
   end
 
   def self.down

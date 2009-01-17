@@ -17,15 +17,18 @@
 .box
   %h3 Logo
   %p
-    %span.logo{:style=>"border: 1px solid #ddd; display: block; width: 300px; line-height: 200px; text-align: center"} none
+    - if @teaser.logo.exists?
+      = image_tag @teaser.logo.url
+    - else
+      %span.logo{:style=>"border: 1px solid #ddd; display: block; width: 300px; line-height: 200px; text-align: center"} none
   %p#change_logo
     %a{:href=>"javascript:void(0);", :onclick=>"Element.hide('change_logo'); Element.show('upload_logo'); Event.stop(event)"} Change
-  %form#upload_logo{:style=>"display: none"}
+  - form_for :teaser, :url => admin_teaser_path, :html => {:id => 'upload_logo', :style => 'display:none', :method => :put, :multipart => true} do |logo|
     %p{:style=>"background: white; border: 1px solid #ddd; padding: 10px; width: 280px"}
       %label{:for=>""}
-      %input{:type=>"file", :name=>"account[logo]", :id=>"account_logo"}/
+      = logo.file_field :logo
     %p
-      %input{:type=>"submit", :value=>"Upload"}/
+      = logo.submit 'Upload'
       or
       %a{:class=>"cancel", :href=>"javascript:void(0);", :onclick=>"Element.hide('upload_logo'); Element.show('change_logo'); Event.stop(event)"} Cancel
 

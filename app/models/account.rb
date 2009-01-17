@@ -5,6 +5,9 @@ class Account < ActiveRecord::Base
   include Authentication::ByPassword
   include Authentication::ByCookieToken
   
+  has_one :teaser
+  after_create :create_teaser
+  
   cattr_accessor :subdomain_regex
   self.subdomain_regex = /\w+/
   
@@ -23,6 +26,7 @@ class Account < ActiveRecord::Base
 
   validates_length_of       :subdomain, :maximum => 40, :allow_nil => false
   validates_uniqueness_of   :subdomain
+  validates_format_of       :subdomain, :with => self.subdomain_regex
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation

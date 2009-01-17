@@ -1,7 +1,3 @@
-class Subscriber
-  attr_accessor :name
-  
-  def initialize(name)
-    @name = name
-  end
+class Subscriber < ActiveRecord::Base
+  belongs_to :teaser
 end

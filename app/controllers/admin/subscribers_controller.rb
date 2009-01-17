@@ -1,4 +1,4 @@
 module Admin
-  class SubscribersController < ApplicationController
+  class SubscribersController < AbstractController
   end
 end
