@@ -130,7 +130,7 @@ form .field_error {
     margin-left: 10px;
     margin-right: -1px; }
     #header p.view_teaser a {
-      background: #e60;
+      background: #d60;
       color: white;
       padding: 6px 8px;
       border-radius: 5px;
@@ -138,7 +138,7 @@ form .field_error {
       -webkit-border-radius: 5px;
       text-decoration: none; }
       #header p.view_teaser a:hover {
-        background: #d30;
+        background: #c30;
         color: white; }
   #header p.info {
     color: #ccc;
