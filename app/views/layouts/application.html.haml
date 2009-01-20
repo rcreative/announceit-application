@@ -6,6 +6,8 @@
     = javascript_include_tag :all
   %body
     #header
+      %p.view_teaser
+        %a{:href=>"/teaser"} View Teaser
       %p.info
         Logged in as
         %strong= current_account.name
