@@ -7,7 +7,7 @@
   %body
     #header
       %p.view_teaser
-        %a{:href=>"/teaser"} View Teaser
+        = link_to "View Teaser", teaser_url
       %p.info
         Logged in as
         %strong= current_account.name

@@ -44,7 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/', :controller => 'welcome', :action => 'index',
     :conditions => { :subdomain => '' }
   
-  map.connect '/', :controller => 'teasers', :action => 'show',
+  map.teaser '/', :controller => 'teasers', :action => 'show',
     :conditions => { :subdomain => Account.subdomain_regex }
   
   map.unimplemented '/unimplemented', :controller => 'welcome', :action => 'unimplemented'
