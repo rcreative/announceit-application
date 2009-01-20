@@ -1,5 +1,5 @@
 module Admin
-  class TeasersController < AbstractController
+  class SettingsController < AbstractController
     before_filter :assign_teaser
     
     def update

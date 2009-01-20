@@ -23,7 +23,7 @@
       %a{:href=>"javascript:void(0);", :onclick=>"Element.hide('logo'); Element.show('change_logo'); Event.stop(event)"}
         Change
   #change_logo{:style => (@teaser.logo.exists? ? 'display:none' : nil)}
-    - form_for :teaser, :url => admin_teaser_path, :html => {:method => :put, :multipart => true} do |logo|
+    - form_for :setttings, :url => admin_settings_path, :html => {:method => :put, :multipart => true} do |logo|
       %p.logo_uploader
         = logo.file_field :logo
       %p

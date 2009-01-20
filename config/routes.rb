@@ -54,9 +54,9 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   
   map.namespace :admin, :path_prefix => "" do |admin|
-    admin.resource :dashboard
-    admin.resource :teaser
+    admin.resource :settings
     admin.resources :subscribers
+    admin.resource :statistics
   end
   
   map.resources :accounts
