@@ -130,15 +130,15 @@ form .field_error {
     margin-left: 10px;
     margin-right: -1px; }
     #header p.view_teaser a {
-      background: #777;
-      color: #eee;
+      background: #e60;
+      color: white;
       padding: 6px 8px;
       border-radius: 5px;
       -moz-border-radius: 5px;
       -webkit-border-radius: 5px;
       text-decoration: none; }
       #header p.view_teaser a:hover {
-        background: #999;
+        background: #d30;
         color: white; }
   #header p.info {
     color: #ccc;
