@@ -48,6 +48,12 @@ describe Account do
     end.should change(Account, :count).by(1)
   end
   
+  it 'should ensure subdomains are not our special ones' do
+    create_account(:subdomain => 'ai').errors.on(:subdomain).should_not be_nil
+    create_account(:subdomain => 'www').errors.on(:subdomain).should_not be_nil
+    create_account(:subdomain => 'mail').errors.on(:subdomain).should_not be_nil
+  end
+  
   describe 'allows legitimate logins:' do
     ['123', '1234567890_234567890_234567890_234567890',
      'hello.-_there@funnychar.com'].each do |login_str|
