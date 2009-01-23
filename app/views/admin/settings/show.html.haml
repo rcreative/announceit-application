@@ -18,7 +18,7 @@
   %h3 Logo
   #logo{:style => (@teaser.logo.exists? ? nil : 'display:none')}
     %p
-      = image_tag @teaser.logo.url
+      = image_tag @teaser.logo.url if @teaser.logo.exists?
     %p.change
       %a{:href=>"javascript:void(0);", :onclick=>"Element.hide('logo'); Element.show('change_logo'); Event.stop(event)"}
         Change
