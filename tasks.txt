@@ -6,9 +6,9 @@ x Allow a client to upload a custom logo for a teaser page
 * Allow a client to view a list of collected e-mail addresses
 * Allow a client to download a list of collected addresses
 * Allow a client to configure the subdomain
-* Allow a client to use a custom domain
 * Allow a client to choose a white or black background for a teaser page
 * Allow a client to choose a plan and pay for it (spreedly)
+* Allow a client to use a custom domain
 * Allow a client to customize the text on the thank you page
 * Allow a client to choose from a variety of predefined templates
 * Allow a client to provide a custom template for a teaser page (stylesheets and HTML)
