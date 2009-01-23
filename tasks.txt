@@ -17,6 +17,7 @@ x Allow a client to configure the subdomain
 * Allow a client to view the additional information collected on a teaser page
 
 Designer Tasks
+* Pagination on subscribers list
 * Home Page
 * Pricing Page
 * Privacy Policy

@@ -1,7 +1,7 @@
 !!! Strict
 %html{:xmlns=>"http://www.w3.org/1999/xhtml"}
   %head
-    %title= [@title, "AnnounceIt"].compact.join(" - ")
+    %title= [application_name, @title ].compact.uniq.join(": ")
     %link{:href=>"/stylesheets/public.css", :rel=>"stylesheet", :type=>"text/css", :media=>"all"}/
   %body
     #content

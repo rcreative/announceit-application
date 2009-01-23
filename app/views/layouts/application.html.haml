@@ -1,13 +1,13 @@
 !!! Strict
 %html{:xmlns=>"http://www.w3.org/1999/xhtml"}
   %head
-    %title= ["AnnounceIt", @title ].compact.uniq.join(": ")
+    %title= [application_name, @title ].compact.uniq.join(": ")
     %link{:href=>"/stylesheets/application.css", :rel=>"stylesheet", :type=>"text/css", :media=>"all"}/
     = javascript_include_tag :all
   %body
     #header
       %p.view_teaser
-        = link_to "View Teaser", teaser_view_url(current_account)
+        = link_to "View Teaser", teaser_view_url(current_account), :target=>"_blank"
       %p.info
         Logged in as
         %strong= current_account.name

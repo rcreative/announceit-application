@@ -1,4 +1,9 @@
 module ApplicationHelper
+  
+  def application_name
+    "Announce It"
+  end
+  
   def application_domain
     request.host_with_port
   end
