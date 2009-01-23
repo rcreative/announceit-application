@@ -3,8 +3,12 @@ module Admin
     before_filter :assign_teaser
     
     def update
-      @teaser.update_attributes(params[:teaser])
-      redirect_to :action => :show
+      if @account.update_attributes(params[:account]) &
+         @teaser.update_attributes(params[:teaser])
+        redirect_to :action => :show
+      else
+        render :action => :subdomain
+      end
     end
     
     protected

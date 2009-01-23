@@ -69,8 +69,8 @@ end
 
 describe 'admin' do
   before do
-    @account = stub_model(Account, :subdomain => 'mecompany', :save => true)
-    @teaser = stub_model(Teaser, :account => @account)
+    @account = stub_model(Account, :subdomain => 'mecompany', :update_attributes => true)
+    @teaser = stub_model(Teaser, :account => @account, :update_attributes => true)
     @account.stub!(:teaser).and_return(@teaser)
     Account.stub!(:authenticate).and_return(@account)
     Account.stub!(:find_by_id).and_return(@account)
@@ -86,5 +86,19 @@ describe 'admin' do
     response.should have_text(/one@example\.com/)
     response.should have_text(/Two/)
     response.should have_text(/two@example\.com/)
+  end
+  
+  it 'should allow changing the subdomain' do
+    @account.should_receive(:update_attributes).with('subdomain' => 'meothername').and_return(true)
+    navigate_to '/settings/subdomain'
+    submit_form :account => {:subdomain => 'meothername'}
+    response.should be_showing('/settings')
+  end
+  
+  it 'should report errors changing the subdomain' do
+    @account.should_receive(:update_attributes).with('subdomain' => 'meothername').and_return(false)
+    navigate_to '/settings/subdomain'
+    submit_form :account => {:subdomain => 'meothername'}
+    response.should render_template('subdomain')
   end
 end
