@@ -7,7 +7,7 @@
   %body
     #header
       %p.view_teaser
-        = link_to "View Teaser", teaser_url
+        = link_to "View Teaser", teaser_view_url(current_account)
       %p.info
         Logged in as
         %strong= current_account.name

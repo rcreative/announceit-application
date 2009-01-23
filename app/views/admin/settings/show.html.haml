@@ -4,7 +4,7 @@
 .box
   %h3 Domain
   %p
-    %big.domain= "#{current_account.subdomain}.#{application_domain}"
+    %big.domain= teaser_host(current_account)
     %a{:href=>"/settings/change_domain"} Change
 
 -# .box

@@ -1,8 +1,6 @@
-# Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  
   def application_domain
-    "announceit.com"
+    request.host_with_port
   end
   
   # Calculate the appropriate years for copyright
@@ -23,12 +21,15 @@ module ApplicationHelper
     end
   end
   
-  def teaser_url
-    if Rails.env.production?
-      raise "implement me"
-    else
-      teaser_dev_path
-    end
+  def teaser_host(account)
+    "#{account.subdomain}.#{application_domain}"
   end
   
+  def teaser_view_url(account)
+    if Rails.env.production?
+      url_for :host => teaser_host(account), :controller => '/teasers', :action => 'show'
+    else
+      url_for '/teaser'
+    end
+  end
 end

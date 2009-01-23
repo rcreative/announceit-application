@@ -13,7 +13,7 @@ class TeasersController < ApplicationController
   
   private
     def assign_teaser
-      @account = Account.find_by_subdomain(request.subdomains.first)
+      @account = current_account || Account.find_by_subdomain(request.subdomains.first)
       @teaser = @account.teaser if @account
     end
 end
