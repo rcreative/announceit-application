@@ -1,6 +1,17 @@
 - if @account
   %h1= @account.name
   %p Public teaser page
+  - if flash[:notice]
+    %p.notice= flash[:notice]
+  - form_for :subscriber, :url => {:action => :subscribe} do |fields|
+    %p
+      = fields.label :name, 'Your name'
+      = fields.text_field :name
+    %p
+      = fields.label :email, 'Your e-mail address'
+      = fields.text_field :email
+    .buttons
+      = fields.submit 'Subscribe'
 - else
   %h1 Not found
   %p

@@ -30,9 +30,39 @@ describe 'teaser page' do
     response.should have_text(/My Company/)
   end
   
+  it 'should be displayed for a subdomain with more tlds' do
+    Account.should_receive(:find_by_subdomain).with('mecompany').and_return(Account.new(:name => 'My Company'))
+    navigate_to 'http://mecompany.a.b.test.host'
+    response.should have_text(/mecompany/)
+  end
+  
   it 'should indicate when no teaser is found for a subdomain' do
     Account.should_receive(:find_by_subdomain).with('mecompany').and_return(nil)
     navigate_to 'http://mecompany.test.host'
     response.should have_text(/mecompany/)
+  end
+end
+
+describe 'subscribe' do
+  before do
+    @account = stub_model(Account, :subdomain => 'mecompany')
+    @teaser = Teaser.create!(:account => @account)
+    @account.stub!(:teaser).and_return(@teaser)
+    Account.stub!(:find_by_subdomain).and_return(@account)
+  end
+  
+  it 'should create a Subscriber for the Teaser' do
+    navigate_to 'http://mecompany.test.host'
+    submit_form :subscriber => {:name => 'Johnny', :email => 'johnny@example.com'}
+    response.should be_showing('/')
+    response.body.should have_text(/thank you/i)
+    Subscriber.last.teaser.should == @teaser
+  end
+  
+  it 'should indicate form errors' do
+    navigate_to 'http://mecompany.test.host'
+    submit_form :subscriber => {:email => '@example.com'}
+    response.should be_showing('/subscribe')
+    response.should have_text(/error/)
   end
 end
