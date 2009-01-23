@@ -3,12 +3,12 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe 'welcome' do
   it 'should be displayed when no subdomain' do
     navigate_to 'http://test.host'
-    response.should be_showing('/signup')
+    response.should be_showing('/')
   end
   
   it 'should not count ai as a subdomain, since we are using that for recursivecreative.net' do
     navigate_to 'http://ai.test.host'
-    response.should be_showing('/signup')
+    response.should be_showing('/')
   end
 end
 
