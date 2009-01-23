@@ -92,7 +92,7 @@ describe 'admin' do
     @account.should_receive(:update_attributes).with('subdomain' => 'meothername').and_return(true)
     navigate_to '/settings/subdomain'
     submit_form :account => {:subdomain => 'meothername'}
-    response.should be_showing('/settings')
+    response.should render_template('show')
   end
   
   it 'should report errors changing the subdomain' do
@@ -100,5 +100,12 @@ describe 'admin' do
     navigate_to '/settings/subdomain'
     submit_form :account => {:subdomain => 'meothername'}
     response.should render_template('subdomain')
+  end
+  
+  it 'should allow customizing the text for the teaser' do
+    @teaser.should_receive(:update_attributes).with('title' => 'Title', 'description' => 'Description').and_return(true)
+    navigate_to '/settings'
+    submit_form 'title_and_description_form', :teaser => {:title => 'Title', :description => 'Description'}
+    response.should render_template('show')
   end
 end

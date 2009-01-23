@@ -23,34 +23,33 @@
       %a{:href=>"javascript:void(0);", :onclick=>"Element.hide('logo'); Element.show('change_logo'); Event.stop(event)"}
         Change
   #change_logo{:style => (@teaser.logo.exists? ? 'display:none' : nil)}
-    - form_for :setttings, :url => admin_settings_path, :html => {:method => :put, :multipart => true} do |logo|
+    - form_for :teaser, :url => admin_settings_path, :html => {:method => :put, :multipart => true} do |logo|
       %p.logo_uploader
         = logo.file_field :logo
       %p
         = logo.submit 'Upload'
         %span{:style => (@teaser.logo.exists? ? nil : 'display:none')}
           or
-          %a{:class=>"cancel", :href=>"javascript:void(0);", :onclick=>"Element.hide('change_logo'); Element.show('logo'); Event.stop(event)"} Cancel
+          = link_to_function 'cancel', "Element.hide('change_logo'); Element.show('logo'); Event.stop(event)", :class => 'cancel'
 
 .box
   %h3 Title &amp; Description
   #title_and_description
     .title_and_description
-      %h4 Be a Part of Something Amazing
-      %p Enter your name and email below to be among the first to participate in our beta program.
+      %h4= @teaser.title
+      %p= @teaser.description
     %p.change
-      %a{:href=>"javascript:void(0);", :onclick=>"Element.hide('title_and_description'); Element.show('change_title_and_description'); Event.stop(event)"}
-        Change
+      = link_to_function 'Change', "Element.hide('title_and_description'); Element.show('change_title_and_description'); Event.stop(event)"
   #change_title_and_description{:style=>"display: none"}
-    %form
+    - form_for :teaser, :url => admin_settings_path, :html => {:id => 'title_and_description_form', :method => :put} do |fields|
       %p
-        %label{:for=>"title"} Title
-        %input.textbox.big{:name=>"title", :id=>"title", :type=>"text", :size=>"30", :value=>"Be Part of Something Amazing"}/
+        = fields.label :title
+        = fields.text_field :title, :size => 30, :class => 'textbox big'
       %p
-        %label{:for=>"description"} Description
-        %textarea{:name=>"description", :id=>"description", :type=>"text", :cols=>40, :rows=>4}= "Enter your name and email below to be among the first to participate in our beta program."
+        = fields.label :description
+        ~ fields.text_area :description, :cols => 40, :rows => 4
       %p
-        %input{:type=>"submit", :value=>"Save Changes"}/
+        = fields.submit 'Save Changes'
         or
-        %a{:class=>"cancel", :href=>"javascript:void(0);", :onclick=>"Element.hide('change_title_and_description'); Element.show('title_and_description'); Event.stop(event)"} Cancel
+        = link_to_function 'cancel', "Element.hide('change_title_and_description'); Element.show('title_and_description'); Event.stop(event)", :class => 'cancel'
         
