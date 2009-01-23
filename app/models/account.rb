@@ -25,8 +25,9 @@ class Account < ActiveRecord::Base
   validates_format_of       :email, :with => Authentication.email_regex, :message => Authentication.bad_email_message
 
   validates_length_of       :subdomain, :maximum => 40, :allow_nil => false
-  validates_uniqueness_of   :subdomain
   validates_format_of       :subdomain, :with => self.subdomain_regex
+  validates_exclusion_of    :subdomain, :in => %w(ai www mail)
+  validates_uniqueness_of   :subdomain
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation

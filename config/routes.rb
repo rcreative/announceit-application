@@ -42,7 +42,7 @@ ActionController::Routing::Routes.draw do |map|
   # map.connect ':controller/:action/:id.:format'
   
   map.connect '/', :controller => 'welcome', :action => 'index',
-    :conditions => { :subdomain => '' }
+    :conditions => { :subdomain => /\A(ai)?\Z/ }
   
   map.teaser '/', :controller => 'teasers', :action => 'show',
     :conditions => { :subdomain => Account.subdomain_regex }
