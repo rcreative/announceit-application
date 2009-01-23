@@ -1,14 +1,12 @@
 - @selected = :subscribers
 - @title = "Subscribers"
 
-- @subscribers = ["Ann Mahler", "Cary Curtis", "Edward Fleck", "Jeff Bradley", "Katherine Jamison", "Keith Aleman", "Pamela Moulton", "Steve Orlando", "Suzanne Koch"].map { |name| Subscriber.new(:name => name, :email => name.downcase.gsub(/\s+/, '.') + "@" + ["gmail.com", "att.net", "yahoo.com"].rand) }
-
 %table.index#subscribers{:border=>0, :cellpadding=>0, :cellspacing=>0}
   %tr
     %th.name Name
     %th.email Email Address
   %tbody
-    - for subscriber in @subscribers
+    - for subscriber in @teaser.subscribers
       %tr[subscriber]
-        %td.name= subscriber.name
+        %td.name=h subscriber.name
         %td.email= mail_to subscriber.email

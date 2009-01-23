@@ -1,4 +1,5 @@
 class TeasersController < ApplicationController
+  before_filter :assign_account
   before_filter :assign_teaser
   
   def subscribe
@@ -12,8 +13,7 @@ class TeasersController < ApplicationController
   end
   
   private
-    def assign_teaser
+    def assign_account
       @account = current_account || Account.find_by_subdomain(request.subdomains.first)
-      @teaser = @account.teaser if @account
     end
 end

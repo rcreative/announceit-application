@@ -66,3 +66,25 @@ describe 'subscribe' do
     response.should have_text(/error/)
   end
 end
+
+describe 'admin' do
+  before do
+    @account = stub_model(Account, :subdomain => 'mecompany', :save => true)
+    @teaser = stub_model(Teaser, :account => @account)
+    @account.stub!(:teaser).and_return(@teaser)
+    Account.stub!(:authenticate).and_return(@account)
+    Account.stub!(:find_by_id).and_return(@account)
+    login_as @account
+  end
+  
+  it 'should list the subscribers' do
+    @teaser.stub!(:subscribers).and_return([
+      Subscriber.new(:email => 'one@example.com'),
+      Subscriber.new(:email => 'two@example.com', :name => 'Two')
+    ])
+    navigate_to '/subscribers'
+    response.should have_text(/one@example\.com/)
+    response.should have_text(/Two/)
+    response.should have_text(/two@example\.com/)
+  end
+end

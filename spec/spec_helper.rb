@@ -8,7 +8,23 @@ require 'spec/integration'
 
 include AuthenticatedTestHelper
 
+module IntegrationExampleExtensions
+  def login_as(account)
+    if account.nil?
+      delete session_path
+    else
+      post session_url, :login => account.login, :password => "password"
+    end
+  end
+  
+  def current_account
+    controller.send :current_account
+  end
+end
+
 Spec::Runner.configure do |config|
+  config.include IntegrationExampleExtensions, :type => :integration
+  
   # If you're not using ActiveRecord you should remove these
   # lines, delete config/database.yml and disable :active_record
   # in your config/boot.rb
