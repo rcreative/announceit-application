@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20090109193227) do
   create_table "teasers", :force => true do |t|
     t.integer  "account_id"
     t.string   "background_color",  :limit => 15
+    t.string   "title"
+    t.text     "description"
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
