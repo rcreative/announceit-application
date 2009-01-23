@@ -46,10 +46,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/teaser', :controller => 'teasers', :action => 'show'
   
   map.connect '/subscribe', :controller => 'teasers', :action => 'subscribe',
-    :conditions => {
-      :subdomain => Account.subdomain_regex,
-      :method    => :post
-    }
+    :conditions => { :method    => :post }
   
   map.unimplemented '/unimplemented', :controller => 'welcome', :action => 'unimplemented'
   

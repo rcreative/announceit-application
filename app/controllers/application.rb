@@ -18,6 +18,6 @@ class ApplicationController < ActionController::Base
   
   private
     def assign_teaser
-      @teaser = @account.teaser if @account
+      @teaser = @account.teaser
     end
 end

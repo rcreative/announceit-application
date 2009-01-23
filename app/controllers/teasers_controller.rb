@@ -15,5 +15,6 @@ class TeasersController < ApplicationController
   private
     def assign_account
       @account = current_account || Account.find_by_subdomain(request.subdomains.first)
+      head :not_found unless @account
     end
 end

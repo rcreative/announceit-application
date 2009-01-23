@@ -38,8 +38,8 @@ describe 'teaser page' do
   
   it 'should indicate when no teaser is found for a subdomain' do
     Account.should_receive(:find_by_subdomain).with('mecompany').and_return(nil)
-    navigate_to 'http://mecompany.test.host'
-    response.should have_text(/mecompany/)
+    get 'http://mecompany.test.host'
+    response.response_code.should be(404)
   end
 end
 
