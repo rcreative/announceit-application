@@ -25,5 +25,3 @@ Designer Tasks
 
 Developer Tasks
 * rename User#login to User#username; update interface to reflect changes
-* when logged in hitting the root url should take you to the dashboard
-* exception notifier
