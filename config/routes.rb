@@ -39,7 +39,15 @@ ActionController::Routing::Routes.draw do |map|
     :conditions => { :subdomain => /\A(ai)?\Z/ }
   
   map.teaser '/', :controller => 'teasers', :action => 'show',
-    :conditions => { :subdomain => Account.subdomain_regex }
+    :conditions => {
+      :subdomain => Account.subdomain_regex,
+      :method    => :get
+    }
+  map.connect '/subscribe', :controller => 'teasers', :action => 'subscribe',
+    :conditions => {
+      :subdomain => Account.subdomain_regex,
+      :method    => :post
+    }
   
   map.unimplemented '/unimplemented', :controller => 'welcome', :action => 'unimplemented'
   
