@@ -16,6 +16,13 @@ d Allow a client to choose a white or black background for a teaser page
 * Allow a client to collect additional information on a teaser page
 * Allow a client to view the additional information collected on a teaser page
 
+Designer Tasks
+* Home Page
+* Pricing Page
+* Privacy Policy
+* Terms and Conditions
+* Teaser Page Templates
+
 Developer Tasks
 * rename User#login to User#username; update interface to reflect changes
 * when logged in hitting the root url should take you to the dashboard
