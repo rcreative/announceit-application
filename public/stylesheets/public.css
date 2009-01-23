@@ -54,7 +54,7 @@ h2 {
   margin-top: 1em; }
 
 h3 {
-  font-size: 140%;
+  font-size: 130%;
   margin-top: 1em;
   margin-bottom: 0.5em; }
 
@@ -114,6 +114,10 @@ form textarea {
 form .buttons {
   margin-top: 2em;
   margin-bottom: 2em; }
+  form .buttons a {
+    color: #e33; }
+  form .buttons input {
+    font-size: 140%; }
 form .field_with_errors input.textbox {
   background: #fee; }
 form .field_error {
@@ -181,6 +185,8 @@ form .field_error {
 
 #content {
   padding: 10px 20px; }
+  #content h1 {
+    font-size: 180%; }
   #content table.index {
     margin: 1em 0;
     text-align: left;

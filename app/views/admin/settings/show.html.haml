@@ -4,15 +4,15 @@
 .box
   %h3 Domain
   %p
-    %big.domain= "subdomain.#{application_domain}"
-    %a{:href=>"#"} Change
+    %big.domain= "#{current_account.subdomain}.#{application_domain}"
+    %a{:href=>"/settings/change_domain"} Change
 
-.box
-  %h3 Template
-  %p
-    %select
-      %option Black Background
-      %option White Background
+-# .box
+-#   %h3 Template
+-#   %p
+-#     %select
+-#       %option Black Background
+-#       %option White Background
 
 .box
   %h3 Logo
