@@ -2,7 +2,7 @@ User Stories
 x Allow a client to signup
 x Allow a client to login
 x Allow a client to upload a custom logo for a teaser page
-* Allow a visitor to enter their e-mail address on the teaser page and store it
+X Allow a visitor to enter their e-mail address on the teaser page and store it
 * Allow a client to view a list of collected e-mail addresses
 * Allow a client to download a list of collected addresses
 * Allow a client to configure the subdomain
