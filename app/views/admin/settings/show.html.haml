@@ -5,7 +5,7 @@
   %h3 Domain
   %p
     %big.domain= teaser_host(current_account)
-    %a{:href=>"/settings/change_domain"} Change
+    = link_to 'Change', subdomain_admin_settings_path
 
 -# .box
 -#   %h3 Template

@@ -3,7 +3,7 @@
 
 %h1 Change Subdomain
 
-- form_for :setttings, :url => admin_settings_path, :html => {:method => :put, :multipart => true} do |f|
+- form_for :account, :url => admin_settings_path, :html => {:method => :put} do |f|
   %fieldset
     %p
       = f.label :subdomain
