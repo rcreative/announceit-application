@@ -46,7 +46,6 @@ describe Account do
   
   it 'should ensure subdomains are not our special ones' do
     create_account(:subdomain => 'ai').errors.on(:subdomain).should_not be_nil
-    create_account(:subdomain => 'www').errors.on(:subdomain).should_not be_nil
     create_account(:subdomain => 'mail').errors.on(:subdomain).should_not be_nil
   end
   
