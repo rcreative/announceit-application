@@ -43,6 +43,8 @@ ActionController::Routing::Routes.draw do |map|
       :subdomain => Account.subdomain_regex,
       :method    => :get
     }
+  map.teaser_dev '/teaser', :controller => 'teasers', :action => 'show'
+  
   map.connect '/subscribe', :controller => 'teasers', :action => 'subscribe',
     :conditions => {
       :subdomain => Account.subdomain_regex,

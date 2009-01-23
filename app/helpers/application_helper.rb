@@ -23,4 +23,12 @@ module ApplicationHelper
     end
   end
   
+  def teaser_url
+    if Rails.env.production?
+      raise "implement me"
+    else
+      teaser_dev_path
+    end
+  end
+  
 end

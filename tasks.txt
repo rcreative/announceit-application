@@ -19,3 +19,4 @@ d Allow a client to choose a white or black background for a teaser page
 Developer Tasks
 * rename User#login to User#username; update interface to reflect changes
 * when logged in hitting the root url should take you to the dashboard
+* exception notifier
