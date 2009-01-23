@@ -44,10 +44,10 @@
     - form_for :teaser, :url => admin_settings_path, :html => {:id => 'title_and_description_form', :method => :put} do |fields|
       %p
         = fields.label :title
-        = fields.text_field :title, :size => 30, :class => 'textbox big'
+        = fields.text_field :title, :value => @teaser.title, :size => 30, :class => 'textbox big'
       %p
         = fields.label :description
-        ~ fields.text_area :description, :cols => 40, :rows => 4
+        ~ fields.text_area :description, :value => @teaser.description, :cols => 40, :rows => 4
       %p
         = fields.submit 'Save Changes'
         or
