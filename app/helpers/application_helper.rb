@@ -2,7 +2,7 @@
 module ApplicationHelper
   
   def application_domain
-    "announceit.com"
+    "announceitapp.com"
   end
   
   # Calculate the appropriate years for copyright
@@ -29,6 +29,10 @@ module ApplicationHelper
     else
       teaser_dev_path
     end
+  end
+  
+  def root_url
+    "/"
   end
   
 end
