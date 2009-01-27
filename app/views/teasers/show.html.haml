@@ -3,12 +3,14 @@
     %img{:src=>@teaser.logo.url}/
 
 - form_for :subscriber, :url => {:action => :subscribe} do |fields|
-  %h1=h @teaser.title
+  - unless @teaser.title.empty?
+    %h1=h @teaser.title
   
   - if errors_on? :subscriber
     %p.errors Please enter a valid e-mail address.
   - else
-    %p=h @teaser.description
+    - unless @teaser.description.empty?
+      %p= @teaser.description
   
   %fieldset
     %p
