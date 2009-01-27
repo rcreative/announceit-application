@@ -26,3 +26,6 @@ Designer Tasks
 
 Developer Tasks
 * rename User#login to User#username; update interface to reflect changes
+* sort subscriber list by name
+* paginate subscriber list
+* gravatars?
