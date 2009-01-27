@@ -27,7 +27,7 @@
       %p.logo_uploader
         = logo.file_field :logo
       %p
-        = logo.submit 'Upload'
+        = logo.submit 'Upload', :class => "button"
         %span{:style => (@teaser.logo.exists? ? nil : 'display:none')}
           or
           = link_to_function 'Cancel', "Element.hide('change_logo'); Element.show('logo'); Event.stop(event)", :class => 'cancel'
@@ -49,7 +49,7 @@
         = fields.label :description
         ~ fields.text_area :description, :value => @teaser.description, :cols => 40, :rows => 4
       %p
-        = fields.submit 'Save Changes'
+        = fields.submit 'Save Changes', :class => "button"
         or
         = link_to_function 'Cancel', "Element.hide('change_title_and_description'); Element.show('title_and_description'); Event.stop(event)", :class => 'cancel'
         
