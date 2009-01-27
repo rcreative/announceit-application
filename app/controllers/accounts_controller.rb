@@ -1,5 +1,9 @@
 class AccountsController < ApplicationController
+  CREATE_KEY = 'dk3su29sw'
+  
   layout "public"
+  
+  before_filter :check_key
   
   def create
     logout_keeping_session!
@@ -18,4 +22,9 @@ class AccountsController < ApplicationController
       render :action => 'new'
     end
   end
+  
+  private
+    def check_key
+      redirect_to root_url unless params[:key] == CREATE_KEY
+    end
 end

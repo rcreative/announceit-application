@@ -48,7 +48,7 @@ describe AccountsController do
   
   
   def create_account(options = {})
-    post :create, :account => { :login => 'quire', :email => 'quire@example.com',
+    post :create, :key => AccountsController::CREATE_KEY, :account => { :login => 'quire', :email => 'quire@example.com',
       :password => 'quire69', :password_confirmation => 'quire69', :subdomain => 'quire' }.merge(options)
   end
 end
