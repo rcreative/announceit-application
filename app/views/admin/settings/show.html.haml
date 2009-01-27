@@ -30,7 +30,7 @@
         = logo.submit 'Upload'
         %span{:style => (@teaser.logo.exists? ? nil : 'display:none')}
           or
-          = link_to_function 'cancel', "Element.hide('change_logo'); Element.show('logo'); Event.stop(event)", :class => 'cancel'
+          = link_to_function 'Cancel', "Element.hide('change_logo'); Element.show('logo'); Event.stop(event)", :class => 'cancel'
 
 .box
   %h3 Title &amp; Description
@@ -51,5 +51,5 @@
       %p
         = fields.submit 'Save Changes'
         or
-        = link_to_function 'cancel', "Element.hide('change_title_and_description'); Element.show('title_and_description'); Event.stop(event)", :class => 'cancel'
+        = link_to_function 'Cancel', "Element.hide('change_title_and_description'); Element.show('title_and_description'); Event.stop(event)", :class => 'cancel'
         
