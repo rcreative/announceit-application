@@ -69,7 +69,7 @@ describe 'subscribe' do
   it 'should create a Subscriber for the Teaser' do
     navigate_to 'http://mecompany.test.host'
     submit_form :subscriber => {:name => 'Johnny', :email => 'johnny@example.com'}
-    response.should be_showing('/')
+    response.should be_showing('/teaser')
     Subscriber.last.teaser.should == @teaser
   end
   

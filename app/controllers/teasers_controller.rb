@@ -8,7 +8,7 @@ class TeasersController < ApplicationController
       render :action => :show
     else
       flash[:notice] = 'Thank you!'
-      redirect_to :action => :show
+      redirect_to teaser_view_url(@account)
     end
   end
   
