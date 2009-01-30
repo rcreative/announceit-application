@@ -188,6 +188,7 @@ form .field_error {
   #content h1 {
     font-size: 180%; }
   #content table.index {
+    border-bottom: 1px solid #e5e5e5;
     margin: 1em 0;
     text-align: left;
     width: 100%; }
@@ -235,6 +236,25 @@ form .field_error {
       padding: 15px 15px 5px; }
     #content .box p.change {
       margin-top: -0.5em; }
+  #content .download {
+    margin: 2em 0; }
+    #content .download h3 {
+      display: inline;
+      font-size: 100%; }
+    #content .download ul {
+      margin-left: 0.25em;
+      display: inline; }
+    #content .download li {
+      display: inline; }
+    #content .download a {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      padding: 6px 8px;
+      text-decoration: none; }
+      #content .download a:hover {
+        text-decoration: underline; }
 
 #footer {
   background: #f5f5f5;

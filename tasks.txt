@@ -3,9 +3,9 @@ x Allow a client to signup
 x Allow a client to login
 x Allow a client to upload a custom logo for a teaser page
 x Allow a client to customize the text that will appear on the teaser page
-i Allow a visitor to enter their e-mail address on the teaser page and store it
+x Allow a visitor to enter their e-mail address on the teaser page and store it
 x Allow a client to view a list of collected e-mail addresses
-* Allow a client to download a list of collected addresses
+d Allow a client to download a list of collected addresses
 x Allow a client to configure the subdomain
 * Allow a client to choose a white or black background for a teaser page
 * Allow a client to choose a plan and pay for it (spreedly)
@@ -15,6 +15,8 @@ x Allow a client to configure the subdomain
 * Allow a client to provide a custom template for a teaser page (stylesheets and HTML)
 * Allow a client to collect additional information on a teaser page
 * Allow a client to view the additional information collected on a teaser page
+* Allow a client to manually add additional subscribers from the subscriber tab
+* Allow a client to unsubscribe a subscriber
 
 Designer Tasks
 * Pagination on subscribers list

@@ -10,3 +10,11 @@
       %tr[subscriber]
         %td.name=h subscriber.name
         %td.email= mail_to subscriber.email
+
+.download
+  %h3 Download:
+  %ul
+    %li
+      = link_to "E-mail Addresses", :format => "txt"
+    %li
+      = link_to "CSV", :format => "csv"
