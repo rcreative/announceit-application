@@ -185,11 +185,12 @@ form .field_error {
 
 #content {
   padding: 10px 20px; }
+  #content .outset {
+    margin: 0 -20px; }
   #content h1 {
     font-size: 180%; }
   #content table.index {
-    border-bottom: 1px solid #e5e5e5;
-    margin: 1em 0;
+    border-bottom: 1px solid #eee;
     text-align: left;
     width: 100%; }
     #content table.index th {
@@ -201,13 +202,36 @@ form .field_error {
       letter-spacing: 0.1em;
       text-transform: uppercase; }
     #content table.index td {
-      padding: 10px 2px;
-      border-top: 1px solid #e5e5e5; }
+      padding: 10px 20px 10px 0;
+      border-top: 1px solid #eee;
+      vertical-align: center; }
+      #content table.index td.avatar {
+        padding: 8px 10px 8px 0;
+        width: 32px; }
+        #content table.index td.avatar img {
+          margin-top: -14px;
+          vertical-align: -110%;
+          border: 1px solid #ddd;
+          padding: 1px; }
+      #content table.index td.actions {
+        padding-right: 0;
+        text-align: right; }
+        #content table.index td.actions a {
+          background: #aaa;
+          border-radius: 4px;
+          -moz-border-radius: 4px;
+          -webkit-border-radius: 4px;
+          color: white;
+          font-size: 85%;
+          padding: 2px 8px 3px;
+          text-decoration: none; }
+          #content table.index td.actions a:hover {
+            background-color: #888; }
     #content table.index a {
       padding: 0 5px; }
   #content .box {
     background-color: #f0f0f0;
-    border: 1px solid #e5e5e5;
+    border: 1px solid #f0f0f0;
     border-radius: 8px;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -236,8 +260,47 @@ form .field_error {
       padding: 15px 15px 5px; }
     #content .box p.change {
       margin-top: -0.5em; }
+  #content .pagination {
+    font-size: 95%;
+    text-align: right; }
+    #content .pagination a {
+      padding: 4px 8px;
+      margin: 0 -0.35em;
+      text-decoration: none; }
+      #content .pagination a:hover {
+        text-decoration: underline; }
+    #content .pagination span.current {
+      color: white;
+      background-color: #f60;
+      padding: 4px 8px;
+      border-radius: 4px;
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px; }
+    #content .pagination span.prev_page, #content .pagination span.next_page {
+      color: #999; }
+    #content .pagination .prev_page {
+      margin-right: 1em; }
+      #content .pagination .prev_page.disabled {
+        display: none; }
+    #content .pagination .next_page {
+      margin-left: 1em; }
+  #content .index_head p {
+    color: #555; }
+  #content .index_head .pagination {
+    float: right; }
+  #content .index_head {
+    margin-bottom: 1.5em; }
+  #content .index_foot {
+    margin-top: 1.5em; }
   #content .download {
-    margin: 2em 0; }
+    background: #e5e5e5;
+    padding: 10px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    clear: both;
+    margin-top: 2em;
+    text-align: center; }
     #content .download h3 {
       display: inline;
       font-size: 100%; }
@@ -247,18 +310,21 @@ form .field_error {
     #content .download li {
       display: inline; }
     #content .download a {
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      -moz-border-radius: 5px;
-      -webkit-border-radius: 5px;
-      padding: 6px 8px;
+      background: #66aa6f;
+      border-radius: 4px;
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+      color: white;
+      font-size: 90%;
+      padding: 4px 10px 4px;
       text-decoration: none; }
       #content .download a:hover {
-        text-decoration: underline; }
+        background-color: #77bb7f; }
 
 #footer {
   background: #f5f5f5;
   border-top: 1px solid #e5e5e5;
   color: #888;
   font-size: 90%;
-  padding: 15px 20px; }
+  padding: 15px 20px;
+  display: none; }

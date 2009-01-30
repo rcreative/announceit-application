@@ -1,20 +1,44 @@
 - @selected = :subscribers
 - @title = "Subscribers"
 
+.index_head
+  .pagination
+    %span.disabled.prev_page Prev
+    %span.current 1
+    %a{:href=>"?page=2", :rel=>"next"} 2
+    %a{:href=>"?page=3"} 3
+    %a{:href=>"?page=4"} 4
+    %a{:href=>"?page=5"} 5
+    %span.gap &hellip;
+    %a{:href=>"?page=7"} 7
+    %a{:href=>"?page=8"} 8
+    %a{:href=>"?page=2", :rel=>"next"} Next
+  %p 15 of 310 subscribers
+
 %table.index#subscribers{:border=>0, :cellpadding=>0, :cellspacing=>0}
-  %tr
-    %th.name Name
-    %th.email Email Address
   %tbody
     - for subscriber in @teaser.subscribers
       %tr[subscriber]
+        %td.avatar= image_tag 'avatar_32x32.png'
         %td.name=h subscriber.name
         %td.email= mail_to subscriber.email
+        %td.actions= link_to "Unsubscribe", "#", :confirm => "Are you sure you want to unsubscribe #{h subscriber.name}?"
+
+.index_foot
+  .pagination
+    %span.disabled.prev_page Prev
+    %span.current 1
+    %a{:href=>"?page=2", :rel=>"next"} 2
+    %a{:href=>"?page=3"} 3
+    %a{:href=>"?page=4"} 4
+    %a{:href=>"?page=5"} 5
+    %span.gap &hellip;
+    %a{:href=>"?page=7"} 7
+    %a{:href=>"?page=8"} 8
+    %a{:href=>"?page=2", :rel=>"next"} Next
 
 .download
   %h3 Download:
   %ul
-    %li
-      = link_to "E-mail Addresses", :format => "txt"
-    %li
-      = link_to "CSV", :format => "csv"
+    %li= link_to "E-mail Addresses", :format => "txt"
+    %li= link_to "CSV", :format => "csv"

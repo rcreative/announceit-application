@@ -1,4 +1,4 @@
-User Stories
+User Stories & Tasks
 x Allow a client to signup
 x Allow a client to login
 x Allow a client to upload a custom logo for a teaser page
@@ -7,27 +7,21 @@ x Allow a visitor to enter their e-mail address on the teaser page and store it
 x Allow a client to view a list of collected e-mail addresses
 d Allow a client to download a list of collected addresses
 x Allow a client to configure the subdomain
+d Sort subscriber list by name then e-mail
+d Paginate the subscribers list
+* rename User#login to User#username; update interface to reflect changes
 * Allow a client to choose a white or black background for a teaser page
 * Allow a client to choose a plan and pay for it (spreedly)
-* Allow a client to use a custom domain
 * Allow a client to customize the text on the thank you page
+* Allow a client to use a custom domain
+* Home Page
+* Pricing Page
+* Privacy Policy
+* Terms and Conditions
+d Add gravatars to subscribers list
 * Allow a client to choose from a variety of predefined templates
 * Allow a client to provide a custom template for a teaser page (stylesheets and HTML)
 * Allow a client to collect additional information on a teaser page
 * Allow a client to view the additional information collected on a teaser page
 * Allow a client to manually add additional subscribers from the subscriber tab
-* Allow a client to unsubscribe a subscriber
-
-Designer Tasks
-* Pagination on subscribers list
-* Home Page
-* Pricing Page
-* Privacy Policy
-* Terms and Conditions
-* Teaser Page Templates
-
-Developer Tasks
-* rename User#login to User#username; update interface to reflect changes
-* sort subscriber list by name
-* paginate subscriber list
-* gravatars?
+d Allow a client to unsubscribe a subscriber
