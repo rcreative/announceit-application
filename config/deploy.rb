@@ -11,7 +11,6 @@ set :port, "42832"
 set :scm, :git
 
 # DNS records pointing to this server
-# ai.recursivecreative.net
 # teaserapp.com
 # myteaserpage.com
 # announceapp.com

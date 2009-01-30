@@ -26,7 +26,7 @@ class Account < ActiveRecord::Base
 
   validates_length_of       :subdomain, :maximum => 40, :allow_nil => false
   validates_format_of       :subdomain, :with => self.subdomain_regex
-  validates_exclusion_of    :subdomain, :in => %w(ai mail)
+  validates_exclusion_of    :subdomain, :in => %w(mail ftp pop smtp ssh imap)
   validates_uniqueness_of   :subdomain
 
   # HACK HACK HACK -- how to do attr_accessible from here?

@@ -45,8 +45,9 @@ describe Account do
   end
   
   it 'should ensure subdomains are not our special ones' do
-    create_account(:subdomain => 'ai').errors.on(:subdomain).should_not be_nil
-    create_account(:subdomain => 'mail').errors.on(:subdomain).should_not be_nil
+    %w(mail ftp pop smtp ssh imap).each do |subdomain|
+      create_account(:subdomain => subdomain).errors.on(:subdomain).should_not be_nil
+    end
   end
   
   describe 'allows legitimate logins:' do
