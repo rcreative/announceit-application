@@ -1,4 +1,18 @@
 module ApplicationHelper
+  def application_name
+    "Announce It"
+  end
+  
+  def application_domain
+    request.domain
+  end
+  
+  def application_host_with_port
+    domain = "#{request.domain}"
+    port = request.port
+    domain += ":#{port}" if port != 80
+    domain
+  end
   
   # Calculate the appropriate years for copyright
   def copyright_years
@@ -43,4 +57,15 @@ module ApplicationHelper
     return grav_url
   end
   
+  def teaser_view_url(account)
+    if Rails.env.production?
+      url_for :host => teaser_host(account), :controller => '/teasers', :action => 'show'
+    else
+      url_for '/teaser'
+    end
+  end
+  
+  def teaser_host(account)
+    "#{account.subdomain}.#{application_host_with_port}"
+  end
 end

@@ -9,10 +9,7 @@ describe AccountsController do
       response.should be_redirect
     end.should change(Account, :count).by(1)
   end
-
   
-
-
   it 'requires login on signup' do
     lambda do
       create_account(:login => nil)
@@ -44,8 +41,6 @@ describe AccountsController do
       response.should be_success
     end.should_not change(Account, :count)
   end
-  
-  
   
   def create_account(options = {})
     post :create, :key => AccountsController::CREATE_KEY, :account => { :login => 'quire', :email => 'quire@example.com',
