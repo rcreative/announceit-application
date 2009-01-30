@@ -40,7 +40,7 @@ module ApplicationHelper
     
     # Default image url to be used when no gravatar is found
     # or when an image exceeds the rating parameter.
-    gravatar_options[:default] ||= '/images/avatar_32x32.png'
+    gravatar_options[:default] ||= "#{request.protocol}#{request.host_with_port}/images/avatar_32x32.png"
     
     # Build the Gravatar url.
     grav_url = 'http://www.gravatar.com/avatar.php?'
