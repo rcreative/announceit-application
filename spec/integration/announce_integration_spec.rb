@@ -83,8 +83,8 @@ describe 'admin' do
     @account.stub!(:teaser).and_return(@teaser)
     
     @teaser.stub!(:subscribers).and_return([
-      Subscriber.new(:email => 'one@example.com'),
-      Subscriber.new(:email => 'two@example.com', :name => 'Two, Inc.')
+      stub_model(Subscriber, :email => 'one@example.com'),
+      stub_model(Subscriber, :email => 'two@example.com', :name => 'Two, Inc.')
     ])
     
     Account.stub!(:authenticate).and_return(@account)
@@ -130,6 +130,16 @@ describe 'admin' do
     navigate_to '/subscribers.csv'
     response.content_type.should == 'text/csv'
     response.headers['Content-Disposition'].should == 'attachment; filename=subscribers.csv'
-    response.body.should match(/^Name,E-mail\n,one@example\.com\n"Two, Inc.",two@example\.com$/m)
+    response.body.should match(/^Name,Email\n,one@example\.com\n"Two, Inc.",two@example\.com$/m)
+  end
+  
+  it 'should allow admin to unsubscribe someone' do
+    subscriber = @teaser.subscribers.first
+    subscriber.should_receive(:destroy)
+    @teaser.subscribers.should_receive(:find).with(subscriber.id.to_s).and_return(subscriber)
+    
+    navigate_to '/subscribers'
+    click_on :link => "/subscribers/#{subscriber.id}"
+    response.should be_showing('/subscribers')
   end
 end

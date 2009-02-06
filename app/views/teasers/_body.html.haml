@@ -10,7 +10,7 @@
       %h1=h @teaser.title
     
     - if errors_on? :subscriber
-      %p.errors Please enter a valid e-mail address.
+      %p.errors Please enter a valid email address.
     - else
       - unless @teaser.description.empty?
         %p= @teaser.description
