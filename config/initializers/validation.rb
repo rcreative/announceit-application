@@ -6,4 +6,4 @@ ActionView::Base.field_error_proc = Proc.new do |html, instance|
   end
 end
 
-Authentication.bad_email_message = 'invalid e-mail address'
+Authentication.bad_email_message = 'invalid email address'

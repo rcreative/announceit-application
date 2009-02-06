@@ -1,4 +1,4 @@
-csv << %w(Name E-mail)
+csv << %w(Name Email)
 @subscribers.each do |subscriber|
   csv << [subscriber.name, subscriber.email]
 end

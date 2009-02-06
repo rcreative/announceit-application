@@ -7,5 +7,10 @@ module Admin
         format.csv { @filename = 'subscribers.csv'; @subscribers = @teaser.subscribers }
       end
     end
+    
+    def destroy
+      @teaser.subscribers.find(params[:id]).destroy
+      redirect_to :action => :index
+    end
   end
 end
