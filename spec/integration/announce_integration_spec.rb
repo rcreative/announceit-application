@@ -81,16 +81,18 @@ describe 'admin' do
     @account = stub_model(Account, :subdomain => 'mecompany', :update_attributes => true)
     @teaser = stub_model(Teaser, :account => @account, :update_attributes => true)
     @account.stub!(:teaser).and_return(@teaser)
+    
+    @teaser.stub!(:subscribers).and_return([
+      Subscriber.new(:email => 'one@example.com'),
+      Subscriber.new(:email => 'two@example.com', :name => 'Two')
+    ])
+    
     Account.stub!(:authenticate).and_return(@account)
     Account.stub!(:find_by_id).and_return(@account)
     login_as @account
   end
   
   it 'should list the subscribers' do
-    @teaser.stub!(:subscribers).and_return([
-      Subscriber.new(:email => 'one@example.com'),
-      Subscriber.new(:email => 'two@example.com', :name => 'Two')
-    ])
     navigate_to '/subscribers'
     response.should have_text(/one@example\.com/)
     response.should have_text(/Two/)
@@ -116,5 +118,18 @@ describe 'admin' do
     navigate_to '/settings'
     submit_form 'title_and_description_form', :teaser => {:title => 'Title', :description => 'Description'}
     response.should render_template('show')
+  end
+  
+  it 'should allow downloading a text file containing all the email addresses' do
+    navigate_to '/subscribers.txt'
+    response.content_type.should == 'text/plain'
+    response.body.should == 'one@example.com, two@example.com'
+  end
+  
+  it 'should allow downloading a csv file containing all names and email addresses' do
+    navigate_to '/subscribers.csv'
+    response.content_type.should == 'text/csv'
+    response.headers['Content-Disposition'].should == 'attachment; filename=subscribers.csv'
+    response.body.should match(/^Name,E-mail\n,one@example\.com\nTwo,two@example\.com$/m)
   end
 end
