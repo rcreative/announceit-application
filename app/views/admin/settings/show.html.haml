@@ -7,21 +7,29 @@
     %big.domain= teaser_host(current_account)
     = link_to 'Change', subdomain_admin_settings_path
 
--# .box
--#   %h3 Template
--#   %p
--#     %select
--#       %option Black Background
--#       %option White Background
-
+- if false # disabled
+  .box
+    %h3 Template
+    #template
+      %p
+        %big White Background
+        = link_to_function 'Change', "Element.hide('template'); Element.show('change_template')"
+    #change_template{:style => 'display:none'}
+      - form_for :teaser, :url => admin_settings_path, :html => {:method => :put, :multipart => true} do |template|
+        %p
+          %select
+            -# alphabetize list of choices
+            %option Dark Background
+            %option{:selected => true} White Background
+          = template.submit 'Save', :class => "button"
+      
 .box
   %h3 Logo
   #logo{:style => (@teaser.logo.exists? ? nil : 'display:none')}
     %p
       = image_tag @teaser.logo.url if @teaser.logo.exists?
     %p.change
-      %a{:href=>"javascript:void(0);", :onclick=>"Element.hide('logo'); Element.show('change_logo'); Event.stop(event)"}
-        Change
+      = link_to_function 'Change', "Element.hide('logo'); Element.show('change_logo')"
   #change_logo{:style => (@teaser.logo.exists? ? 'display:none' : nil)}
     - form_for :teaser, :url => admin_settings_path, :html => {:method => :put, :multipart => true} do |logo|
       %p.logo_uploader
@@ -30,7 +38,7 @@
         = logo.submit 'Upload', :class => "button"
         %span{:style => (@teaser.logo.exists? ? nil : 'display:none')}
           or
-          = link_to_function 'Cancel', "Element.hide('change_logo'); Element.show('logo'); Event.stop(event)", :class => 'cancel'
+          = link_to_function 'Cancel', "Element.hide('change_logo'); Element.show('logo')", :class => 'cancel'
 
 .box
   %h3 Title &amp; Description
