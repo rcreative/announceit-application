@@ -12,7 +12,7 @@ x Paginate the subscribers list
 x Add gravatars to subscribers list
 * When there are no subscribers show a "blank slate page"
 * rename User#login to User#username; update interface to reflect changes
-x Allow a client to choose a white or black background for a teaser page
+x Allow a client to choose a white or dark background for a teaser page
 * Allow a client to use a custom domain
 * Allow a client to customize the text on the thank you page
 * Allow a client to choose a plan and pay for it (Spreedly)

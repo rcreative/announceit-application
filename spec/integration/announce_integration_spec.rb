@@ -51,6 +51,14 @@ describe 'teaser page' do
     get 'http://mecompany.test.host'
     response.response_code.should be(404)
   end
+  
+  it 'should render the selected background' do
+    Account.stub!(:authenticate).and_return(@account)
+    Account.stub!(:find_by_id).and_return(@account)
+    login_as @account
+    navigate_to '/teaser'
+    response.should render_template('white_background')
+  end
 end
 
 describe 'subscribe' do
@@ -79,7 +87,7 @@ end
 describe 'admin' do
   before do
     @account = stub_model(Account, :subdomain => 'mecompany', :update_attributes => true)
-    @teaser = stub_model(Teaser, :account => @account, :update_attributes => true)
+    @teaser = stub_model(Teaser, :account => @account, :template_name => 'white_background', :update_attributes => true)
     @account.stub!(:teaser).and_return(@teaser)
     
     @teaser.stub!(:subscribers).and_return([
@@ -117,7 +125,14 @@ describe 'admin' do
     @teaser.should_receive(:update_attributes).with('title' => 'Title', 'description' => 'Description').and_return(true)
     navigate_to '/settings'
     submit_form 'title_and_description_form', :teaser => {:title => 'Title', :description => 'Description'}
-    response.should render_template('show')
+    response.should be_showing('/settings')
+  end
+  
+  it 'should allow selecting the template background' do
+    @teaser.should_receive(:update_attributes).with('template_name' => 'dark_background')
+    navigate_to '/settings'
+    submit_form 'template_form', :teaser => {:template_name => 'dark_background'}
+    response.should be_showing('/settings')
   end
   
   it 'should allow downloading a text file containing all the email addresses' do
