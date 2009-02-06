@@ -13,8 +13,7 @@ describe ApplicationHelper do
   end
   
   it 'should calculate the application domain correctly with a subdomain' do
-    # this doesn't work for some reason
-    request.request_uri = 'http://subdomain.announceitapp.com'
+    @request.should_receive(:host).any_number_of_times.and_return('subdomain.announceitapp.com')
     application_domain.should == 'announceitapp.com'
   end
   
