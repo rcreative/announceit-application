@@ -4,3 +4,4 @@ coverage
 tmp
 public/system
 public/stylesheets/*.css
+public/stylesheets/**/*.css
