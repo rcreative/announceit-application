@@ -3,8 +3,9 @@ class AddTemplatesToTeasers < ActiveRecord::Migration
   end
   
   def self.up
-    change_column_default :teasers, :background_color, 'white'
-    Teaser.update_all("background_color = 'white'")
+    remove_column :teasers, :background_color
+    add_column :teasers, :template_name, :string, :default => 'white_background'
+    Teaser.update_all("template_name = 'white_background'")
   end
   
   def self.down

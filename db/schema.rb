@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(:version => 20090206202727) do
 
   create_table "teasers", :force => true do |t|
     t.integer  "account_id"
-    t.string   "background_color",  :limit => 15, :default => "white"
     t.string   "title"
     t.text     "description"
     t.string   "logo_file_name"
@@ -43,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20090206202727) do
     t.datetime "logo_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "template_name",     :default => "white_background"
   end
 
 end

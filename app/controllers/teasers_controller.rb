@@ -23,6 +23,6 @@ class TeasersController < ApplicationController
     end
     
     def render_teaser_page
-      render :template => "teasers/#{@teaser.background_color}_background.html.haml", :layout => false
+      render :template => "teasers/#{@teaser.template_name}.html.haml", :layout => false
     end
 end

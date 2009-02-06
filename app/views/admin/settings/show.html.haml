@@ -11,12 +11,13 @@
   %h3 Template
   #template
     %p
-      %big= "#{@teaser.background_color.capitalize} Background"
+      %big= @teaser.template_name.humanize
       = link_to_function 'Change', "Element.hide('template'); Element.show('change_template')"
   #change_template{:style => 'display:none'}
     - form_for :teaser, :url => admin_settings_path, :html => {:id => 'template_form', :method => :put} do |template|
       %p
-        = template.select :background_color, [%w(Dark\ Background dark), %w(White\ Background white)]
+        - template_names = [%w(Dark\ Background dark_background), %w(White\ Background white_background)]
+        = template.select :template_name, template_names
         = template.submit 'Save', :class => "button"
         
 .box

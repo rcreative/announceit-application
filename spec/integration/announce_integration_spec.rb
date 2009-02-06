@@ -87,7 +87,7 @@ end
 describe 'admin' do
   before do
     @account = stub_model(Account, :subdomain => 'mecompany', :update_attributes => true)
-    @teaser = stub_model(Teaser, :account => @account, :background_color => 'white', :update_attributes => true)
+    @teaser = stub_model(Teaser, :account => @account, :template_name => 'white_background', :update_attributes => true)
     @account.stub!(:teaser).and_return(@teaser)
     
     @teaser.stub!(:subscribers).and_return([
@@ -129,9 +129,9 @@ describe 'admin' do
   end
   
   it 'should allow selecting the template background' do
-    @teaser.should_receive(:update_attributes).with('background_color' => 'dark')
+    @teaser.should_receive(:update_attributes).with('template_name' => 'dark_background')
     navigate_to '/settings'
-    submit_form 'template_form', :teaser => {:background_color => 'dark'}
+    submit_form 'template_form', :teaser => {:template_name => 'dark_background'}
     response.should be_showing('/settings')
   end
   
