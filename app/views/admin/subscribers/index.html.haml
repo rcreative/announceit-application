@@ -12,7 +12,7 @@
   %tbody
     - for subscriber in @subscribers
       %tr[subscriber]
-        %td.avatar= image_tag gravatar_url(subscriber.email)
+        %td.avatar= image_tag gravatar_url(subscriber.email), :width => 32, :height => 32
         %td.name=h subscriber.name
         %td.email= mail_to subscriber.email
         %td.actions= link_to "Unsubscribe", admin_subscriber_path(subscriber), :method => :delete, :confirm => "Are you sure you want to unsubscribe #{subscriber.name? ? h(subscriber.name) : 'this person'}?"
