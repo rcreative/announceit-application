@@ -1,6 +1,6 @@
 class Teaser < ActiveRecord::Base
   belongs_to :account
-  has_many :subscribers
+  has_many :subscribers, :order => 'name, email'
   has_attached_file :logo
   
   def title

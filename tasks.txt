@@ -7,8 +7,8 @@ x Allow a visitor to enter their e-mail address on the teaser page and store it
 x Allow a client to view a list of collected e-mail addresses
 d Allow a client to download a list of collected addresses
 x Allow a client to configure the subdomain
-d Sort subscriber list by name then e-mail
-d Paginate the subscribers list
+x Sort subscriber list by name then e-mail
+x Paginate the subscribers list
 * When there are no subscribers show a "blank slate page"
 * rename User#login to User#username; update interface to reflect changes
 * Allow a client to choose a white or black background for a teaser page
