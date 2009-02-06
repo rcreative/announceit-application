@@ -16,6 +16,7 @@ x Allow a client to choose a white or dark background for a teaser page
 * Allow a client to use a custom domain
 * Allow a client to customize the text on the thank you page
 * Allow a client to choose a plan and pay for it (Spreedly)
+* Put a footer on free trials
 * Home Page
 * Pricing Page
 * Privacy Policy
