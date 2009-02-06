@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090109193227) do
+ActiveRecord::Schema.define(:version => 20090206202727) do
 
   create_table "accounts", :force => true do |t|
     t.string   "login",                     :limit => 100
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20090109193227) do
 
   create_table "teasers", :force => true do |t|
     t.integer  "account_id"
-    t.string   "background_color",  :limit => 15
+    t.string   "background_color",  :limit => 15, :default => "white"
     t.string   "title"
     t.text     "description"
     t.string   "logo_file_name"
