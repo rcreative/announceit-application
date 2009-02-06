@@ -84,7 +84,7 @@ describe 'admin' do
     
     @teaser.stub!(:subscribers).and_return([
       Subscriber.new(:email => 'one@example.com'),
-      Subscriber.new(:email => 'two@example.com', :name => 'Two')
+      Subscriber.new(:email => 'two@example.com', :name => 'Two, Inc.')
     ])
     
     Account.stub!(:authenticate).and_return(@account)
@@ -95,7 +95,7 @@ describe 'admin' do
   it 'should list the subscribers' do
     navigate_to '/subscribers'
     response.should have_text(/one@example\.com/)
-    response.should have_text(/Two/)
+    response.should have_text(/Two, Inc./)
     response.should have_text(/two@example\.com/)
   end
   
@@ -130,6 +130,6 @@ describe 'admin' do
     navigate_to '/subscribers.csv'
     response.content_type.should == 'text/csv'
     response.headers['Content-Disposition'].should == 'attachment; filename=subscribers.csv'
-    response.body.should match(/^Name,E-mail\n,one@example\.com\nTwo,two@example\.com$/m)
+    response.body.should match(/^Name,E-mail\n,one@example\.com\n"Two, Inc.",two@example\.com$/m)
   end
 end
