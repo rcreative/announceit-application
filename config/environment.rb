@@ -10,7 +10,18 @@ RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
-Rails::Initializer.run do |config|
+# Who needs a plugin when it's this easy?
+class AnnounceConfiguration < Rails::Configuration
+  attr_accessor :announce
+  
+  def initialize
+    self.announce = Rails::OrderedOptions.new
+    self.announce.tlds = []
+    super
+  end
+end
+
+Rails::Initializer.run(:process, AnnounceConfiguration.new) do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
@@ -33,6 +44,7 @@ Rails::Initializer.run do |config|
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
   # :all can be used as a placeholder for all plugins not explicitly named
+  config.plugin_paths << "#{config.root_path}/lib/plugins"
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
   # Add additional load paths for your own custom dirs

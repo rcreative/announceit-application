@@ -18,7 +18,14 @@ class TeasersController < ApplicationController
   
   private
     def assign_account
-      @account = current_account || Account.find_by_subdomain(request.subdomains.first)
+      @account = current_account || begin
+        debugger
+        if Rails.configuration.announce.tlds.include?(request.domain)
+          Account.find_by_subdomain(request.subdomains.first)
+        else
+          Account.find_by_custom_domain(request.domain)
+        end
+      end
       head :not_found unless @account
     end
     

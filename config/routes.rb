@@ -36,7 +36,10 @@ ActionController::Routing::Routes.draw do |map|
   # See how all your routes lay out with "rake routes"
   
   map.connect '/', :controller => 'welcome', :action => 'index',
-    :conditions => { :subdomain => /\A(ai)?\Z/ }
+    :conditions => {
+      :host        => Rails.configuration.announce.tlds,
+      :method      => :get
+    }
   
   map.teaser '/', :controller => 'teasers', :action => 'show',
     :conditions => {

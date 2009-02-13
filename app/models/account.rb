@@ -9,7 +9,7 @@ class Account < ActiveRecord::Base
   after_create :create_teaser
   
   cattr_accessor :subdomain_regex
-  self.subdomain_regex = /\w+/
+  self.subdomain_regex = /\w+|^$/
   
   validates_presence_of     :username
   validates_length_of       :username, :within => 3..40

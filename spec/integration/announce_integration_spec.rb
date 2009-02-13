@@ -46,6 +46,11 @@ describe 'teaser page' do
     navigate_to 'http://mecompany.a.b.test.host'
   end
   
+  it 'should be displayed for a custom domain name' do
+    Account.should_receive(:find_by_custom_domain).with('somewherespecial.com').and_return(@account)
+    navigate_to 'http://somewherespecial.com'
+  end
+  
   it 'should indicate when no teaser is found for a subdomain' do
     Account.should_receive(:find_by_subdomain).with('mecompany').and_return(nil)
     get 'http://mecompany.test.host'

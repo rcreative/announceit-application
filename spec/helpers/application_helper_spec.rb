@@ -24,7 +24,7 @@ describe ApplicationHelper do
     application_host_with_port.should == 'test.host:8221'
   end
   
-  it 'should calculate the teaser host correctly' do
+  it 'should calculate the teaser using the subdomain' do
     teaser_host(@account).should == "subdomain.test.host"
   end
   

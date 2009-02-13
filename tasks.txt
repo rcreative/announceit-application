@@ -11,9 +11,9 @@ x Sort subscriber list by name then e-mail
 x Paginate the subscribers list
 x Add gravatars to subscribers list
 * When there are no subscribers show a "blank slate page"
-* rename User#login to User#username; update interface to reflect changes
+x rename User#login to User#username; update interface to reflect changes
 x Allow a client to choose a white or dark background for a teaser page
-* Allow a client to use a custom domain
+d Allow a client to use a custom domain
 * Allow a client to customize the text on the thank you page
 * Allow a client to choose a plan and pay for it (Spreedly)
 * Put a footer on free trials
