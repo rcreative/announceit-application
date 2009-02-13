@@ -113,16 +113,23 @@ describe 'admin' do
   end
   
   it 'should allow changing the subdomain' do
-    @account.should_receive(:update_attributes).with('subdomain' => 'meothername').and_return(true)
+    @account.should_receive(:update_attributes).with('subdomain' => 'meothername', 'domain_type' => 'subdomain').and_return(true)
     navigate_to '/settings/subdomain'
-    submit_form :account => {:subdomain => 'meothername'}
+    submit_form :account => {:domain_type => 'subdomain', :subdomain => 'meothername'}
+    response.should render_template('show')
+  end
+  
+  it 'should allow usage of a custom domain' do
+    @account.should_receive(:update_attributes).with('domain_type' => 'custom', 'custom_domain' => 'somewhere.com').and_return(true)
+    navigate_to '/settings/subdomain'
+    submit_form :account => {:domain_type => 'custom', :custom_domain => 'somewhere.com'}
     response.should render_template('show')
   end
   
   it 'should report errors changing the subdomain' do
-    @account.should_receive(:update_attributes).with('subdomain' => 'meothername').and_return(false)
+    @account.should_receive(:update_attributes).with('subdomain' => 'meothername', 'domain_type' => 'subdomain').and_return(false)
     navigate_to '/settings/subdomain'
-    submit_form :account => {:subdomain => 'meothername'}
+    submit_form :account => {:domain_type => 'subdomain', :subdomain => 'meothername'}
     response.should render_template('subdomain')
   end
   

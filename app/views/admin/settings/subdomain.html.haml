@@ -1,14 +1,21 @@
 - @selected = :settings
-- @title = "Change Subdomain"
+- @title = "Change Domain"
 
-%h1 Change Subdomain
+%h1 Change Domain
 
 - form_for :account, :url => admin_settings_path, :html => {:method => :put} do |f|
   %fieldset
     %p
-      = f.label :subdomain
+      = f.radio_button :domain_type, 'subdomain', :class => 'radio'
+      = f.label :domain_type_subdomain, 'Subdomain', :class => 'radio'
+      %br/
       = f.text_field :subdomain, :class => "textbox big", :size => 18
       = ".#{application_domain}"
+    %p
+      = f.radio_button :domain_type, 'custom', :class => 'radio'
+      = f.label :domain_type_custom, 'Custom Domain', :class => 'radio'
+      %br/
+      = f.text_field :custom_domain, :class => "textbox big"
   .buttons
     = f.submit 'Save Changes'
     or

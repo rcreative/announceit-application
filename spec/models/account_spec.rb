@@ -29,7 +29,7 @@ describe Account do
     end.should_not change(Account, :count)
   end
 
-  it 'requires subdomain' do
+  it 'requires subdomain when no custom' do
     lambda do
       u = create_account(:subdomain => nil)
       u.errors.on(:subdomain).should_not be_nil
@@ -38,7 +38,8 @@ describe Account do
   
   it 'requires unique subdomain' do
     lambda do
-      create_account(:subdomain => 'taken')
+      u = create_account(:subdomain => 'taken')
+      u.domain_type.should == 'subdomain'
       u = create_account(:subdomain => 'taken')
       u.errors.on(:subdomain).should_not be_nil
     end.should change(Account, :count).by(1)
@@ -48,6 +49,13 @@ describe Account do
     %w(mail ftp pop smtp ssh imap).each do |subdomain|
       create_account(:subdomain => subdomain).errors.on(:subdomain).should_not be_nil
     end
+  end
+  
+  it 'should allow custom domain' do
+    lambda do
+      u = create_account(:subdomain => nil, :custom_domain => 'mecustomdomain.com', :domain_type => 'custom')
+      u.errors.full_messages
+    end.should change(Account, :count)
   end
   
   describe 'allows legitimate logins:' do

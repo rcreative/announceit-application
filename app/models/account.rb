@@ -24,15 +24,19 @@ class Account < ActiveRecord::Base
   validates_uniqueness_of   :email
   validates_format_of       :email, :with => Authentication.email_regex, :message => Authentication.bad_email_message
 
-  validates_length_of       :subdomain, :maximum => 40, :allow_nil => false
+  validates_length_of       :subdomain, :maximum => 40, :if => lambda {|o| o.domain_type != 'custom'}
   validates_format_of       :subdomain, :with => self.subdomain_regex
   validates_exclusion_of    :subdomain, :in => %w(mail ftp pop smtp ssh imap)
-  validates_uniqueness_of   :subdomain
+  validates_uniqueness_of   :subdomain, :case_sensitive => false, :allow_nil => true
 
+  validates_presence_of     :custom_domain, :if => lambda {|o| o.domain_type == 'custom'}
+  validates_exclusion_of    :custom_domain, :in => Rails.configuration.announce.tlds
+  validates_uniqueness_of   :custom_domain, :case_sensitive => false, :allow_nil => true
+  
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :username, :email, :name, :password, :password_confirmation, :subdomain
+  attr_accessible :username, :email, :name, :password, :password_confirmation, :domain_type, :custom_domain, :subdomain
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
@@ -41,7 +45,7 @@ class Account < ActiveRecord::Base
     u = find_by_username(username) # need to get the salt
     u && u.authenticated?(password) ? u : nil
   end
-
+  
   def username=(value)
     write_attribute :username, (value ? value.downcase : nil)
   end

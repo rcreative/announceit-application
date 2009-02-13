@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20090213165651) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "custom_domain"
+    t.string   "domain_type",               :limit => 9,   :default => "subdomain"
   end
 
   create_table "subscribers", :force => true do |t|
