@@ -24,3 +24,5 @@ config.action_controller.perform_caching             = true
 # config.action_mailer.raise_delivery_errors = false
 
 config.active_record.observers = :account_observer
+
+config.announce.tlds.concat %w(announceitapp.com myteaserpage.com)

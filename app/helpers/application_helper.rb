@@ -66,6 +66,6 @@ module ApplicationHelper
   end
   
   def teaser_host(account)
-    "#{account.subdomain}.#{application_host_with_port}"
+    account.domain_type == 'subdomain' ? "#{account.subdomain}.#{application_host_with_port}" : account.custom_domain
   end
 end
