@@ -1,0 +1,7 @@
+#foreground, #midground, #background { background: none; }
+
+h1 { height: 40px; }
+
+.signup { margin-top: -13.25em; }
+.signup li { padding: 4px 0; }
+.signup li img { vertical-align: text-top; margin-top: -2px; }
