@@ -1,0 +1,47 @@
+/*	TYPOGRAPHY
+=============================================================================*/
+
+body { font: 13px/1.5 "Lucida Grande", Lucida, Verdana, sans-serif; }
+
+
+/*	LAYOUT
+=============================================================================*/
+
+body { background: #414141 url(../images/bg_bluestripe.gif) 0 0 repeat-x; }
+#page_container { margin-top: 75px; background: #a8cae2 url(../images/bg_sky.gif) repeat-x 0 100%; padding-bottom: 57px; }	
+#content { width: 780px; margin: 0 auto; position: relative; }	
+#footer { width: 780px; margin: 0 auto; color: #ccc; margin-top: -50px; font-size: 11px; text-align: right; }
+
+h1 {
+	background: transparent url(../images/mc.png) 0 100% no-repeat;
+	width: 298px;
+	height: 60px;
+	text-indent: -5000px;
+	margin: 0 0 20px 280px; }
+
+img.tower { float: left; margin-top: -25px; position: absolute; left: 0; bottom: 0; }
+/*p { text-shadow: white 0 1px 2px; }*/
+p.description { float: left; color: #1B3F4D; width: 260px; margin-left: 280px; margin-right: 20px; display: inline; }
+.signup { float: right; color: #595959; width: 220px; }
+
+	.signup p { margin-bottom: 15px; }
+
+	.signup form { margin-bottom: 2px; }
+	.signup label { display: none; }
+	.signup .text_field { display: block; width: 212px; margin-left: 1px; margin-bottom: 5px; font-size: 14px; }
+	.text_field { color: #000; }
+	.text_field.default { color: #999; }
+
+	.signup ul { list-style: none; margin: 0 0 20px; }
+	.signup li { text-align: right; width: 220px; line-height: 27px; font-size: 11px; color: #666; }
+	.signup li a { vertical-align: text-top; }
+
+
+#background { background: transparent url(../images/antennae_back.png) -20% 100% repeat-x; }
+#midground { background: transparent url(../images/antennae_mid.png) -70% 100% repeat-x; }
+#foreground { background: transparent url(../images/antennae_fore.png) -160% 100% repeat-x; }
+
+
+
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+* html .clearfix { zoom: 1;}
