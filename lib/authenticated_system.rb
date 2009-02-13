@@ -28,7 +28,7 @@ module AuthenticatedSystem
     #
     #  # only allow nonbobs
     #  def authorized?
-    #    current_account.login != "bob"
+    #    current_account.username != "bob"
     #  end
     #
     def authorized?(action = action_name, resource = nil)

@@ -9,10 +9,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090206202727) do
+ActiveRecord::Schema.define(:version => 20090213163216) do
 
   create_table "accounts", :force => true do |t|
-    t.string   "login",                     :limit => 100
+    t.string   "username",                  :limit => 100
     t.string   "name"
     t.string   "email",                     :limit => 100
     t.string   "subdomain"

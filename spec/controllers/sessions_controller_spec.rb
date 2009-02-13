@@ -4,8 +4,8 @@ describe SessionsController do
   fixtures        :accounts
   before do 
     @account  = mock_account
-    @login_params = { :login => 'quentin', :password => 'test' }
-    Account.stub!(:authenticate).with(@login_params[:login], @login_params[:password]).and_return(@account)
+    @login_params = { :username => 'quentin', :password => 'test' }
+    Account.stub!(:authenticate).with(@login_params[:username], @login_params[:password]).and_return(@account)
   end
   def do_create
     post :create, @login_params

@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   
   def create
     logout_keeping_session!
-    account = Account.authenticate(params[:login], params[:password])
+    account = Account.authenticate(params[:username], params[:password])
     if account
       # Protects against session fixation attacks, causes request forgery
       # protection if user resubmits an earlier form using back
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "Logged in successfully"
     else
       note_failed_signin
-      @login       = params[:login]
+      @login       = params[:username]
       @remember_me = params[:remember_me]
       render :action => 'new'
     end
@@ -33,6 +33,6 @@ protected
   # Track failed login attempts
   def note_failed_signin
     flash[:error] = "Invalid username or password."
-    logger.warn "Failed login for '#{params[:login]}' from #{request.remote_ip} at #{Time.now.utc}"
+    logger.warn "Failed login for '#{params[:username]}' from #{request.remote_ip} at #{Time.now.utc}"
   end
 end

@@ -13,7 +13,7 @@ module IntegrationExampleExtensions
     if account.nil?
       delete session_path
     else
-      post session_url, :login => account.login, :password => "password"
+      post session_url, :username => account.username, :password => "password"
     end
   end
   

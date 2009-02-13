@@ -24,8 +24,8 @@ describe Account do
 
   it 'requires login' do
     lambda do
-      u = create_account(:login => nil)
-      u.errors.on(:login).should_not be_nil
+      u = create_account(:username => nil)
+      u.errors.on(:username).should_not be_nil
     end.should_not change(Account, :count)
   end
 
@@ -55,8 +55,8 @@ describe Account do
      'hello.-_there@funnychar.com'].each do |login_str|
       it "'#{login_str}'" do
         lambda do
-          u = create_account(:login => login_str)
-          u.errors.on(:login).should     be_nil
+          u = create_account(:username => login_str)
+          u.errors.on(:username).should     be_nil
         end.should change(Account, :count).by(1)
       end
     end
@@ -67,8 +67,8 @@ describe Account do
      'semicolon;', 'quote"', 'tick\'', 'backtick`', 'percent%', 'plus+', 'space '].each do |login_str|
       it "'#{login_str}'" do
         lambda do
-          u = create_account(:login => login_str)
-          u.errors.on(:login).should_not be_nil
+          u = create_account(:username => login_str)
+          u.errors.on(:username).should_not be_nil
         end.should_not change(Account, :count)
       end
     end
@@ -156,7 +156,7 @@ describe Account do
   end
 
   it 'does not rehash password' do
-    accounts(:quentin).update_attributes(:login => 'quentin2')
+    accounts(:quentin).update_attributes(:username => 'quentin2')
     Account.authenticate('quentin2', 'monkey').should == accounts(:quentin)
   end
 
@@ -238,7 +238,7 @@ describe Account do
 protected
   def create_account(options = {})
     record = Account.new({
-      :login => 'quire', :email => 'quire@example.com',
+      :username => 'quire', :email => 'quire@example.com',
       :password => 'quire69', :password_confirmation => 'quire69',
       :subdomain => 'quire'
     }.merge(options))
