@@ -25,7 +25,10 @@ class TeasersController < ApplicationController
           Account.find_by_custom_domain(request.host)
         end
       end
-      head :not_found unless @account
+      
+      if @account.nil?
+        redirect_to (Rails.env.production? ? "http://www.#{request.host_with_port}" : root_url)
+      end
     end
     
     def render_teaser_page

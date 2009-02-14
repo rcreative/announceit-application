@@ -38,6 +38,8 @@ class Account < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :username, :email, :name, :password, :password_confirmation, :domain_type, :custom_domain, :subdomain
 
+  before_save :clear_unused_domain_setting
+  
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
   def self.authenticate(username, password)
@@ -53,4 +55,13 @@ class Account < ActiveRecord::Base
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
+  
+  protected
+    def clear_unused_domain_setting
+      if domain_type == 'custom'
+        self.subdomain = nil
+      else
+        self.custom_domain = nil
+      end
+    end
 end

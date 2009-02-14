@@ -54,7 +54,7 @@ describe 'teaser page' do
   it 'should indicate when no teaser is found for a subdomain' do
     Account.should_receive(:find_by_subdomain).with('mecompany').and_return(nil)
     get 'http://mecompany.test.host'
-    response.response_code.should be(404)
+    response.should redirect_to('/')
   end
   
   it 'should render the selected background' do

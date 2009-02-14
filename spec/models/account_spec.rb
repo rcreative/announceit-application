@@ -53,8 +53,9 @@ describe Account do
   
   it 'should allow custom domain' do
     lambda do
-      u = create_account(:subdomain => nil, :custom_domain => 'mecustomdomain.com', :domain_type => 'custom')
-      u.errors.full_messages
+      u = create_account(:subdomain => '', :custom_domain => 'mecustomdomain.com', :domain_type => 'custom')
+      u.domain_type.should == 'custom'
+      u.subdomain.should be_nil
     end.should change(Account, :count)
   end
   
