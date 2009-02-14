@@ -27,7 +27,7 @@ class TeasersController < ApplicationController
       end
       
       if @account.nil?
-        redirect_to (Rails.env.production? ? "http://www.#{request.host_with_port}" : root_url)
+        redirect_to (Rails.env.production? ? "http://www.announceitapp.com" : root_url)
       end
     end
     
