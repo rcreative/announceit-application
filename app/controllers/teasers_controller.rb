@@ -1,4 +1,6 @@
 class TeasersController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+  
   before_filter :assign_account
   before_filter :assign_teaser
   
