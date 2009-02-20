@@ -14,7 +14,8 @@ x Add gravatars to subscribers list
 x rename User#login to User#username; update interface to reflect changes
 x Allow a client to choose a white or dark background for a teaser page
 x Allow a client to use a custom domain
-* BUG: there seem to be some problems with the validation on subdomains/ custom domains
+* BUG: there seem to be some problems with the validation on subdomains / custom domains
+* BUG: fix styles for Firefox and IE7
 * Dismissible welcome message for new signups
 * Allow a client to choose a plan and pay for it (Spreedly)
 * Allow a client to customize the text on the thank you page
