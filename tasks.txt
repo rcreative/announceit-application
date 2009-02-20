@@ -17,6 +17,7 @@ x Allow a client to use a custom domain
 * BUG: there seem to be some problems with the validation on subdomains / custom domains
 * BUG: fix styles for Firefox and IE7
 * Dismissible welcome message for new signups
+* Install Google analytics code so we can track page hits better
 * Allow a client to choose a plan and pay for it (Spreedly)
 * Allow a client to customize the text on the thank you page
 * Put a badge on 10-day free trials
