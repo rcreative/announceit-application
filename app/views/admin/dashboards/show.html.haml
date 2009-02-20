@@ -2,7 +2,7 @@
 - @title = "Dashboard"
 
 %p.message.info
-  %strong Looks like you're new.
+  %strong You must be new!
   Head on over to the
   = link_to "settings tab", admin_settings_path 
   and configure your teaser page.
@@ -22,3 +22,9 @@
       %a{:href=>admin_subscribers_path}
         %big 42
         subscribers
+
+.box
+  %p
+    %big
+      You can view your teaser page here:
+      = link_to teaser_url, teaser_url
