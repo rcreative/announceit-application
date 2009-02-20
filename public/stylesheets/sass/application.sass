@@ -151,6 +151,42 @@
       padding: 15px 15px 5px
     p.change
       margin-top: -0.5em
+    &#statistics
+      background-color: #def
+      border-color: #bbd5f0
+      overflow: auto
+      .graph
+        background: white
+        border: 5px solid #bbd5f0
+        border-radius: 5px
+        -moz-border-radius: 5px
+        -webkit-border-radius: 5px
+        float: left
+        margin: 15px 15px 15px 0
+        width: 60%
+        #visitor_statistics
+          width: 100%
+          height: 220px
+      .large_statistics
+        float: left
+        width: 35%
+        margin-top: 30px
+        font-size: 130%
+        li
+          margin-bottom: 1em
+        big
+          font-family: Georgia, "Lucida Grande", Verdana, Helvetica, Arial, sans-serif
+          font-size: 200%
+        small
+          font-size: 80%
+          color: #9ab
+          display: block
+        a
+          color: #333
+          text-decoration: none
+          &:hover
+            text-decoration: underline
+            color: #2285cc
   .pagination
     font-size: 95%
     text-align: right

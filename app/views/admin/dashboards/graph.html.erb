@@ -1,0 +1,87 @@
+{
+  "bg_colour": "#ffffff",
+  "tooltip"  : { "shadow": false, "background": "#ffffff" },
+  
+  "title": {
+    "text": "Visitors and Subscribers in the Past 7 Days",
+    "style": "{ font-size: 16; margin-top: 5px; margin-bottom: 10px }"
+  },
+  
+  "elements": [
+    {
+      "text":      "Unique Visitors",
+      "type":      "area_hollow",
+      "colour":    "#2285cc",
+      "dot-size":  4,
+      "fill":      "#2285cc",
+      "fill-alpha": 0.25,
+      "halo-size": 1,
+      "tip":       "#val# Visitors",
+      "width":     2,
+      "values" :   [13,20,12,26,22,28,11]
+    },
+    
+    {
+      "text":      "Subscribers",
+      "type":      "area_hollow",
+      "colour":    "#cc0000",
+      "dot-size":  4,
+      "halo-size": 1,
+      "fill":      "#cc3300",
+      "fill-alpha": 0.25,
+      "tip":       "#val# Subscribers",
+      "width":     2,
+      "values" :  [2,4,0,10,5,6,1] 
+    }
+  ],
+  
+  "y_axis": {
+    "colour": "#cccccc",
+    "grid-colour": "#dddddd",
+    "max": 40,
+    "steps": 10
+  },
+  
+  "x_axis": {
+    "colour": "#cccccc",
+    "grid-colour": "#dddddd",
+    "labels": {
+      "labels": ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed"]
+    }
+  }
+
+}
+
+{
+  "title":{
+    "text":"Area Chart",
+    "style":"{font-size: 30px;}"
+  },
+
+  "elements":[
+    {
+      "type":      "area_hollow",
+      "colour":    "#CC3399",
+      "fill":      "#343399",
+      "fill-alpha": 0.8,
+      "text":      "Page views",
+      "width":     3,
+      "font-size": 10,
+      "dot-size":  7,
+      "values" :   [2.1,2.2]
+    }
+  ],
+
+  "y_axis":{
+    "stroke":       4,
+    "tick-length":  10,
+    "colour":       "#000000",
+    "grid-colour":  "#d0d0d0",
+    "offset":       true,
+    "min":          2,
+    "max":          3,
+    "visible":      true,
+    "steps":        0.1
+  }
+
+}

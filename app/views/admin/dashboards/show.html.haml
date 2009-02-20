@@ -1,3 +1,18 @@
 - @selected = :dashboard
 - @title = "Dashboard"
 
+.box#statistics
+  .graph
+    = remote_graph("visitor_statistics", :route => '/dashboard/graph')
+  %ul.large_statistics
+    %li
+      %big 230
+      unique visitors
+      %small since April 3, 2009
+    %li
+      %big 18
+      visits today
+    %li
+      %a{:href=>admin_subscribers_path}
+        %big 42
+        subscribers
