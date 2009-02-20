@@ -57,6 +57,15 @@ module ApplicationHelper
     return grav_url
   end
   
+  def name_and_email(name, email)
+    email = %{<span class="email">#{mail_to h email}</span>}
+    if name.empty?
+      email
+    else
+      %{<span class="name">#{h name}</span> (#{email})}
+    end
+  end
+  
   def teaser_view_url(account)
     if Rails.env.production?
       url_for :host => teaser_host(account), :controller => '/teasers', :action => 'show'

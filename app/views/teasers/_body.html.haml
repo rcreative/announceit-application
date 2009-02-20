@@ -5,6 +5,7 @@
 - form_for :subscriber, :url => {:action => :subscribe} do |fields|
   - if flash[:thanks]
     %h1 Thank You!
+    %p We&#8217;ll be in touch.
   - else
     - unless @teaser.title.empty?
       %h1=h @teaser.title
