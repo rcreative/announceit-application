@@ -1,27 +1,33 @@
 - @selected = :subscribers
 - @title = "Subscribers"
 
-.index_head
-  = will_paginate @subscribers, :previous_label => '&laquo; Prev'
-  %p
-    - if @subscribers.total_pages > 1
-      = "#{@subscribers.size} of"
-    = "#{@subscribers.total_entries} subscribers"
-
-%table.index#subscribers{:border=>0, :cellpadding=>0, :cellspacing=>0}
-  %tbody
-    - for subscriber in @subscribers
-      %tr[subscriber]
-        %td.avatar= image_tag gravatar_url(subscriber.email), :width => 32, :height => 32
-        %td.name=h subscriber.name
-        %td.email= mail_to subscriber.email
-        %td.actions= link_to "Unsubscribe", admin_subscriber_path(subscriber), :method => :delete, :confirm => "Are you sure you want to unsubscribe #{subscriber.name? ? h(subscriber.name) : 'this person'}?"
-
-.index_foot
-  = will_paginate @subscribers, :previous_label => '&laquo; Prev'
-
-.download
-  %h3 Download:
-  %ul
-    %li= link_to "Email Addresses", :format => "txt"
-    %li= link_to "CSV", :format => "csv"
+- unless @subscribers.empty?
+  .index_head
+    = will_paginate @subscribers, :previous_label => '&laquo; Prev'
+    %p
+      - if @subscribers.total_pages > 1
+        = "#{@subscribers.size} of"
+      = "#{@subscribers.total_entries} subscribers"
+  
+  %table.index#subscribers{:border=>0, :cellpadding=>0, :cellspacing=>0}
+    %tbody
+      - for subscriber in @subscribers
+        %tr[subscriber]
+          %td.avatar= image_tag gravatar_url(subscriber.email), :width => 32, :height => 32
+          %td.name
+            = h subscriber.name
+            = mail_to h subscriber.email
+          %td.actions= link_to "Unsubscribe", admin_subscriber_path(subscriber), :method => :delete, :confirm => "Are you sure you want to unsubscribe #{subscriber.name? ? h(subscriber.name) : 'this person'}?"
+  
+  .index_foot
+    = will_paginate @subscribers, :previous_label => '&laquo; Prev'
+  
+  .download
+    %h3 Download:
+    %ul
+      %li= link_to "Email Addresses", :format => "txt"
+      %li= link_to "CSV", :format => "csv"
+- else
+  %p.message.info
+    %strong You don&#8217;t have any subscribers yet!
+    %em When you do, they&#8217;ll show up here.

@@ -13,10 +13,12 @@ x Add gravatars to subscribers list
 * When there are no subscribers show a "blank slate page"
 x rename User#login to User#username; update interface to reflect changes
 x Allow a client to choose a white or dark background for a teaser page
-d Allow a client to use a custom domain
-* Allow a client to customize the text on the thank you page
+x Allow a client to use a custom domain
+* BUG: there seem to be some problems with the validation on subdomains/ custom domains
+* Dismissible welcome message for new signups
 * Allow a client to choose a plan and pay for it (Spreedly)
-* Put a footer on free trials
+* Allow a client to customize the text on the thank you page
+* Put a badge on 10-day free trials
 * Home Page
 * Pricing Page
 * Privacy Policy
