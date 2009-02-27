@@ -58,7 +58,7 @@ module ApplicationHelper
   end
   
   def name_and_email(name, email)
-    email = %{<span class="email">#{mail_to h email}</span>}
+    email = %{<span class="email">#{mail_to h(email)}</span>}
     if name.blank?
       email
     else
