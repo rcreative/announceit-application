@@ -124,20 +124,20 @@ describe AccountsController do
     
     it "should route accounts_path() to /accounts" do
       accounts_path().should == "/accounts"
-      formatted_accounts_path(:format => 'xml').should == "/accounts.xml"
-      formatted_accounts_path(:format => 'json').should == "/accounts.json"
+      accounts_path(:format => 'xml').should == "/accounts.xml"
+      accounts_path(:format => 'json').should == "/accounts.json"
     end
     
     it "should route new_account_path() to /accounts/new" do
       new_account_path().should == "/accounts/new"
-      formatted_new_account_path(:format => 'xml').should == "/accounts/new.xml"
-      formatted_new_account_path(:format => 'json').should == "/accounts/new.json"
+      new_account_path(:format => 'xml').should == "/accounts/new.xml"
+      new_account_path(:format => 'json').should == "/accounts/new.json"
     end
     
     it "should route account_(:id => '1') to /accounts/1" do
       account_path(:id => '1').should == "/accounts/1"
-      formatted_account_path(:id => '1', :format => 'xml').should == "/accounts/1.xml"
-      formatted_account_path(:id => '1', :format => 'json').should == "/accounts/1.json"
+      account_path(:id => '1', :format => 'xml').should == "/accounts/1.xml"
+      account_path(:id => '1', :format => 'json').should == "/accounts/1.json"
     end
     
     it "should route edit_account_path(:id => '1') to /accounts/1/edit" do

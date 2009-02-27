@@ -14,8 +14,8 @@ x When there are no subscribers show a "blank slate page"
 x rename User#login to User#username; update interface to reflect changes
 x Allow a client to choose a white or dark background for a teaser page
 x Allow a client to use a custom domain
-* BUG: there seem to be some problems with the validation on subdomains / custom domains
-* BUG: fix styles for Firefox and IE7
+b BUG: there seem to be some problems with the validation on subdomains / custom domains
+b BUG: fix styles for Firefox and IE7
 d Show statistics on the dashboard
 d Show teaser URL on the dashboard
 d Welcome message for new signups

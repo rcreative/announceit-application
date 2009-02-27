@@ -52,22 +52,4 @@ class VizresTest < Test::Unit::TestCase
     vr("<html></html>")
   end
   
-  def test_create_tmp_if_missing_when_tmp_does_not_exist
-    File.expects(:exists?).with(TMP).returns(false)
-    FileUtils.expects(:mkdir_p).with(TMP)
-    self.expects(:`).with("which svn").returns("/opt/local/bin/svn")
-    self.expects(:`).with("svn propset svn:ignore tmp ./public")
-    create_tmp_if_missing
-  end
-  
-  def test_create_tmp_if_missing_when_tmp_already_exists
-    File.expects(:exists?).with(TMP).returns(true)
-    FileUtils.expects(:mkdir).never
-    create_tmp_if_missing
-  end
-  
-  def test_create_tmp_if_missing_when_svn_is_not_available
-    # TODO: write me
-  end
-  
 end

@@ -1,4 +1,6 @@
+require 'test/unit' unless defined?(Test)
 require 'vizres/browser'
+require 'vizres/scm'
 
 module Vizres
   TMP = File.join(RAILS_ROOT, "public", "tmp")
@@ -24,10 +26,7 @@ module Vizres
   end
 
   def create_tmp_if_missing
-    unless File.exists?(TMP)
-      FileUtils.mkdir_p(TMP)
-      `svn propset svn:ignore tmp #{RAILS_ROOT}/public` unless `which svn`.empty?
-    end
+    SCM.create_tmp_if_missing(TMP)
   end
 end
 
