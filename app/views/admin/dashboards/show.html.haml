@@ -2,7 +2,7 @@
 - @title = "Dashboard"
 
 %p.message.info
-  %strong You must be new!?
+  %strong You must be new!
   Head on over to the
   = link_to "settings tab", admin_settings_path 
   and configure your teaser page now.
@@ -10,6 +10,13 @@
 .box#statistics
   .graph
     = remote_graph("visitor_statistics", :route => '/dashboard/graph')
+    %p.views
+      View:
+      %a.selected{:href=>"#"} Past 7 days
+      %span.separator= "|"
+      %a{:href=>"#"} Last 2 months
+      %span.separator= "|"
+      %a{:href=>"#"} All Time
   %ul.large_statistics
     %li
       %big 230
