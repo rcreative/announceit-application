@@ -20,7 +20,6 @@ d Show statistics on the dashboard
 d Show teaser URL on the dashboard
 d Welcome message for new signups
 d Allow a logged in user to change their name, e-mail, username, and password [see accounts branch]
-* BUG: fix styles for Firefox and IE7
 * Install Google analytics code so we can track page hits better
 * Allow a client to choose a plan and pay for it (Spreedly)
 * Allow a client to customize the text on the thank you page

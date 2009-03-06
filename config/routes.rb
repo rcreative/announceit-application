@@ -35,42 +35,41 @@ ActionController::Routing::Routes.draw do |map|
   
   # See how all your routes lay out with "rake routes"
   
-  map.connect '/', :controller => 'welcome', :action => 'index',
+  map.connect '/',
+    :controller => 'welcome', :action => 'index',
     :conditions => {
       :host        => Rails.configuration.announce.tlds,
-      :method      => :get
-    }
-  
-  map.teaser '/', :controller => 'teasers', :action => 'show',
+      :method      => :get}
+      
+  map.teaser '/',
+    :controller => 'teasers', :action => 'show',
     :conditions => {
       :subdomain => Account.subdomain_regex,
-      :method    => :get
-    }
-  map.connect '/teaser', :controller => 'teasers', :action => 'show'
+      :method    => :get}
+  map.connect '/teaser',
+    :controller => 'teasers', :action => 'show'
   
-  map.connect '/subscribe', :controller => 'teasers', :action => 'subscribe',
-    :conditions => { :method    => :post }
-  
-  map.unimplemented '/unimplemented', :controller => 'welcome', :action => 'unimplemented'
+  map.connect '/subscribe',
+    :controller => 'teasers', :action => 'subscribe',
+    :conditions => { :method => :post }
+    
+  map.dashboard '/dashboard',
+    :controller => 'admin/statistics', :action => 'show',
+    :conditions => {:method => :get}
   
   map.signup '/signup', :controller => 'accounts', :action => 'new'
   map.login  '/login',  :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   
-  map.namespace :admin, :path_prefix => "" do |admin|
-    admin.resource :settings, :member => { :subdomain => :get }
+  map.namespace :admin, :path_prefix => '' do |admin|
+    admin.dashboard 'dashboard', :controller => 'dashboards'
+    admin.resource :statistics, :member => { :graph => :get }
     admin.resources :subscribers
-    admin.resource :statistics
+    admin.resource :settings, :member => { :subdomain => :get }
   end
   
   map.resources :accounts
   map.resource :session
   
   map.root :controller => 'welcome', :action => 'index'
-  
-  # Install the default routes as the lowest priority.
-  # Note: These default routes make all actions in every controller accessible via GET requests. You should
-  # consider removing the them or commenting them out if you're using named routes and resources.
-  # map.connect ':controller/:action/:id'
-  # map.connect ':controller/:action/:id.:format'
 end

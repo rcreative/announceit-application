@@ -105,6 +105,14 @@ describe 'admin' do
     login_as @account
   end
   
+  describe 'dashboard' do
+    it 'should show the statistics of the last seven days' do
+      navigate_to '/dashboard'
+      response.should render_template('admin/statistics/show')
+      response.should have_tag('a.selected', 'Past 7 days')
+    end
+  end
+  
   it 'should list the subscribers' do
     navigate_to '/subscribers'
     response.should have_text(/one@example\.com/)
