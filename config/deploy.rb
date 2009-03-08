@@ -20,15 +20,33 @@ role :app, "173.45.235.36"
 role :web, "173.45.235.36"
 role :db,  "173.45.235.36", :primary => true
 
-namespace :deploy do
-  task :reset do
-    set :migrate_target, :latest
-    update_code
-    remigrate
-    symlink
-    restart
+namespace :db do
+  task :backup_name, :roles => :db, :only => { :primary => true } do
+    now = Time.now
+    run "mkdir -p #{shared_path}/db_backups"
+    backup_time = [now.year,now.month,now.day,now.hour,now.min,now.sec].join('-')
+    set :backup_file, "#{shared_path}/db_backups/announce_production-snapshot-#{backup_time}.sql"
+  end
+
+  desc "Backup your database to shared_path+/db_backups"
+  task :dump, :roles => :db, :only => {:primary => true} do
+    backup_name
+    database_info = YAML.load_file('config/database.yml')['production']
+    run "mysqldump --add-drop-table -u #{database_info['username']} -p#{database_info['password']} announce_production | bzip2 -c > #{backup_file}.bz2"
   end
   
+  desc "Sync your production database to your local workstation"
+  task :clone_to_local, :roles => :db, :only => {:primary => true} do
+    backup_name
+    dump
+    get "#{backup_file}.bz2", "/tmp/#{application}.sql.gz"
+    development_info = YAML.load_file("config/database.yml")['development']
+    run_str = "bzcat /tmp/#{application}.sql.gz | mysql -u #{development_info['username']} -p#{development_info['password']}  #{development_info['database']}"
+    %x!#{run_str}!
+  end
+end
+
+namespace :deploy do
   desc "Restarting mod_rails with restart.txt"
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "touch #{current_path}/tmp/restart.txt"
@@ -58,19 +76,4 @@ namespace :slicehost do
   task :apache_reload do
     sudo "/etc/init.d/apache2 reload"
   end
-end
-
-task :remigrate, :roles => :db, :only => { :primary => true } do
-  rake = fetch(:rake, "rake")
-  rails_env = fetch(:rails_env, "production")
-  migrate_env = fetch(:migrate_env, "")
-  migrate_target = fetch(:migrate_target, :latest)
-  
-  directory = case migrate_target.to_sym
-    when :current then current_path
-    when :latest  then current_release
-    else raise ArgumentError, "unknown migration target #{migrate_target.inspect}"
-    end
-    
-  run "cd #{directory}; #{rake} RAILS_ENV=#{rails_env} #{migrate_env} db:migrate:reset"
 end

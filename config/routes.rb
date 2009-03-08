@@ -53,16 +53,15 @@ ActionController::Routing::Routes.draw do |map|
     :controller => 'teasers', :action => 'subscribe',
     :conditions => { :method => :post }
     
-  map.dashboard '/dashboard',
-    :controller => 'admin/statistics', :action => 'show',
-    :conditions => {:method => :get}
-  
   map.signup '/signup', :controller => 'accounts', :action => 'new'
   map.login  '/login',  :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   
+  map.admin_dashboard '/dashboard',
+    :controller => 'admin/statistics', :action => 'show',
+    :conditions => {:method => :get}
+    
   map.namespace :admin, :path_prefix => '' do |admin|
-    admin.dashboard 'dashboard', :controller => 'dashboards'
     admin.resource :statistics, :member => { :graph => :get }
     admin.resources :subscribers
     admin.resource :settings, :member => { :subdomain => :get }

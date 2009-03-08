@@ -1,0 +1,53 @@
+{
+  "bg_colour": "#ffffff",
+  "tooltip"  : { "shadow": false, "background": "#ffffff" },
+  
+  "title": {
+    "text": "Visitors and Subscribers in the Past 7 Days",
+    "style": "{ font-size: 16; margin-top: 5px; margin-bottom: 10px }"
+  },
+  
+  "elements": [
+      {
+        "text":      "Unique Visitors",
+        "type":      "area_hollow",
+        "colour":    "#2285cc",
+        "dot-size":  4,
+        "fill":      "#2285cc",
+        "fill-alpha": 0.25,
+        "halo-size": 1,
+        "tip":       "#val# Visitors",
+        "width":     2,
+        "values" :   <%= @statistics.visits.inspect %>
+      },
+    
+      {
+        "text":      "Subscribers",
+        "type":      "area_hollow",
+        "colour":    "#cc0000",
+        "dot-size":  4,
+        "halo-size": 1,
+        "fill":      "#cc3300",
+        "fill-alpha": 0.25,
+        "tip":       "#val# Subscribers",
+        "width":     2,
+        "values" :  <%= @statistics.subscribes.inspect %>
+      }
+    ],
+  
+  "y_axis": {
+    "colour": "#cccccc",
+    "grid-colour": "#dddddd",
+    "max": 40,
+    "steps": 10
+  },
+  
+  "x_axis": {
+    "colour": "#cccccc",
+    "grid-colour": "#dddddd",
+    "labels": {
+      "labels": <%= @statistics.xlabels.inspect %>
+    }
+  }
+
+}

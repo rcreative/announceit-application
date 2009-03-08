@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090213165651) do
+ActiveRecord::Schema.define(:version => 20090306224934) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username",                  :limit => 100
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(:version => 20090213165651) do
     t.datetime "updated_at"
   end
 
+  create_table "subscribes", :force => true do |t|
+    t.integer "teaser_id"
+    t.integer "visitor_id"
+    t.integer "subscriber_id"
+    t.date    "subscribed_on"
+  end
+
   create_table "teasers", :force => true do |t|
     t.integer  "account_id"
     t.string   "title"
@@ -45,6 +52,17 @@ ActiveRecord::Schema.define(:version => 20090213165651) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "template_name",     :default => "white_background"
+    t.integer  "page_views",        :default => 0
+  end
+
+  create_table "visitors", :force => true do |t|
+    t.integer "teaser_id"
+    t.string  "cookie"
+  end
+
+  create_table "visits", :force => true do |t|
+    t.integer  "visitor_id"
+    t.datetime "visited_at"
   end
 
 end

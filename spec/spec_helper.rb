@@ -6,7 +6,25 @@ require 'spec'
 require 'spec/rails'
 require 'spec/integration'
 
+require 'dataset'
+class Test::Unit::TestCase
+  include Dataset
+  datasets_directory "#{RAILS_ROOT}/spec/datasets"
+end
+
 include AuthenticatedTestHelper
+
+def account_attributes
+  {
+    :username => 'quire', :email => 'quire@example.com',
+    :password => 'quire69', :password_confirmation => 'quire69',
+    :subdomain => 'quire'
+  }
+end
+
+def subscriber_attributes(updates = {})
+  {:email => 'quag@example.com'}.merge(updates)
+end
 
 module IntegrationExampleExtensions
   def login_as(account)
