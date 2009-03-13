@@ -20,6 +20,7 @@ d Show statistics on the dashboard
 d Show teaser URL on the dashboard
 d Welcome message for new signups
 d Allow a logged in user to change their name, e-mail, username, and password [see accounts branch]
+i Don't show points on graph for dates preceding teaser creation
 * Install Google analytics code so we can track page hits better
 * Allow a client to choose a plan and pay for it (Spreedly)
 * Allow a client to customize the text on the thank you page

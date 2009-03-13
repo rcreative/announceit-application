@@ -6,7 +6,7 @@ class ActivityStatistics
   end
   
   def activity?
-    subscribes? || visits?
+    subscribes? || visitors?
   end
   
   def xlabels
@@ -14,12 +14,11 @@ class ActivityStatistics
   end
   
   def ymax
-    highest_value = ([visits.max, subscribes.max].max * 1.10).to_i
-    [highest_value, 5].max
+    highest_value = ([visitors.max, subscribes.max].max * 1.10).to_i
+    [highest_value, 4].max
   end
   
   def ysteps
-    ymax = self.ymax
     [(ymax / 4).to_i, 1].max
   end
   
@@ -43,5 +42,19 @@ class ActivityStatistics
   
   def visits?
     visits.inject(0) {|sum,c| sum + c} != 0
+  end
+  
+  def visitors
+    counts = @teaser.visits.count(
+      'date(visited_at), visitor_id',
+      :distinct => true,
+      :group => 'date(visited_at)',
+      :conditions => ['date(visited_at) in (?)', @dates]
+    )
+    @dates.collect {|d| counts[d.to_s(:db)] || 0 }
+  end
+  
+  def visitors?
+    visitors.inject(0) {|sum,c| sum + c} != 0
   end
 end

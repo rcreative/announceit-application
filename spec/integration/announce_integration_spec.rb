@@ -34,6 +34,7 @@ describe 'teaser page' do
     @account = stub_model(Account, :subdomain => 'mecompany')
     @teaser = Teaser.create!(:account => @account)
     @account.stub!(:teaser).and_return(@teaser)
+    Account.stub!(:find_by_subdomain).and_return(@account)
   end
   
   it 'should be displayed for a subdomain' do
@@ -64,6 +65,24 @@ describe 'teaser page' do
     navigate_to '/teaser'
     response.should render_template('white_background')
   end
+  
+  it 'should store a "permanent" cookie useful for detecting a returning visitor' do
+    lambda do
+      navigate_to 'http://mecompany.test.host'
+    end.should change(Visitor, :count).by(1)
+    cookies["teaser.#{@teaser.id}.visitor"].should == Visitor.last.cookie
+  end
+  
+  it 'should create a visit for a visitor who has not visited within the past hour' do
+    visitor = @teaser.visitors.create!
+    cookies["teaser.#{@teaser.id}.visitor"] = visitor.cookie
+    lambda do
+      navigate_to 'http://mecompany.test.host'
+    end.should change(Visit, :count).by(1)
+    Visit.last.visitor_id.should == visitor.id
+  end
+  
+  it 'should not track account owners'
 end
 
 describe 'subscribe' do

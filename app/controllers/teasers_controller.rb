@@ -3,6 +3,7 @@ class TeasersController < ApplicationController
   
   before_filter :assign_account
   before_filter :assign_teaser
+  before_filter :track_visitor
   
   def show
     render_teaser_page
@@ -35,5 +36,16 @@ class TeasersController < ApplicationController
     
     def render_teaser_page
       render :template => "teasers/#{@teaser.template_name}.html.haml", :layout => false
+    end
+    
+    def track_visitor
+      visitor_cookie_name = "teaser.#{@teaser.id}.visitor"
+      if cookies[visitor_cookie_name].blank?
+        @visitor = @teaser.visitors.create!
+        cookies[visitor_cookie_name] = @visitor.cookie
+      else
+        @visitor = @teaser.visitors.find_by_cookie(cookies[visitor_cookie_name])
+      end
+      @visitor.visits.create!(:visited_at => Time.now)
     end
 end
