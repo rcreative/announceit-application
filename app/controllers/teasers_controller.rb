@@ -51,9 +51,8 @@ class TeasersController < ApplicationController
         cookies[visitor_cookie_name] = @visitor.cookie
       end
       
-      last_visit = @visitor.visits.last
-      if last_visit && last_visit.visited_at > 1.hour.ago
-        last_visit.update_attribute(:visited_at, Time.now)
+      if recent_visit = @visitor.visits.last(:conditions => ['visited_at > ?', 1.hour.ago])
+        recent_visit.update_attribute(:visited_at, Time.now)
       else
         @visitor.visits.create!
       end
