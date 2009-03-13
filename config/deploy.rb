@@ -41,7 +41,8 @@ namespace :db do
     dump
     get "#{backup_file}.bz2", "/tmp/#{application}.sql.gz"
     development_info = YAML.load_file("config/database.yml")['development']
-    run_str = "bzcat /tmp/#{application}.sql.gz | mysql -u #{development_info['username']} -p#{development_info['password']}  #{development_info['database']}"
+    local_db_password = development_info['password'] ? " -p#{development_info['password']}" : ''
+    run_str = "bzcat /tmp/#{application}.sql.gz | mysql -u #{development_info['username']}#{local_db_password}  #{development_info['database']}"
     %x!#{run_str}!
   end
 end
