@@ -13,6 +13,16 @@ class ActivityStatistics
     @dates.collect {|d| d.strftime('%a') }
   end
   
+  def ymax
+    highest_value = ([visits.max, subscribes.max].max * 1.10).to_i
+    [highest_value, 5].max
+  end
+  
+  def ysteps
+    ymax = self.ymax
+    [(ymax / 4).to_i, 1].max
+  end
+  
   def subscribes
     counts = @teaser.subscribes.count(:all,
       :group => 'date(subscribed_on)',

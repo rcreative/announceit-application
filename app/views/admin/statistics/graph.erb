@@ -17,8 +17,8 @@
         "fill-alpha": 0.25,
         "halo-size": 1,
         "tip":       "#val# Visitors",
-        "width":     2,
-        "values" :   <%= @statistics.visits.inspect %>
+        "width":     2<% if @statistics.visits? %>,
+        "values" :   <%= @statistics.visits.inspect %><% end %>
       },
     
       {
@@ -30,16 +30,16 @@
         "fill":      "#cc3300",
         "fill-alpha": 0.25,
         "tip":       "#val# Subscribers",
-        "width":     2,
-        "values" :  <%= @statistics.subscribes.inspect %>
+        "width":     2<% if @statistics.subscribes? %>,
+        "values" :  <%= @statistics.subscribes.inspect %><% end %>
       }
     ],
   
   "y_axis": {
     "colour": "#cccccc",
     "grid-colour": "#dddddd",
-    "max": 40,
-    "steps": 10
+    "max": <%= @statistics.ymax %>,
+    "steps": <%= @statistics.ysteps %>
   },
   
   "x_axis": {
