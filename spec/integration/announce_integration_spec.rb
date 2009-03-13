@@ -73,7 +73,7 @@ describe 'teaser page' do
     cookies["teaser.#{@teaser.id}.visitor"].should == Visitor.last.cookie
   end
   
-  it 'should create a visit for a visitor who has not visited within the past hour' do
+  it 'should create a visit for a visitor' do
     visitor = @teaser.visitors.create!
     cookies["teaser.#{@teaser.id}.visitor"] = visitor.cookie
     lambda do
@@ -82,7 +82,25 @@ describe 'teaser page' do
     Visit.last.visitor_id.should == visitor.id
   end
   
-  it 'should not track account owners'
+  it 'should create a new visitor and update cookie when existing cookie not found' do
+    cookies["teaser.#{@teaser.id}.visitor"] = 'something not found'
+    lambda do
+      navigate_to 'http://mecompany.test.host'
+    end.should change(Visitor, :count).by(1)
+    cookies["teaser.#{@teaser.id}.visitor"].should == Visitor.last.cookie
+  end
+  
+  it 'should not create a visit for a visitor who has visited within the last hour' do
+    visitor = @teaser.visitors.create!
+    visit = visitor.visits.create!
+    cookies["teaser.#{@teaser.id}.visitor"] = visitor.cookie
+    recent_visit_time = 5.minutes.from_now
+    lambda do
+      Time.stub!(:now).and_return(recent_visit_time)
+      navigate_to 'http://mecompany.test.host'
+    end.should_not change(Visit, :count)
+    visit.reload.visited_at.to_s.should == recent_visit_time.to_s
+  end
 end
 
 describe 'subscribe' do
@@ -105,6 +123,16 @@ describe 'subscribe' do
     submit_form :subscriber => {:email => '@example.com'}
     response.should be_showing('/subscribe')
     response.should have_text(/errors/)
+  end
+  
+  it 'should associate the current visitor, subscriber with a subscribe' do
+    visitor = @teaser.visitors.create!
+    cookies["teaser.#{@teaser.id}.visitor"] = visitor.cookie
+    submit_to 'http://mecompany.test.host/subscribe', :subscriber => {:name => 'Johnny', :email => 'johnny@example.com'}
+    subscribe = Subscribe.last
+    subscribe.visitor.should == visitor
+    subscribe.subscriber_id.should_not be_nil
+    subscribe.subscribed_on.should == Date.today
   end
 end
 

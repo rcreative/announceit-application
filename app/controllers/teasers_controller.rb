@@ -14,6 +14,12 @@ class TeasersController < ApplicationController
     if @subscriber.new_record?
       render_teaser_page
     else
+      @teaser.subscribes.create!(
+        :subscriber => @subscriber,
+        :visitor => @visitor,
+        :subscribed_on => Date.today
+      )
+      
       flash[:thanks] = true
       redirect_to teaser_view_url(@account)
     end
@@ -40,12 +46,16 @@ class TeasersController < ApplicationController
     
     def track_visitor
       visitor_cookie_name = "teaser.#{@teaser.id}.visitor"
-      if cookies[visitor_cookie_name].blank?
+      if cookies[visitor_cookie_name].blank? || (@visitor = @teaser.visitors.find_by_cookie(cookies[visitor_cookie_name])).nil?
         @visitor = @teaser.visitors.create!
         cookies[visitor_cookie_name] = @visitor.cookie
-      else
-        @visitor = @teaser.visitors.find_by_cookie(cookies[visitor_cookie_name])
       end
-      @visitor.visits.create!(:visited_at => Time.now)
+      
+      last_visit = @visitor.visits.last
+      if last_visit && last_visit.visited_at > 1.hour.ago
+        last_visit.update_attribute(:visited_at, Time.now)
+      else
+        @visitor.visits.create!
+      end
     end
 end

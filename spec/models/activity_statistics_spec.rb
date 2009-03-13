@@ -10,19 +10,32 @@ describe ActivityStatistics do
   
   before do
     Time.stub!(:now).and_return(Time.local(2009,3,6))
-    @stats = ActivityStatistics.new(@account_one, @teaser_one)
   end
   
   describe 'last 7 days' do
-    before do
+    before :all do
       @vone.visits.create!(:visited_at => Time.local(2009,2,28))
       @vone.visits.create!(:visited_at => Time.local(2009,3,1,12))
       @vone.visits.create!(:visited_at => Time.local(2009,3,1,15))
       @vtwo.visits.create!(:visited_at => Time.local(2009,3,1))
     end
     
+    before { @stats = ActivityStatistics.new(@account_one, @teaser_one) }
+    
+    it 'should answer the start date from 7 days ago' do
+      @stats.start_date.should == Date.new(2009,2,28)
+    end
+    
     it 'should answer labels for each day' do
       @stats.xlabels.should == %w(Sat Sun Mon Tue Wed Thu Fri)
+    end
+    
+    it 'should answer visitors for date range' do
+      @stats.visitors_total.should == 3
+    end
+    
+    it 'should answer visitors today' do
+      @stats.visitors_today.should == 0
     end
     
     it 'should answer visits for each day' do
@@ -41,6 +54,7 @@ describe ActivityStatistics do
   
   describe 'y axis' do
     before do
+      @stats = ActivityStatistics.new(@account_one, @teaser_one)
       @stats.stub!(:visitors).and_return([0,0,0,0,0,0,0])
       @stats.stub!(:subscribes).and_return([0,0,0,0,0,0,0])
     end

@@ -19,15 +19,15 @@
       %a{:href=>"#"} All Time
   %ul.large_statistics
     %li
-      %big 230
+      %big= @statistics.visitors_total
       unique visitors
-      %small since April 3, 2009
+      %small= "since #{@statistics.start_date.to_s(:month_day_year)}"
     %li
-      %big 18
+      %big= @statistics.visitors_today
       visitors today
     %li
       %a{:href=>admin_subscribers_path}
-        %big 42
+        %big= @subscriber_count
         subscribers
 
 .box

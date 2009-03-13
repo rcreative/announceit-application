@@ -1,4 +1,6 @@
 class ActivityStatistics
+  extend ActiveSupport::Memoizable
+  
   def initialize(account, teaser)
     @account, @teaser = account, teaser
     start = 7.days.ago.to_date
@@ -22,12 +24,17 @@ class ActivityStatistics
     [(ymax / 4).to_i, 1].max
   end
   
+  def start_date
+    @dates.first
+  end
+  
   def subscribes
     counts = @teaser.subscribes.count(:all,
       :group => 'date(subscribed_on)',
       :conditions => ['subscribed_on in (?)', @dates])
     @dates.collect {|d| counts[d.to_s(:db)] || 0 }
   end
+  memoize :subscribes
   
   def subscribes?
     subscribes.inject(0) {|sum,c| sum + c} != 0
@@ -39,6 +46,7 @@ class ActivityStatistics
       :conditions => ['date(visited_at) in (?)', @dates])
     @dates.collect {|d| counts[d.to_s(:db)] || 0 }
   end
+  memoize :visits
   
   def visits?
     visits.inject(0) {|sum,c| sum + c} != 0
@@ -53,8 +61,17 @@ class ActivityStatistics
     )
     @dates.collect {|d| counts[d.to_s(:db)] || 0 }
   end
+  memoize :visitors
   
   def visitors?
-    visitors.inject(0) {|sum,c| sum + c} != 0
+    visitors_total != 0
+  end
+  
+  def visitors_today
+    visitors.last
+  end
+  
+  def visitors_total
+    visitors.inject(0) {|sum,c| sum + c}
   end
 end
