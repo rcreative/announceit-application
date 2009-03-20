@@ -3,7 +3,7 @@ module Admin
     before_filter :assign_activity_statistics
     
     def graph
-      render :layout => false
+      render :layout => false, :content_type => Mime::JSON
     end
     
     def show

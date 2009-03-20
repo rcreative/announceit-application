@@ -1,34 +1,21 @@
 - @selected = :dashboard
 - @title = "Dashboard"
 
-%p.message.info
-  %strong You must be new!
-  Head on over to the
-  = link_to "settings tab", admin_settings_path 
-  and configure your teaser page now.
-
 .box#statistics
   .graph
     = remote_graph("visitor_statistics", :url => {:action => 'graph'})
-    %p.views
-      View:
-      %a.selected{:href=>"#"} Past 7 days
-      %span.separator= "|"
-      %a{:href=>"#"} Last 2 months
-      %span.separator= "|"
-      %a{:href=>"#"} All Time
   %ul.large_statistics
     %li
       %big= @statistics.visitors_total
-      unique visitors
+      = "unique visitor#{@statistics.visitors_total != 1 ? 's' : ''}"
       %small= "since #{@statistics.start_date.to_s(:month_day_year)}"
     %li
       %big= @statistics.visitors_today
-      visitors today
+      = "visitor#{@statistics.visitors_today != 1 ? 's' : ''} today"
     %li
       %a{:href=>admin_subscribers_path}
         %big= @subscriber_count
-        subscribers
+        = "subscriber#{@subscriber_count != 1 ? 's' : ''}"
 
 .box
   %p

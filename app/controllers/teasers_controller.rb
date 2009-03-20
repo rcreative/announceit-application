@@ -48,7 +48,7 @@ class TeasersController < ApplicationController
       visitor_cookie_name = "teaser.#{@teaser.id}.visitor"
       if cookies[visitor_cookie_name].blank? || (@visitor = @teaser.visitors.find_by_cookie(cookies[visitor_cookie_name])).nil?
         @visitor = @teaser.visitors.create!
-        cookies[visitor_cookie_name] = @visitor.cookie
+        install_persistent_cookie(visitor_cookie_name, @visitor.cookie)
       end
       
       if recent_visit = @visitor.visits.last(:conditions => ['visited_at > ?', 1.hour.ago])
@@ -56,5 +56,15 @@ class TeasersController < ApplicationController
       else
         @visitor.visits.create!
       end
+    end
+    
+    # Not setting :expires of cookie makes it a session cookie. Those are
+    # deleted from the browser when it is restarted.
+    #
+    def install_persistent_cookie(name, cookie)
+      cookies[name] = {
+        :value => cookie,
+        :expires => 10.years.from_now
+      }
     end
 end

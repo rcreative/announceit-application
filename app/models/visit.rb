@@ -4,6 +4,6 @@ class Visit < ActiveRecord::Base
   
   private
     def assign_visited_at
-      self.visited_at = Time.now
+      self.visited_at ||= Time.now
     end
 end

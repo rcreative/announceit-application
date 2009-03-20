@@ -3,7 +3,7 @@ class ActivityStatistics
   
   def initialize(account, teaser)
     @account, @teaser = account, teaser
-    start = 7.days.ago.to_date
+    start = (Time.now - 7.days).to_date
     @dates = (1..7).collect {|i| start + i.days }
   end
   
@@ -16,7 +16,7 @@ class ActivityStatistics
   end
   
   def ymax
-    highest_value = ([visitors.max, subscribes.max].max * 1.10).to_i
+    highest_value = ([visitor_counts.max, subscribe_counts.max].max * 1.10).to_i
     [highest_value, 4].max
   end
   
@@ -28,31 +28,51 @@ class ActivityStatistics
     @dates.first
   end
   
-  def subscribes
+  def subscribe_counts
     counts = @teaser.subscribes.count(:all,
       :group => 'date(subscribed_on)',
       :conditions => ['subscribed_on in (?)', @dates])
     @dates.collect {|d| counts[d.to_s(:db)] || 0 }
   end
-  memoize :subscribes
+  memoize :subscribe_counts
   
-  def subscribes?
-    subscribes.inject(0) {|sum,c| sum + c} != 0
+  def subscribes
+    first = @teaser.subscribes.first
+    day_before_first = (first ? first.subscribed_on : Date.today) - 1.day
+    data = subscribe_counts.dup
+    @dates.each_with_index do |d,i|
+      data[i] = nil if d < day_before_first
+    end
+    data
   end
   
-  def visits
+  def subscribes?
+    subscribe_counts.inject(0) {|sum,c| sum + c} != 0
+  end
+  
+  def visit_counts
     counts = @teaser.visits.count(:all,
       :group => 'date(visited_at)',
       :conditions => ['date(visited_at) in (?)', @dates])
     @dates.collect {|d| counts[d.to_s(:db)] || 0 }
   end
-  memoize :visits
+  memoize :visit_counts
   
   def visits?
-    visits.inject(0) {|sum,c| sum + c} != 0
+    visit_counts.inject(0) {|sum,c| sum + c} != 0
   end
   
   def visitors
+    first = @teaser.visits.first
+    day_before_first = (first ? first.visited_at.to_date : Date.today) - 1.day
+    data = visitor_counts.dup
+    @dates.each_with_index do |d,i|
+      data[i] = nil if d < day_before_first
+    end
+    data
+  end
+  
+  def visitor_counts
     counts = @teaser.visits.count(
       'date(visited_at), visitor_id',
       :distinct => true,
@@ -61,17 +81,17 @@ class ActivityStatistics
     )
     @dates.collect {|d| counts[d.to_s(:db)] || 0 }
   end
-  memoize :visitors
+  memoize :visitor_counts
   
   def visitors?
     visitors_total != 0
   end
   
   def visitors_today
-    visitors.last
+    visitor_counts.last
   end
   
   def visitors_total
-    visitors.inject(0) {|sum,c| sum + c}
+    visitor_counts.inject(0) {|sum,c| sum + c}
   end
 end

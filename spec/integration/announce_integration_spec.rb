@@ -154,6 +154,7 @@ describe 'admin' do
   
   describe 'dashboard' do
     it 'should show the statistics of the last seven days' do
+      pending 'implementation of multiple choices'
       navigate_to '/dashboard'
       response.should render_template('admin/statistics/show')
       response.should have_tag('a.selected', 'Past 7 days')

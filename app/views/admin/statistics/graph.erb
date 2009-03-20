@@ -18,7 +18,7 @@
         "halo-size": 1,
         "tip":       "#val# Visitors",
         "width":     2<% if @statistics.visitors? %>,
-        "values" :   <%= @statistics.visitors.inspect %><% end %>
+        "values" :   <%= @statistics.visitors.to_json %><% end %>
       },
     
       {
@@ -31,7 +31,7 @@
         "fill-alpha": 0.25,
         "tip":       "#val# Subscribers",
         "width":     2<% if @statistics.subscribes? %>,
-        "values" :  <%= @statistics.subscribes.inspect %><% end %>
+        "values" :  <%= @statistics.subscribes.to_json %><% end %>
       }
     ],
   
