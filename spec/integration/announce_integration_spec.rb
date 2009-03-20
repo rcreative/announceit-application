@@ -8,13 +8,13 @@ describe 'welcome' do
 end
 
 describe 'signup' do
-  it 'should create an account and show settings page' do
+  it 'should create an account and show dashboard' do
     navigate_to '/signup?key=dk3su29sw'
     submit_form :account => {
       :name => 'Me Company', :email => 'me@example.com',
       :username => '2kso2df', :password => 'password', :password_confirmation => 'password',
       :subdomain => 'mecompany'}
-    response.should be_showing('/settings')
+    response.should be_showing('/dashboard')
   end
   
   it 'should require our special flag for now' do

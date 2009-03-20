@@ -15,12 +15,14 @@ x rename User#login to User#username; update interface to reflect changes
 x Allow a client to choose a white or dark background for a teaser page
 x Allow a client to use a custom domain
 b BUG: there seem to be some problems with the validation on subdomains / custom domains
+  I could not cause an error. Any examples?
 b BUG: fix styles for Firefox and IE7
-d Show statistics on the dashboard
-d Show teaser URL on the dashboard
-d Welcome message for new signups
+x Show 7 days statistics on the dashboard
+d Show more than 7 days statistics
+x Show teaser URL on the dashboard
+x Welcome message for new signups
 d Allow a logged in user to change their name, e-mail, username, and password [see accounts branch]
-i Don't show points on graph for dates preceding teaser creation
+x Don't show points on graph for dates preceding teaser creation
 * Install Google analytics code so we can track page hits better
 * Allow a client to choose a plan and pay for it (Spreedly)
 * Allow a client to customize the text on the thank you page

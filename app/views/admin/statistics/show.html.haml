@@ -1,6 +1,13 @@
 - @selected = :dashboard
 - @title = "Dashboard"
 
+- if @teaser.unmodified?
+  %p.message.info
+    %strong You must be new!
+    Head on over to the
+    = link_to "settings tab", admin_settings_path
+    and configure your teaser page now.
+    
 .box#statistics
   .graph
     = remote_graph("visitor_statistics", :url => {:action => 'graph'})

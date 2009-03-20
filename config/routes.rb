@@ -41,12 +41,12 @@ ActionController::Routing::Routes.draw do |map|
       :host        => Rails.configuration.announce.tlds,
       :method      => :get}
       
-  map.teaser '/',
+  map.connect '/',
     :controller => 'teasers', :action => 'show',
     :conditions => {
       :subdomain => Account.subdomain_regex,
       :method    => :get}
-  map.connect '/teaser',
+  map.teaser '/teaser',
     :controller => 'teasers', :action => 'show'
   
   map.connect '/subscribe',

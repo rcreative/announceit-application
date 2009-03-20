@@ -15,10 +15,8 @@ class AccountsController < ApplicationController
       # button. Uncomment if you understand the tradeoffs.
       # reset session
       self.current_account = @account # !! now logged in
-      redirect_back_or_default('/settings')
-      flash[:notice] = "Thanks for signing up!"
+      redirect_to admin_dashboard_path
     else
-      flash[:error]  = "We couldn't set up that account, sorry."
       render :action => 'new'
     end
   end

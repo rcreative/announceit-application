@@ -26,4 +26,8 @@ class Teaser < ActiveRecord::Base
       )
     end
   end
+  
+  def unmodified?
+    !(title? || description? || logo_file_name?)
+  end
 end
