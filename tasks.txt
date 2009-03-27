@@ -20,7 +20,8 @@ b BUG: fix styles for Firefox and IE7
 x Show 7 days statistics on the dashboard
 x BUG: A visit by a logged in user should not count in statistics
 b BUG: Timezone issues
-d Show more than 7 days statistics
+x Show last two months of statistics
+d Show statistics for all time
 x Show teaser URL on the dashboard
 x Welcome message for new signups
 d Allow a logged in user to change their name, e-mail, username, and password [see accounts branch]
