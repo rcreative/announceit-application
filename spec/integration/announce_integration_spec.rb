@@ -35,6 +35,8 @@ describe 'teaser page' do
     @teaser = Teaser.create!(:account => @account)
     @account.stub!(:teaser).and_return(@teaser)
     Account.stub!(:find_by_subdomain).and_return(@account)
+    Account.stub!(:authenticate).and_return(@account)
+    Account.stub!(:find_by_id).and_return(@account)
   end
   
   it 'should be displayed for a subdomain' do
@@ -59,8 +61,6 @@ describe 'teaser page' do
   end
   
   it 'should render the selected background' do
-    Account.stub!(:authenticate).and_return(@account)
-    Account.stub!(:find_by_id).and_return(@account)
     login_as @account
     navigate_to '/teaser'
     response.should render_template('white_background')
@@ -100,6 +100,15 @@ describe 'teaser page' do
       navigate_to 'http://mecompany.test.host'
     end.should_not change(Visit, :count)
     visit.reload.visited_at.to_s.should == recent_visit_time.to_s
+  end
+  
+  it 'should not create a visit for a visitor who is logged in as the account owner' do
+    login_as @account
+    visitor = @teaser.visitors.create!
+    cookies["teaser.#{@teaser.id}.visitor"] = visitor.cookie
+    lambda do
+      navigate_to '/teaser'
+    end.should_not change(Visit, :count)
   end
 end
 

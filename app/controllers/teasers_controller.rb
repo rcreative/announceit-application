@@ -3,7 +3,7 @@ class TeasersController < ApplicationController
   
   before_filter :assign_account
   before_filter :assign_teaser
-  before_filter :track_visitor
+  before_filter :track_visitor, :unless => :logged_in?
   
   def show
     render_teaser_page
@@ -44,6 +44,14 @@ class TeasersController < ApplicationController
       render :template => "teasers/#{@teaser.template_name}.html.haml", :layout => false
     end
     
+    # It is important to understand the reason we do not specify the cookie
+    # :domain as *.annouceitapp.com, etc. According to
+    # http://en.wikipedia.org/wiki/HTTP_cookie, browsers typically limit the
+    # number of cookies per domain that they will store (LCD of 20). Without
+    # actual testing, I did not want to bump into this. Therefore, we will be
+    # storing by FQDN; myteaser.announceitapp.com has cookies separate from
+    # yourteaser.announceitapp.com.
+    #
     def track_visitor
       visitor_cookie_name = "teaser.#{@teaser.id}.visitor"
       if cookies[visitor_cookie_name].blank? || (@visitor = @teaser.visitors.find_by_cookie(cookies[visitor_cookie_name])).nil?
