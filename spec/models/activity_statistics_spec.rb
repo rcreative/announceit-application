@@ -20,7 +20,7 @@ describe ActivityStatistics do
       @vtwo.visits.create!(:visited_at => Time.local(2009,3,1))
     end
     
-    before { @stats = ActivityStatistics.new(@account_one, @teaser_one) }
+    before { @stats = DailyStatistics.new(@account_one, @teaser_one) }
     
     it 'should answer the start date from 7 days ago' do
       @stats.start_date.should == Date.new(2009,2,28)
@@ -50,6 +50,10 @@ describe ActivityStatistics do
     it 'should answer unique visitor counts for each day' do
       @stats.visitor_counts.should == [1,2,0,0,0,0,0]
     end
+    
+    it 'should answer 1 step for x' do
+      @stats.xsteps.should == 1
+    end
   end
   
   describe 'last 2 months' do
@@ -60,22 +64,28 @@ describe ActivityStatistics do
       @vtwo.visits.create!(:visited_at => Time.local(2009,3,6))
     end
     
-    before { @stats = ActivityStatistics.new(@account_one, @teaser_one, 2.months) }
+    before { @stats = MonthlyStatistics.new(@account_one, @teaser_one) }
     
-    it 'should answer the start date from 2 months ago' do
-      @stats.start_date.should == Date.new(2009,1,7)
+    it 'should answer the start date from roughly 2 months ago' do
+      @stats.start_date.should == Date.new(2009,1,9)
+    end
+    
+    it 'should answer labels for each day' do
+      unlabeled = Array.new(6,'')
+      @stats.xlabels.should == ['Jan 9', unlabeled, 'Jan 16', unlabeled, 'Jan 23', unlabeled, 'Jan 30', unlabeled, 'Feb 6', unlabeled, 'Feb 13', unlabeled, 'Feb 20', unlabeled, 'Feb 27', unlabeled, 'Mar 6'].flatten
     end
     
     it 'should answer visit counts for each day' do
-      visits_between_first_and_second = Array.new(29, 0)
-      visits_between_second_and_last = Array.new(27, 0)
-      expected = [1] + visits_between_first_and_second + [2] + visits_between_second_and_last + [1]
-      @stats.visit_counts.should == expected
+      @stats.visit_counts.should == [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+    end
+    
+    it 'should answer 9 steps for x' do
+      @stats.xsteps.should == 9
     end
   end
   
   describe 'before first visit' do
-    before { @stats = ActivityStatistics.new(@account_one, @teaser_one) }
+    before { @stats = DailyStatistics.new(@account_one, @teaser_one) }
     
     it 'should answer visitors with nil for days that were before we began collecting' do
       @vone.visits.create!(:visited_at => Time.now)
@@ -90,7 +100,7 @@ describe ActivityStatistics do
   
   describe 'y axis' do
     before do
-      @stats = ActivityStatistics.new(@account_one, @teaser_one)
+      @stats = DailyStatistics.new(@account_one, @teaser_one)
       @stats.stub!(:visitor_counts).and_return([0,0,0,0,0,0,0])
       @stats.stub!(:subscribe_counts).and_return([0,0,0,0,0,0,0])
     end

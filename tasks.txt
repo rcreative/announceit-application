@@ -19,6 +19,7 @@ b BUG: there seem to be some problems with the validation on subdomains / custom
 b BUG: fix styles for Firefox and IE7
 x Show 7 days statistics on the dashboard
 x BUG: A visit by a logged in user should not count in statistics
+b BUG: Timezone issues
 d Show more than 7 days statistics
 x Show teaser URL on the dashboard
 x Welcome message for new signups

@@ -1,17 +1,15 @@
 class ActivityStatistics
   extend ActiveSupport::Memoizable
   
-  def initialize(account, teaser, history = 7.days)
-    @account, @teaser = account, teaser
-    @dates = ((Date.today-history+1)..Date.today)
+  attr_reader :start_date
+  
+  def initialize(account, teaser, start_date)
+    @account, @teaser, @start_date = account, teaser, start_date
+    @dates = (start_date..Date.today)
   end
   
   def activity?
     subscribes? || visitors?
-  end
-  
-  def xlabels
-    @dates.collect {|d| d.strftime('%a') }
   end
   
   def ymax
@@ -21,10 +19,6 @@ class ActivityStatistics
   
   def ysteps
     [(ymax / 4).to_i, 1].max
-  end
-  
-  def start_date
-    @dates.first
   end
   
   def subscribe_counts

@@ -12,7 +12,7 @@ module Admin
     
     private
       def assign_activity_statistics
-        @statistics = ActivityStatistics.new(@account, @teaser)
+        @statistics = DailyStatistics.new(@account, @teaser)
       end
   end
 end
