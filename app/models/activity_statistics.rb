@@ -1,10 +1,9 @@
 class ActivityStatistics
   extend ActiveSupport::Memoizable
   
-  def initialize(account, teaser)
+  def initialize(account, teaser, history = 7.days)
     @account, @teaser = account, teaser
-    start = (Time.now - 7.days).to_date
-    @dates = (1..7).collect {|i| start + i.days }
+    @dates = ((Date.today-history+1)..Date.today)
   end
   
   def activity?

@@ -52,6 +52,28 @@ describe ActivityStatistics do
     end
   end
   
+  describe 'last 2 months' do
+    dataset do
+      @vone.visits.create!(:visited_at => Time.local(2009,1,7))
+      @vone.visits.create!(:visited_at => Time.local(2009,2,6,12))
+      @vone.visits.create!(:visited_at => Time.local(2009,2,6,15))
+      @vtwo.visits.create!(:visited_at => Time.local(2009,3,6))
+    end
+    
+    before { @stats = ActivityStatistics.new(@account_one, @teaser_one, 2.months) }
+    
+    it 'should answer the start date from 2 months ago' do
+      @stats.start_date.should == Date.new(2009,1,7)
+    end
+    
+    it 'should answer visit counts for each day' do
+      visits_between_first_and_second = Array.new(29, 0)
+      visits_between_second_and_last = Array.new(27, 0)
+      expected = [1] + visits_between_first_and_second + [2] + visits_between_second_and_last + [1]
+      @stats.visit_counts.should == expected
+    end
+  end
+  
   describe 'before first visit' do
     before { @stats = ActivityStatistics.new(@account_one, @teaser_one) }
     
