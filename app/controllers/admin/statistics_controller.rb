@@ -12,7 +12,11 @@ module Admin
     
     private
       def assign_activity_statistics
-        @statistics = DailyStatistics.new(@account, @teaser)
+        if params.has_key?('monthly')
+          @statistics = MonthlyStatistics.new(@account, @teaser)
+        else
+          @statistics = DailyStatistics.new(@account, @teaser)
+        end
       end
   end
 end

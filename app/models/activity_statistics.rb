@@ -1,10 +1,10 @@
 class ActivityStatistics
   extend ActiveSupport::Memoizable
   
-  attr_reader :start_date
+  attr_reader :start_date, :title
   
-  def initialize(account, teaser, start_date)
-    @account, @teaser, @start_date = account, teaser, start_date
+  def initialize(title, account, teaser, start_date)
+    @title, @account, @teaser, @start_date = title, account, teaser, start_date
     @dates = (start_date..Date.today)
   end
   
@@ -24,7 +24,7 @@ class ActivityStatistics
   def subscribe_counts
     counts = @teaser.subscribes.count(:all,
       :group => 'date(subscribed_on)',
-      :conditions => ['subscribed_on in (?)', @dates])
+      :conditions => ['subscribed_on >= ? and subscribed_on <= ?', @dates.first, @dates.last])
     @dates.collect {|d| counts[d.to_s(:db)] || 0 }
   end
   memoize :subscribe_counts
@@ -46,7 +46,7 @@ class ActivityStatistics
   def visit_counts
     counts = @teaser.visits.count(:all,
       :group => 'date(visited_at)',
-      :conditions => ['date(visited_at) in (?)', @dates])
+      :conditions => ['visited_at >= ? and visited_at < ?', @dates.first.midnight, (@dates.last + 1).midnight])
     @dates.collect {|d| counts[d.to_s(:db)] || 0 }
   end
   memoize :visit_counts
@@ -70,7 +70,7 @@ class ActivityStatistics
       'date(visited_at), visitor_id',
       :distinct => true,
       :group => 'date(visited_at)',
-      :conditions => ['date(visited_at) in (?)', @dates]
+      :conditions => ['visited_at >= ? and visited_at < ?', @dates.first.midnight, (@dates.last + 1).midnight]
     )
     @dates.collect {|d| counts[d.to_s(:db)] || 0 }
   end

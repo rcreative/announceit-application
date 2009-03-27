@@ -1,7 +1,9 @@
 class MonthlyStatistics < ActivityStatistics
   def initialize(account, teaser)
-    super(account, teaser, Date.today - (8*7).days)
+    super('Visitors and Subscribers in the Past 2 Months', account, teaser, Date.today - (8*7).days)
   end
+  
+  def kind; 'monthly'; end
   
   def xlabels
     intervals = [@start_date]
@@ -15,6 +17,6 @@ class MonthlyStatistics < ActivityStatistics
   end
   
   def xsteps
-    9
+    7
   end
 end

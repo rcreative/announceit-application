@@ -3,7 +3,7 @@
   "tooltip"  : { "shadow": false, "background": "#ffffff" },
   
   "title": {
-    "text": "Visitors and Subscribers in the Past 7 Days",
+    "text": "<%= @statistics.title %>",
     "style": "{ font-size: 16; margin-top: 5px; margin-bottom: 10px }"
   },
   
@@ -46,6 +46,7 @@
     "colour": "#cccccc",
     "grid-colour": "#dddddd",
     "steps": <%= @statistics.xsteps %>,
+    "offset": <%= @statistics.kind == 'daily' ? 'true' : 'false' %>,
     "labels": {
       "labels": <%= @statistics.xlabels.inspect %>
     }

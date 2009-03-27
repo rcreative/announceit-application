@@ -10,7 +10,12 @@
     
 .box#statistics
   .graph
-    = remote_graph("visitor_statistics", :url => {:action => 'graph'})
+    = remote_graph("visitor_statistics", :url => url_for(:action => 'graph') + "?#{@statistics.kind}")
+    %p.views
+      View:
+      %a{:class=>(@statistics.kind == 'daily' ? 'selected' : nil), :href=>"?daily"} Past 7 days
+      %span.separator= "|"
+      %a{:class=>(@statistics.kind == 'monthly' ? 'selected' : nil), :href=>"?monthly"} Last 2 months
   %ul.large_statistics
     %li
       %big= @statistics.visitors_total

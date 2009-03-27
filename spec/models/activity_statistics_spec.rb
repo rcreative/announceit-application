@@ -51,7 +51,7 @@ describe ActivityStatistics do
       @stats.visitor_counts.should == [1,2,0,0,0,0,0]
     end
     
-    it 'should answer 1 step for x' do
+    it 'should answer daily steps for x' do
       @stats.xsteps.should == 1
     end
   end
@@ -79,8 +79,8 @@ describe ActivityStatistics do
       @stats.visit_counts.should == [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
     end
     
-    it 'should answer 9 steps for x' do
-      @stats.xsteps.should == 9
+    it 'should answer weekly steps for x' do
+      @stats.xsteps.should == 7
     end
   end
   
