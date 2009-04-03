@@ -6,25 +6,41 @@ require 'spec'
 require 'spec/rails'
 require 'spec/integration'
 
+
+module ModelAttributeMethods
+  def account_attributes
+    {
+      :username => 'quire', :email => 'quire@example.com',
+      :password => 'quire69', :password_confirmation => 'quire69',
+      :subdomain => 'quire'
+    }
+  end
+  
+  def subscriber_attributes(updates = {})
+    {:email => 'quag@example.com'}.merge(updates)
+  end
+end
+
+module ModelFactoryMethods
+  def create_account(attributes = {})
+    Account.create(account_attributes.merge(attributes))
+  end
+end
+
 require 'dataset'
+class Dataset::Base
+  include ModelAttributeMethods
+  include ModelFactoryMethods
+end
 class Test::Unit::TestCase
+  include ModelAttributeMethods
+  include ModelFactoryMethods
   include Dataset
   datasets_directory "#{RAILS_ROOT}/spec/datasets"
 end
 
+
 include AuthenticatedTestHelper
-
-def account_attributes
-  {
-    :username => 'quire', :email => 'quire@example.com',
-    :password => 'quire69', :password_confirmation => 'quire69',
-    :subdomain => 'quire'
-  }
-end
-
-def subscriber_attributes(updates = {})
-  {:email => 'quag@example.com'}.merge(updates)
-end
 
 module IntegrationExampleExtensions
   def login_as(account)

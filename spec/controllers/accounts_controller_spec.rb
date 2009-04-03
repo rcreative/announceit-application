@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe AccountsController do
-  fixtures :accounts
+  dataset :accounts
 
   it 'allows signup' do
     lambda do

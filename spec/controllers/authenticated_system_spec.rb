@@ -4,7 +4,7 @@ include AuthenticatedSystem
 def action_name() end
 
 describe SessionsController do
-  fixtures :accounts
+  dataset :accounts
   
   before do
     # FIXME -- sessions controller not testing xml logins 
@@ -26,9 +26,9 @@ describe SessionsController do
     it 'forgets me' do    
       current_account.remember_me
       current_account.remember_token.should_not be_nil; current_account.remember_token_expires_at.should_not be_nil
-      Account.find(1).remember_token.should_not be_nil; Account.find(1).remember_token_expires_at.should_not be_nil
+      accounts(:quentin).remember_token.should_not be_nil; accounts(:quentin).remember_token_expires_at.should_not be_nil
       logout_killing_session!
-      Account.find(1).remember_token.should     be_nil; Account.find(1).remember_token_expires_at.should     be_nil
+      accounts(:quentin).remember_token.should     be_nil; accounts(:quentin).remember_token_expires_at.should     be_nil
     end
   end
 
@@ -48,9 +48,9 @@ describe SessionsController do
     it 'forgets me' do    
       current_account.remember_me
       current_account.remember_token.should_not be_nil; current_account.remember_token_expires_at.should_not be_nil
-      Account.find(1).remember_token.should_not be_nil; Account.find(1).remember_token_expires_at.should_not be_nil
+      accounts(:quentin).remember_token.should_not be_nil; accounts(:quentin).remember_token_expires_at.should_not be_nil
       logout_keeping_session!
-      Account.find(1).remember_token.should     be_nil; Account.find(1).remember_token_expires_at.should     be_nil
+      accounts(:quentin).remember_token.should     be_nil; accounts(:quentin).remember_token_expires_at.should     be_nil
     end
   end
   
