@@ -54,6 +54,12 @@ ActionController::Routing::Routes.draw do |map|
     :conditions => { :method => :post }
     
   map.signup '/signup', :controller => 'accounts', :action => 'new'
+  map.preferences '/preferences',
+    :controller => 'accounts', :action => 'edit',
+    :conditions => {
+      :method => :get
+    }
+    
   map.login  '/login',  :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   

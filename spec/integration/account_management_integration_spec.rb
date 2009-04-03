@@ -21,3 +21,26 @@ describe 'signup' do
     response.should redirect_to('/')
   end
 end
+
+describe 'account editing' do
+  dataset :accounts
+  
+  before { login_as :quentin }
+  
+  it 'should allow changing the name and email' do
+    navigate_to '/preferences'
+    submit_form :account => {:name => 'New Name', :email => 'quentin2@example.com'}
+    account = accounts(:quentin)
+    account.name.should == 'New Name'
+    account.email.should == 'quentin2@example.com'
+  end
+  
+  it 'should allow changing password' do
+    submit_to account_path(account_id(:quentin)), {:account => {
+      :name => current_account.name, :email => current_account.email,
+      :password => 'my_new_one', :password_confirmation => 'my_new_one'}},
+      :put
+    account = accounts(:quentin)
+    account.authenticated?('my_new_one').should be_true
+  end
+end

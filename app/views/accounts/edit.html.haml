@@ -1,0 +1,34 @@
+- @selected = :preferences
+- @title = "Preferences"
+
+- form_for current_account do |f|
+  %h1 Preferences
+  
+  - if errors_on? :account
+    %p.message.error Oops! There were errors while processing this form. Please correct them before continuing.
+  %fieldset
+    %p
+      = f.label :name
+      = f.text_field :name, :class => "textbox", :size => 33
+    %p
+      = f.label :email
+      = f.text_field :email, :class => "textbox", :size => 33
+    #password
+      %p
+        %label Password
+        %big &bull;&bull;&bull;&bull;&bull;
+        = link_to_function "Change", "Element.hide('password'); Element.show('change_password')", :class => "alt"
+    .set#change_password{:style => 'display:none'}
+      %p
+        %label{:for=>"password"} Change Password
+        %input.textbox{:name=>"password", :id=>"password", :type=>"password", :size=>15}/
+      %p
+        %label{:for=>"password_confirmation"} Confirm Password
+        %input{:name=>"password_confirmation", :id=>"password_confirmation", :type=>"password", :size=>15}/
+        or
+        = link_to_function "Cancel", "Element.hide('change_password'); Element.show('password')", :class => "cancel"
+      .clear &nbsp;
+  .buttons
+    %input.button{:type=>"submit", :value=>"Save Changes"}/
+    or
+    = link_to "Cancel", "/dashboard/", :class => "cancel"

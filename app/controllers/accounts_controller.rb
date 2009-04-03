@@ -1,9 +1,12 @@
 class AccountsController < ApplicationController
   CREATE_KEY = 'dk3su29sw'
   
-  layout "public"
+  before_filter :check_key, :except => [:edit, :update]
+  before_filter :login_required, :only => [:edit, :update]
   
-  before_filter :check_key
+  def new
+    render :layout => 'public'
+  end
   
   def create
     logout_keeping_session!
@@ -17,8 +20,13 @@ class AccountsController < ApplicationController
       self.current_account = @account # !! now logged in
       redirect_to admin_dashboard_path
     else
-      render :action => 'new'
+      render :action => 'new', :layout => 'public'
     end
+  end
+  
+  def update
+    current_account.update_attributes!(params[:account])
+    redirect_to preferences_url
   end
   
   private

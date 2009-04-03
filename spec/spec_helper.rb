@@ -47,7 +47,8 @@ module IntegrationExampleExtensions
     if account.nil?
       delete session_path
     else
-      post session_url, :email => account.email, :password => "password"
+      account = accounts(account) if Symbol === account
+      post session_url, :email => account.email, :password => "monkey"
     end
   end
   

@@ -7,12 +7,13 @@
     = javascript_include_tag :all
   %body
     #header
-      %p.view_teaser
-        = link_to "View Teaser", teaser_view_url(current_account), :target=>"_blank"
-      %p.info
-        Logged in as
-        %strong= current_account.name
-        = "(#{ link_to 'Logout', logout_url })"
+      %ul.applinks
+        %li{:class=>(@selected == :preferences) ? "here" : nil}
+          = link_to "Logged in as <strong>#{current_account.name}</strong>", preferences_path
+        %li
+          = link_to "Logout", logout_url
+        %li
+          = link_to "View Teaser", teaser_view_url(current_account), :class=>"view_teaser", :target=>"_blank"
       = render :partial => "/layouts/navigation"
     #content
       = yield
