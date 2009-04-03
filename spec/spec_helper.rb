@@ -10,7 +10,7 @@ require 'spec/integration'
 module ModelAttributeMethods
   def account_attributes
     {
-      :username => 'quire', :email => 'quire@example.com',
+      :email => 'quire@example.com',
       :password => 'quire69', :password_confirmation => 'quire69',
       :subdomain => 'quire'
     }
@@ -47,7 +47,7 @@ module IntegrationExampleExtensions
     if account.nil?
       delete session_path
     else
-      post session_url, :username => account.username, :password => "password"
+      post session_url, :email => account.email, :password => "password"
     end
   end
   

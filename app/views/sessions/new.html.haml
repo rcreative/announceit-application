@@ -5,8 +5,8 @@
     %p.message.error= flash[:error]
   %fieldset
     %p
-      = label_tag 'username', 'Username'
-      = text_field_tag 'username', @login, :class => "textbox big", :size => 30
+      = label_tag 'email', 'Email'
+      = text_field_tag 'email', @email, :class => "textbox big", :size => 30
     %p
       = label_tag 'password'
       = password_field_tag 'password', nil, :class => "textbox big", :size => 30

@@ -1,7 +1,6 @@
 class AccountsDataset < Dataset::Base
   def load
     create_record :account, :quentin,
-      :username => 'quentin',
       :email => 'quentin@example.com',
       :salt => '356a192b7913b04c54574d18c28d46e6395428ab', # SHA1('0')
       :crypted_password => '5656ffa11c386f390714e9864f5ee93daac34913', # 'monkey'

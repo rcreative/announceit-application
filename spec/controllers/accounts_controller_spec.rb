@@ -10,14 +10,6 @@ describe AccountsController do
     end.should change(Account, :count).by(1)
   end
   
-  it 'requires login on signup' do
-    lambda do
-      create_account(:username => nil)
-      assigns[:account].errors.on(:username).should_not be_nil
-      response.should be_success
-    end.should_not change(Account, :count)
-  end
-  
   it 'requires password on signup' do
     lambda do
       create_account(:password => nil)
@@ -43,7 +35,7 @@ describe AccountsController do
   end
   
   def create_account(options = {})
-    post :create, :key => AccountsController::CREATE_KEY, :account => { :username => 'quire', :email => 'quire@example.com',
+    post :create, :key => AccountsController::CREATE_KEY, :account => { :email => 'quire@example.com',
       :password => 'quire69', :password_confirmation => 'quire69', :subdomain => 'quire' }.merge(options)
   end
 end

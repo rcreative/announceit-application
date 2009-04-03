@@ -34,30 +34,6 @@ describe Account do
     end.should change(Account, :count)
   end
   
-  describe 'allows legitimate logins:' do
-    ['123', '1234567890_234567890_234567890_234567890',
-     'hello.-_there@funnychar.com'].each do |login_str|
-      it "'#{login_str}'" do
-        lambda do
-          u = create_account(:username => login_str)
-          u.errors.on(:username).should     be_nil
-        end.should change(Account, :count).by(1)
-      end
-    end
-  end
-  describe 'disallows illegitimate logins:' do
-    ['12', '1234567890_234567890_234567890_234567890_', "tab\t", "newline\n",
-     "Iñtërnâtiônàlizætiøn hasn't happened to ruby 1.8 yet",
-     'semicolon;', 'quote"', 'tick\'', 'backtick`', 'percent%', 'plus+', 'space '].each do |login_str|
-      it "'#{login_str}'" do
-        lambda do
-          u = create_account(:username => login_str)
-          u.errors.on(:username).should_not be_nil
-        end.should_not change(Account, :count)
-      end
-    end
-  end
-
   it 'requires password' do
     lambda do
       u = create_account(:password => nil)
@@ -136,12 +112,12 @@ describe Account do
 
   it 'resets password' do
     accounts(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
-    Account.authenticate('quentin', 'new password').should == accounts(:quentin)
+    Account.authenticate('quentin@example.com', 'new password').should == accounts(:quentin)
   end
 
   it 'does not rehash password' do
-    accounts(:quentin).update_attributes(:username => 'quentin2')
-    Account.authenticate('quentin2', 'monkey').should == accounts(:quentin)
+    accounts(:quentin).update_attributes(:email => 'quentin2@example.com')
+    Account.authenticate('quentin2@example.com', 'monkey').should == accounts(:quentin)
   end
 
   #
@@ -149,32 +125,29 @@ describe Account do
   #
 
   it 'authenticates account' do
-    Account.authenticate('quentin', 'monkey').should == accounts(:quentin)
+    Account.authenticate('quentin@example.com', 'monkey').should == accounts(:quentin)
   end
 
   it "doesn't authenticate account with bad password" do
-    Account.authenticate('quentin', 'invalid_password').should be_nil
+    Account.authenticate('quentin@example.com', 'invalid_password').should be_nil
   end
 
- if REST_AUTH_SITE_KEY.blank?
-   # old-school passwords
-   it "authenticates a user against a hard-coded old-style password" do
-     Account.authenticate('old_password_holder', 'test').should == accounts(:old_password_holder)
-   end
- else
-   it "doesn't authenticate a user against a hard-coded old-style password" do
-     Account.authenticate('old_password_holder', 'test').should be_nil
-   end
+  it "doesn't authenticate a user against a hard-coded old-style password" do
+    create_record :account,
+      :email => 'salty_dog@example.com',
+      :salt => '7e3041ebc2fc05a40c60028e2c4901a81035d3cd',
+      :crypted_password => '00742970dc9e6319f8019fd54864d3ea740f04b1' # test
+    Account.authenticate('salty_dog@example.com', 'test').should be_nil
+  end
 
-   # New installs should bump this up and set REST_AUTH_DIGEST_STRETCHES to give a 10ms encrypt time or so
-   desired_encryption_expensiveness_ms = 0.1
-   it "takes longer than #{desired_encryption_expensiveness_ms}ms to encrypt a password" do
-     test_reps = 100
-     start_time = Time.now; test_reps.times{ Account.authenticate('quentin', 'monkey'+rand.to_s) }; end_time   = Time.now
-     auth_time_ms = 1000 * (end_time - start_time)/test_reps
-     auth_time_ms.should > desired_encryption_expensiveness_ms
-   end
- end
+  # New installs should bump this up and set REST_AUTH_DIGEST_STRETCHES to give a 10ms encrypt time or so
+  desired_encryption_expensiveness_ms = 0.1
+  it "takes longer than #{desired_encryption_expensiveness_ms}ms to encrypt a password" do
+    test_reps = 100
+    start_time = Time.now; test_reps.times{ Account.authenticate('quentin@example.com', 'monkey'+rand.to_s) }; end_time   = Time.now
+    auth_time_ms = 1000 * (end_time - start_time)/test_reps
+    auth_time_ms.should > desired_encryption_expensiveness_ms
+  end
 
   #
   # Authentication

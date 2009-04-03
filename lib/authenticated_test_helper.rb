@@ -5,13 +5,13 @@ module AuthenticatedTestHelper
   end
 
   def authorize_as(account)
-    @request.env["HTTP_AUTHORIZATION"] = account ? ActionController::HttpAuthentication::Basic.encode_credentials(accounts(account).username, 'monkey') : nil
+    @request.env["HTTP_AUTHORIZATION"] = account ? ActionController::HttpAuthentication::Basic.encode_credentials(accounts(account).email, 'monkey') : nil
   end
   
   # rspec
   def mock_account
     account = mock_model(Account, :id => 1,
-      :username  => 'user_name',
+      :email  => 'email',
       :name   => 'U. Surname',
       :to_xml => "Account-in-XML", :to_json => "Account-in-JSON", 
       :errors => [])

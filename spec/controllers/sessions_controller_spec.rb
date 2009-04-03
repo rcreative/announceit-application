@@ -5,8 +5,8 @@ describe SessionsController do
   
   before do 
     @account  = mock_account
-    @login_params = { :username => 'quentin', :password => 'test' }
-    Account.stub!(:authenticate).with(@login_params[:username], @login_params[:password]).and_return(@account)
+    @login_params = { :email => 'quentin@example.com', :password => 'test' }
+    Account.stub!(:authenticate).with(@login_params[:email], @login_params[:password]).and_return(@account)
   end
   
   def do_create
@@ -75,7 +75,7 @@ describe SessionsController do
       login_as :quentin
     end
     it 'logs out keeping session'   do controller.should_receive(:logout_keeping_session!); do_create end
-    it 'flashes an error'           do do_create; flash[:error].should =~ /invalid.*?username.*?password/i end
+    it 'flashes an error'           do do_create; flash[:error].should =~ /invalid.*?email.*?password/i end
     it 'renders the log in page'    do do_create; response.should render_template('new')  end
     it "doesn't log me in"          do do_create; controller.send(:logged_in?).should == false end
     it "doesn't send password back" do 

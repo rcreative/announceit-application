@@ -9,10 +9,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090306224934) do
+ActiveRecord::Schema.define(:version => 20090403161854) do
 
   create_table "accounts", :force => true do |t|
-    t.string   "username",                  :limit => 100
     t.string   "name"
     t.string   "email",                     :limit => 100
     t.string   "subdomain"
@@ -25,6 +24,8 @@ ActiveRecord::Schema.define(:version => 20090306224934) do
     t.string   "custom_domain"
     t.string   "domain_type",               :limit => 9,   :default => "subdomain"
   end
+
+  add_index "accounts", ["email"], :name => "index_accounts_on_email"
 
   create_table "subscribers", :force => true do |t|
     t.integer  "teaser_id"
