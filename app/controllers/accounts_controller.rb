@@ -27,6 +27,8 @@ class AccountsController < ApplicationController
   def update
     current_account.update_attributes!(params[:account])
     redirect_to preferences_url
+  rescue ActiveRecord::RecordInvalid
+    render :edit
   end
   
   private

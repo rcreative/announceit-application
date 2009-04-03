@@ -43,4 +43,10 @@ describe 'account editing' do
     account = accounts(:quentin)
     account.authenticated?('my_new_one').should be_true
   end
+  
+  it 'should report form errors' do
+    submit_to account_path(account_id(:quentin)), {:account => {
+      :name => current_account.name, :email => ''}}, :put
+    response.should be_showing(account_path(account_id(:quentin)))
+  end
 end
