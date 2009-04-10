@@ -62,7 +62,7 @@ namespace :slicehost do
     # carriage return at end is required, or it will not run!
     crontab =<<-EOF
 MAILTO = adam@recursivecreative.com
-@daily echo "cd #{current_path} && rake db2s3:backup:full"
+@daily cd #{current_path} && RAILS_ENV=production rake db2s3:backup:full"
 
     EOF
     put crontab, "src/crontab"
