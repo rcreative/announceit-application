@@ -38,9 +38,13 @@ Rails::Initializer.run(:process, AnnounceConfiguration.new) do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
-  config.gem 'mislav-will_paginate', :version => '~> 2.3.6', :lib => 'will_paginate', 
+  config.gem 'mislav-will_paginate',
+    :version => '2.3.6',
+    :lib => 'will_paginate', 
     :source => 'http://gems.github.com'
-  config.gem "xaviershay-db2s3", :lib => "db2s3",
+  config.gem "xaviershay-db2s3",
+    :version => '0.2.2',
+    :lib => "db2s3",
     :source => "http://gems.github.com"
     
   # Only load the plugins named here, in the order given. By default, all plugins 
