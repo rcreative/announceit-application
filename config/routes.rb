@@ -47,8 +47,10 @@ ActionController::Routing::Routes.draw do |map|
       :subdomain => Account.subdomain_regex,
       :method    => :get}
   map.teaser '/teaser',
-    :controller => 'teasers', :action => 'show'
-  
+    :controller => 'teasers', :action => 'show',
+    :conditions => {
+      :method => :get}
+      
   map.connect '/subscribe',
     :controller => 'teasers', :action => 'subscribe',
     :conditions => { :method => :post }
@@ -68,9 +70,10 @@ ActionController::Routing::Routes.draw do |map|
     :conditions => {:method => :get}
     
   map.namespace :admin, :path_prefix => '' do |admin|
-    admin.resource :statistics, :member => { :graph => :get }
+    admin.resource  :statistics, :member => { :graph => :get }
     admin.resources :subscribers
-    admin.resource :settings, :member => { :subdomain => :get }
+    admin.resource  :teaser
+    admin.resource  :domain
   end
   
   map.resources :accounts

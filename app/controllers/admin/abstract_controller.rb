@@ -8,5 +8,9 @@ module Admin
       def assign_account
         @account = current_account
       end
+      
+      def assign_teaser
+        @teaser = current_account.teaser
+      end
   end
 end

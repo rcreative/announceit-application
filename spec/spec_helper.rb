@@ -6,6 +6,7 @@ require 'spec'
 require 'spec/rails'
 require 'spec/integration'
 
+require 'vizres'
 
 module ModelAttributeMethods
   def account_attributes

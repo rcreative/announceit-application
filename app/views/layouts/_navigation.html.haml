@@ -2,7 +2,7 @@
   %ul
     %li{:class=>(@selected == :dashboard) ? "here" : nil}
       = link_to "Dashboard", admin_dashboard_path
+    %li{:class=>(@selected == :teaser) ? "here" : nil}
+      = link_to "Teaser Page", edit_admin_teaser_path
     %li{:class=>(@selected == :subscribers) ? "here" : nil}
       = link_to "Subscribers", admin_subscribers_path
-    %li{:class=>(@selected == :settings) ? "here" : nil}
-      = link_to "Settings", admin_settings_path

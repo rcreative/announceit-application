@@ -1,9 +1,9 @@
-- @selected = :settings
+- @selected = :dashboard
 - @title = "Change Domain"
 
 %h1 Change Domain
 
-- form_for :account, :url => admin_settings_path, :html => {:method => :put} do |f|
+- form_for :account, :url => admin_domain_path, :html => {:method => :put} do |f|
   %fieldset
     %p
       = f.radio_button :domain_type, 'subdomain', :class => 'radio'
@@ -19,4 +19,4 @@
   .buttons
     = f.submit 'Save Changes'
     or
-    = link_to 'Cancel', admin_settings_path
+    = link_to 'Cancel', admin_dashboard_path

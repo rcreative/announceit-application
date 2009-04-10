@@ -1,12 +1,6 @@
-- @selected = :settings
-- @title = "Settings"
+- @selected = :teaser
+- @title = "Teaser Page"
 
-.box
-  %h3 Domain
-  %p
-    %big.domain= teaser_host(current_account)
-    = link_to 'Change', subdomain_admin_settings_path
-    
 .box
   %h3 Template
   #template
@@ -14,7 +8,7 @@
       %big= @teaser.template_name.humanize.titleize
       = link_to_function 'Change', "Element.hide('template'); Element.show('change_template')"
   #change_template{:style => 'display:none'}
-    - form_for :teaser, :url => admin_settings_path, :html => {:id => 'template_form', :method => :put} do |template|
+    - form_for :teaser, :url => admin_teaser_path, :html => {:id => 'template_form', :method => :put} do |template|
       %p
         - template_names = [%w(Dark\ Background dark_background), %w(White\ Background white_background)]
         - template_names << %w(Code\ Name\ Mc code_name_mc) if @account.id == 2 # nathaniel
@@ -29,7 +23,7 @@
     %p.change
       = link_to_function 'Change', "Element.hide('logo'); Element.show('change_logo')"
   #change_logo{:style => (@teaser.logo.exists? ? 'display:none' : nil)}
-    - form_for :teaser, :url => admin_settings_path, :html => {:method => :put, :multipart => true} do |logo|
+    - form_for :teaser, :url => admin_teaser_path, :html => {:method => :put, :multipart => true} do |logo|
       %p.logo_uploader
         = logo.file_field :logo
       %p
@@ -47,7 +41,7 @@
     %p.change
       = link_to_function 'Change', "Element.hide('title_and_description'); Element.show('change_title_and_description'); Event.stop(event)"
   #change_title_and_description{:style=>"display: none"}
-    - form_for :teaser, :url => admin_settings_path, :html => {:id => 'title_and_description_form', :method => :put} do |fields|
+    - form_for :teaser, :url => admin_teaser_path, :html => {:id => 'title_and_description_form', :method => :put} do |fields|
       %p
         = fields.label :title
         = fields.text_field :title, :value => @teaser.title, :size => 30, :class => 'textbox big'

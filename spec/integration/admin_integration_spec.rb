@@ -28,6 +28,27 @@ describe 'admin' do
       response.should render_template('admin/statistics/show')
       response.should have_tag('a.selected', 'Last 2 months')
     end
+    
+    it 'should allow changing the subdomain' do
+      @account.should_receive(:update_attributes).with('subdomain' => 'meothername', 'domain_type' => 'subdomain').and_return(true)
+      navigate_to '/domain/edit'
+      submit_form :account => {:domain_type => 'subdomain', :subdomain => 'meothername'}
+      response.should be_showing('/dashboard')
+    end
+    
+    it 'should allow usage of a custom domain' do
+      @account.should_receive(:update_attributes).with('domain_type' => 'custom', 'custom_domain' => 'somewhere.com').and_return(true)
+      navigate_to '/domain/edit'
+      submit_form :account => {:domain_type => 'custom', :custom_domain => 'somewhere.com'}
+      response.should be_showing('/dashboard')
+    end
+    
+    it 'should report errors changing the subdomain' do
+      @account.should_receive(:update_attributes).with('subdomain' => 'meothername', 'domain_type' => 'subdomain').and_return(false)
+      navigate_to '/domain/edit'
+      submit_form :account => {:domain_type => 'subdomain', :subdomain => 'meothername'}
+      response.should render_template('edit')
+    end
   end
   
   it 'should list the subscribers' do
@@ -37,39 +58,18 @@ describe 'admin' do
     response.should have_text(/two@example\.com/)
   end
   
-  it 'should allow changing the subdomain' do
-    @account.should_receive(:update_attributes).with('subdomain' => 'meothername', 'domain_type' => 'subdomain').and_return(true)
-    navigate_to '/settings/subdomain'
-    submit_form :account => {:domain_type => 'subdomain', :subdomain => 'meothername'}
-    response.should render_template('show')
-  end
-  
-  it 'should allow usage of a custom domain' do
-    @account.should_receive(:update_attributes).with('domain_type' => 'custom', 'custom_domain' => 'somewhere.com').and_return(true)
-    navigate_to '/settings/subdomain'
-    submit_form :account => {:domain_type => 'custom', :custom_domain => 'somewhere.com'}
-    response.should render_template('show')
-  end
-  
-  it 'should report errors changing the subdomain' do
-    @account.should_receive(:update_attributes).with('subdomain' => 'meothername', 'domain_type' => 'subdomain').and_return(false)
-    navigate_to '/settings/subdomain'
-    submit_form :account => {:domain_type => 'subdomain', :subdomain => 'meothername'}
-    response.should render_template('subdomain')
-  end
-  
   it 'should allow customizing the text for the teaser' do
     @teaser.should_receive(:update_attributes).with('title' => 'Title', 'description' => 'Description').and_return(true)
-    navigate_to '/settings'
+    navigate_to '/teaser/edit'
     submit_form 'title_and_description_form', :teaser => {:title => 'Title', :description => 'Description'}
-    response.should be_showing('/settings')
+    response.should be_showing('/teaser/edit')
   end
   
   it 'should allow selecting the template background' do
     @teaser.should_receive(:update_attributes).with('template_name' => 'dark_background')
-    navigate_to '/settings'
+    navigate_to '/teaser/edit'
     submit_form 'template_form', :teaser => {:template_name => 'dark_background'}
-    response.should be_showing('/settings')
+    response.should be_showing('/teaser/edit')
   end
   
   it 'should allow downloading a text file containing all the email addresses' do

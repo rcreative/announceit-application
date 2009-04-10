@@ -4,9 +4,9 @@
 - if @teaser.unmodified?
   %p.message.info
     %strong You must be new!
-    Head on over to the
-    = link_to "settings tab", admin_settings_path
-    and configure your teaser page now.
+    Configure your
+    = link_to "teaser page", edit_admin_teaser_path
+    now.
     
 .box#statistics
   .graph
@@ -33,4 +33,7 @@
   %p
     %big
       You can view your teaser page here:
-      = link_to teaser_url, teaser_url
+      = link_to teaser_view_url(current_account), teaser_view_url(current_account)
+      &nbsp;
+      %small{:style=>"font-size: 70%"}
+        = link_to 'Customize', edit_admin_domain_path, :class => "alt"
