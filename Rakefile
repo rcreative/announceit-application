@@ -6,6 +6,7 @@ require(File.join(File.dirname(__FILE__), 'config', 'boot'))
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
+require 'db2s3/tasks'
 
 require 'tasks/rails'
 Dir["#{RAILS_ROOT}/lib/plugins/*/**/tasks/**/*.rake"].sort.each { |ext| load ext }

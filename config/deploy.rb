@@ -2,6 +2,7 @@ default_run_options[:pty] = true
 
 set :application, "announce"
 set :repository,  "git@recursivecreative.unfuddle.com:recursivecreative/announce.git"
+set :backup_repository, "git@recursivecreative.unfuddle.com:recursivecreative/backups.git"
 
 set :deploy_to, "/home/deploy/#{application}"
 set :user, "deploy"
@@ -9,12 +10,6 @@ set :use_sudo, false
 set :port, "42832"
 
 set :scm, :git
-
-# DNS records pointing to this server
-# teaserapp.com
-# myteaserpage.com
-# announceapp.com
-# announceitapp.com
 
 role :app, "173.45.235.36"
 role :web, "173.45.235.36"
@@ -62,6 +57,18 @@ namespace :deploy do
 end
 
 namespace :slicehost do
+  desc "Configure crontab for deploy user"
+  task :config_crontab do
+    # carriage return at end is required, or it will not run!
+    crontab =<<-EOF
+MAILTO = adam@recursivecreative.com
+@daily echo "cd #{current_path} && rake db2s3:backup:full"
+
+    EOF
+    put crontab, "src/crontab"
+    run "crontab -u #{user} src/crontab"
+  end
+  
   desc "Configure VHost"
   task :config_vhost do
     vhost_config =<<-EOF

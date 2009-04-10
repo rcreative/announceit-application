@@ -1,0 +1,79 @@
+--- !ruby/object:Gem::Specification 
+name: xaviershay-db2s3
+version: !ruby/object:Gem::Version 
+  version: 0.2.2
+platform: ruby
+authors: 
+- Xavier Shay
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2009-03-08 00:00:00 -05:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: aws-s3
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: 0.5.1
+    version: 
+description: db2s3 provides rake tasks for backing up and restoring your DB to S3
+email: contact@rhnh.net
+executables: []
+
+extensions: []
+
+extra_rdoc_files: []
+
+files: 
+- README
+- Rakefile
+- db2s3.gemspec
+- init.rb
+- lib
+- lib/db2s3.rb
+- lib/db2s3/tasks.rb
+- rails
+- rails/init.rb
+- spec
+- spec/db2s3_spec.rb
+- spec/mysql_drop_schema.sql
+- spec/mysql_schema.sql
+- spec/s3_config.example.rb
+- spec/s3_config.rb
+- spec/spec_helper.rb
+- tasks
+- tasks/tasks.rake
+has_rdoc: false
+homepage: http://github.com/xaviershay/db2s3
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.1
+signing_key: 
+specification_version: 2
+summary: db2s3 provides rake tasks for backing up and restoring your DB to S3
+test_files: []
+
