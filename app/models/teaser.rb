@@ -12,6 +12,10 @@ class Teaser < ActiveRecord::Base
   
   has_attached_file :logo
   
+  def custom_template?
+    !!custom_templates.detect {|t| t.template == template}
+  end
+  
   def title
     self[:title] || 'Be a Part of Something Amazing'
   end

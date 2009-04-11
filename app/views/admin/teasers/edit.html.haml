@@ -15,41 +15,45 @@
         = template.select :template_id, template_names
         = template.submit 'Save', :class => "button"
         
-.box
-  %h3 Logo
-  #logo{:style => (@teaser.logo.exists? ? nil : 'display:none')}
-    %p
-      = image_tag @teaser.logo.url if @teaser.logo.exists?
-    %p.change
-      = link_to_function 'Change', "Element.hide('logo'); Element.show('change_logo')"
-  #change_logo{:style => (@teaser.logo.exists? ? 'display:none' : nil)}
-    - form_for :teaser, :url => admin_teaser_path, :html => {:method => :put, :multipart => true} do |logo|
-      %p.logo_uploader
-        = logo.file_field :logo
+- if @teaser.custom_template?
+  .box
+    %h3 Custom Template
+    %p Editing Coming Soon!
+- else
+  .box
+    %h3 Logo
+    #logo{:style => (@teaser.logo.exists? ? nil : 'display:none')}
       %p
-        = logo.submit 'Upload', :class => "button"
-        %span{:style => (@teaser.logo.exists? ? nil : 'display:none')}
+        = image_tag @teaser.logo.url if @teaser.logo.exists?
+      %p.change
+        = link_to_function 'Change', "Element.hide('logo'); Element.show('change_logo')"
+    #change_logo{:style => (@teaser.logo.exists? ? 'display:none' : nil)}
+      - form_for :teaser, :url => admin_teaser_path, :html => {:method => :put, :multipart => true} do |logo|
+        %p.logo_uploader
+          = logo.file_field :logo
+        %p
+          = logo.submit 'Upload', :class => "button"
+          %span{:style => (@teaser.logo.exists? ? nil : 'display:none')}
+            or
+            = link_to_function 'Cancel', "Element.hide('change_logo'); Element.show('logo')", :class => 'cancel'
+            
+  .box
+    %h3 Title &amp; Description
+    #title_and_description
+      .title_and_description
+        %h4= @teaser.title
+        %p= @teaser.description
+      %p.change
+        = link_to_function 'Change', "Element.hide('title_and_description'); Element.show('change_title_and_description'); Event.stop(event)"
+    #change_title_and_description{:style=>"display: none"}
+      - form_for :teaser, :url => admin_teaser_path, :html => {:id => 'title_and_description_form', :method => :put} do |fields|
+        %p
+          = fields.label :title
+          = fields.text_field :title, :value => @teaser.title, :size => 30, :class => 'textbox big'
+        %p
+          = fields.label :description
+          ~ fields.text_area :description, :value => @teaser.description, :cols => 40, :rows => 4
+        %p
+          = fields.submit 'Save Changes', :class => "button"
           or
-          = link_to_function 'Cancel', "Element.hide('change_logo'); Element.show('logo')", :class => 'cancel'
-          
-.box
-  %h3 Title &amp; Description
-  #title_and_description
-    .title_and_description
-      %h4= @teaser.title
-      %p= @teaser.description
-    %p.change
-      = link_to_function 'Change', "Element.hide('title_and_description'); Element.show('change_title_and_description'); Event.stop(event)"
-  #change_title_and_description{:style=>"display: none"}
-    - form_for :teaser, :url => admin_teaser_path, :html => {:id => 'title_and_description_form', :method => :put} do |fields|
-      %p
-        = fields.label :title
-        = fields.text_field :title, :value => @teaser.title, :size => 30, :class => 'textbox big'
-      %p
-        = fields.label :description
-        ~ fields.text_area :description, :value => @teaser.description, :cols => 40, :rows => 4
-      %p
-        = fields.submit 'Save Changes', :class => "button"
-        or
-        = link_to_function 'Cancel', "Element.hide('change_title_and_description'); Element.show('title_and_description'); Event.stop(event)", :class => 'cancel'
-        
+          = link_to_function 'Cancel', "Element.hide('change_title_and_description'); Element.show('title_and_description'); Event.stop(event)", :class => 'cancel'
