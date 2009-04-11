@@ -9,10 +9,20 @@ class UpgradeTemplatesToObjects < ActiveRecord::Migration
     belongs_to :template, :class_name => UpgradeTemplatesToObjects::Template.name
   end
   
+  class CustomTemplate < ActiveRecord::Base
+    belongs_to :teaser, :class_name => UpgradeTemplatesToObjects::Teaser.name
+    belongs_to :template, :class_name => UpgradeTemplatesToObjects::Template.name
+  end
+  
   def self.up
     create_table :builtin_templates, :force => true do |t|
       t.belongs_to :template
       t.boolean :default_template, :default => false
+    end
+    
+    create_table :custom_templates, :force => true do |t|
+      t.belongs_to :teaser
+      t.belongs_to :template
     end
     
     create_table :templates, :force => true do |t|
@@ -54,13 +64,20 @@ class UpgradeTemplatesToObjects < ActiveRecord::Migration
         when 'dark_background'
           teaser.template = dark
         end
-        teaser.save!
       end
+      teaser.save!
     end
   end
   
   def self.migrate_codename_mc(teaser)
-    say 'Need to migrate codename_mc'
+    template_data = YAML.load(File.read(File.join(Rails.root, 'db', 'missioncontrol_template.yml')))
+    template = Template.create!(
+      :name => 'Mission Control',
+      :source => template_data['source'],
+      :styles => template_data['styles']
+    )
+    CustomTemplate.create!(:template => template, :teaser => teaser)
+    teaser.template = template
   end
   
   def self.down

@@ -2,6 +2,8 @@ class Teaser < ActiveRecord::Base
   belongs_to :account
   belongs_to :template
   
+  has_many :custom_templates, :include => :template
+  
   has_many :subscribers, :order => 'name, email'
   has_many :subscribes
   

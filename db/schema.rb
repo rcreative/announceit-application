@@ -32,6 +32,11 @@ ActiveRecord::Schema.define(:version => 20090410210341) do
     t.boolean "default_template", :default => false
   end
 
+  create_table "custom_templates", :force => true do |t|
+    t.integer "teaser_id"
+    t.integer "template_id"
+  end
+
   create_table "subscribers", :force => true do |t|
     t.integer  "teaser_id"
     t.string   "name"

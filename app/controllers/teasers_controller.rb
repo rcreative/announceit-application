@@ -7,6 +7,7 @@ class TeasersController < ApplicationController
   
   def show
     subscriber = Subscriber.find(params[:subscriber_id]) rescue Subscriber.new
+    subscriber.name = subscriber.email = ''
     render :text => @teaser.template.render(:subscriber => subscriber, :teaser => @teaser), :content_type => 'text/html'
   end
   
