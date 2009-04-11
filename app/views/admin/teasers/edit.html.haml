@@ -5,14 +5,14 @@
   %h3 Template
   #template
     %p
-      %big= @teaser.template_name.humanize.titleize
+      %big= @teaser.template.name
       = link_to_function 'Change', "Element.hide('template'); Element.show('change_template')"
   #change_template{:style => 'display:none'}
     - form_for :teaser, :url => admin_teaser_path, :html => {:id => 'template_form', :method => :put} do |template|
       %p
-        - template_names = [%w(Dark\ Background dark_background), %w(White\ Background white_background)]
-        - template_names << %w(Code\ Name\ Mc code_name_mc) if @account.id == 2 # nathaniel
-        = template.select :template_name, template_names
+        - template_names = BuiltinTemplate.all(:include => :template).collect(&:template).collect {|t| [t.name, t.id]}
+        - # template_names << %w(Code\ Name\ Mc code_name_mc) if @account.id == 2 # nathaniel
+        = template.select :template_id, template_names
         = template.submit 'Save', :class => "button"
         
 .box

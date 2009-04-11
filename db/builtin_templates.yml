@@ -1,0 +1,301 @@
+White Background:
+  source:
+    "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">
+<html xmlns=\"http://www.w3.org/1999/xhtml\">
+  <head>
+    <meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />
+    <title><r:teaser:title /></title>
+    <r:styles media=\"all\" />
+  </head>
+  <body>
+    <div id=\"logo\">
+      <r:logo />
+    </div>
+    <r:subscribe_form>
+      <r:unless_success>
+        <h1><r:teaser:title /></h1>
+        <r:unless_error>
+          <p><r:teaser:description /></p>
+        </r:unless_error>
+        <r:if_error>
+          <p class=\"error\">Please enter a valid email address.</p>
+        </r:if_error>
+        <fieldset>
+          <p>
+            <label for=\"subscriber_name\">Name</label>
+            <r:name_input id=\"subscriber_name\" />
+          </p>
+          <p>
+            <label for=\"subscriber_email\">Email</label>
+            <r:email_input id=\"subscriber_email\" />
+          </p>
+        </fieldset>
+        <div class=\"buttons\">
+          <input type=\"submit\" value=\"Subscribe\" />
+        </div>
+      </r:unless_success>
+      <r:if_success>
+        <h1>Thank You!</h1>
+        <p>We&#8217;ll be in touch.</p>
+      </r:if_success>
+    </r:subscribe_form>
+  </body>
+</html>"
+  styles:
+    "html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+ins {
+  text-decoration: none; }
+
+del {
+  text-decoration: line-through; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body {
+  background: white;
+  color: #333;
+  font-family: \"Lucida Grande\", Verdana, Helvetica, Arial, sans-serif;
+  font-size: 80%;
+  padding: 2em;
+  line-height: 150%;
+  text-align: center; }
+
+#logo img {
+  border: 0 !important; }
+
+form {
+  background: #f0f0f0;
+  margin: 2em auto;
+  width: 28em;
+  text-align: left;
+  padding: 1.5em 2em 1em;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px; }
+
+h1 {
+  font-size: 110%;
+  text-align: left;
+  margin-bottom: -0.25em; }
+
+p {
+  margin: 1em 0; }
+
+p.errors {
+  background-color: #ffe6e6;
+  border: 1px solid #e1b3b3;
+  color: #c30;
+  padding: 0.5em; }
+
+label {
+  width: 4em;
+  display: inline-block;
+  text-align: left; }
+
+input.textbox {
+  font-size: 120%;
+  width: 18em; }
+
+.buttons {
+  margin: 1em 0 0.75em;
+  padding-left: 4em; }
+  .buttons input {
+    font-size: 130%; }
+"
+Dark Background:
+  source:
+    "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">
+<html xmlns=\"http://www.w3.org/1999/xhtml\">
+  <head>
+    <meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />
+    <title><r:teaser:title /></title>
+    <r:styles media=\"all\" />
+  </head>
+  <body>
+    <div id=\"logo\">
+      <r:logo />
+    </div>
+    <r:subscribe_form>
+      <r:unless_success>
+        <h1><r:teaser:title /></h1>
+        <r:unless_error>
+          <p><r:teaser:description /></p>
+        </r:unless_error>
+        <r:if_error>
+          <p class=\"error\">Please enter a valid email address.</p>
+        </r:if_error>
+        <fieldset>
+          <p>
+            <label for=\"subscriber_name\">Name</label>
+            <r:name_input id=\"subscriber_name\" />
+          </p>
+          <p>
+            <label for=\"subscriber_email\">Email</label>
+            <r:email_input id=\"subscriber_email\" />
+          </p>
+        </fieldset>
+        <div class=\"buttons\">
+          <input type=\"submit\" value=\"Subscribe\" />
+        </div>
+      </r:unless_success>
+      <r:if_success>
+        <h1>Thank You!</h1>
+        <p>We&#8217;ll be in touch.</p>
+      </r:if_success>
+    </r:subscribe_form>
+  </body>
+</html>"
+  styles:
+    "html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+ins {
+  text-decoration: none; }
+
+del {
+  text-decoration: line-through; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+ins {
+  text-decoration: none; }
+
+del {
+  text-decoration: line-through; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body {
+  background: white;
+  color: #333;
+  font-family: \"Lucida Grande\", Verdana, Helvetica, Arial, sans-serif;
+  font-size: 80%;
+  padding: 2em;
+  line-height: 150%;
+  text-align: center; }
+
+#logo img {
+  border: 0 !important; }
+
+form {
+  background: #f0f0f0;
+  margin: 2em auto;
+  width: 28em;
+  text-align: left;
+  padding: 1.5em 2em 1em;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px; }
+
+h1 {
+  font-size: 110%;
+  text-align: left;
+  margin-bottom: -0.25em; }
+
+p {
+  margin: 1em 0; }
+
+p.errors {
+  background-color: #ffe6e6;
+  border: 1px solid #e1b3b3;
+  color: #c30;
+  padding: 0.5em; }
+
+label {
+  width: 4em;
+  display: inline-block;
+  text-align: left; }
+
+input.textbox {
+  font-size: 120%;
+  width: 18em; }
+
+.buttons {
+  margin: 1em 0 0.75em;
+  padding-left: 4em; }
+  .buttons input {
+    font-size: 130%; }
+
+body {
+  background: #222;
+  color: #ddd; }
+
+h1, h2, h3, h4, h5, h6, strong, label {
+  color: white; }
+
+form {
+  background: #333; }
+
+p {
+  text-shadow: 0 0 0 #ddd; }
+
+p.errors {
+  background-color: #810;
+  border: 0;
+  color: white; }
+
+input.textbox {
+  background-color: white;
+  border: 0;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  outline: none; }
+  input.textbox:active, input.textbox:focus {
+    background: #fea; }
+"

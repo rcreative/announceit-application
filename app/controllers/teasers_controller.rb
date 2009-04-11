@@ -6,26 +6,25 @@ class TeasersController < ApplicationController
   before_filter :track_visitor, :unless => :logged_in?
   
   def show
-    render_teaser_page
+    subscriber = Subscriber.find(params[:subscriber_id]) rescue Subscriber.new
+    render :text => @teaser.template.render(:subscriber => subscriber, :teaser => @teaser), :content_type => 'text/html'
   end
   
   def subscribe
     @subscriber = @teaser.subscribers.create(params[:subscriber])
     if @subscriber.new_record?
-      render_teaser_page
+      render :text => @teaser.template.render(:subscriber => @subscriber, :teaser => @teaser), :content_type => 'text/html'
     else
       @teaser.subscribes.create!(
         :subscriber => @subscriber,
         :visitor => @visitor,
         :subscribed_on => Date.today
       )
-      
-      flash[:thanks] = true
-      redirect_to teaser_view_url(@account)
+      redirect_to teaser_view_url(@account, @subscriber)
     end
   end
   
-  private
+  protected
     def assign_account
       @account = current_account || begin
         if Rails.configuration.announce.tlds.include?(request.domain)
@@ -38,10 +37,6 @@ class TeasersController < ApplicationController
       if @account.nil?
         redirect_to (Rails.env.production? ? "http://www.announceitapp.com" : root_url)
       end
-    end
-    
-    def render_teaser_page
-      render :template => "teasers/#{@teaser.template_name}.html.haml", :layout => false
     end
     
     # It is important to understand the reason we do not specify the cookie

@@ -4,7 +4,7 @@ module Admin
     before_filter :assign_account
     before_filter :assign_teaser
     
-    private
+    protected
       def assign_account
         @account = current_account
       end

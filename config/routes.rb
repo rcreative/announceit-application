@@ -46,11 +46,17 @@ ActionController::Routing::Routes.draw do |map|
     :conditions => {
       :subdomain => Account.subdomain_regex,
       :method    => :get}
-  map.teaser '/teaser',
+  map.teaser '/teaser/:subscriber_id',
     :controller => 'teasers', :action => 'show',
-    :conditions => {
-      :method => :get}
-      
+    :defaults => {:subscriber_id => nil},
+    :requirements => {:subscriber_id => /\d+/},
+    :conditions => {:method => :get}
+    
+  map.template_styles '/templates/:id/styles.css',
+    :controller => 'templates', :action => 'styles',
+    :requirements => {:id => /\d+/},
+    :conditions => {:method => :get}
+    
   map.connect '/subscribe',
     :controller => 'teasers', :action => 'subscribe',
     :conditions => { :method => :post }

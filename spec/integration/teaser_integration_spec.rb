@@ -8,6 +8,8 @@ describe 'welcome' do
 end
 
 describe 'teaser page' do
+  dataset :builtin_templates
+  
   before do
     @account = stub_model(Account, :subdomain => 'mecompany')
     @teaser = Teaser.create!(:account => @account)
@@ -38,10 +40,19 @@ describe 'teaser page' do
     response.should redirect_to('/')
   end
   
-  it 'should render the selected background' do
+  it 'should render the default template as html' do
+    default_template = templates(:white_background)
     login_as @account
     navigate_to '/teaser'
-    response.should render_template('white_background')
+    response.should have_tag('link[href=?]', "/templates/#{default_template.id}/styles.css?#{default_template.updated_at.to_s(:asset_id)}")
+    response.should_not have_tag('.error')
+    response.content_type.should == 'text/html'
+  end
+  
+  it 'should answer the styles of the template' do
+    get "/templates/#{@teaser.template.id}/styles.css"
+    response.should be_success
+    response.content_type.should == 'text/css'
   end
   
   it 'should store a "permanent" cookie useful for detecting a returning visitor' do
@@ -91,6 +102,8 @@ describe 'teaser page' do
 end
 
 describe 'subscribe' do
+  dataset :builtin_templates
+  
   before do
     @account = stub_model(Account, :subdomain => 'mecompany')
     @teaser = Teaser.create!(:account => @account)
@@ -101,15 +114,16 @@ describe 'subscribe' do
   it 'should create a Subscriber for the Teaser' do
     navigate_to 'http://mecompany.test.host'
     submit_form :subscriber => {:name => 'Johnny', :email => 'johnny@example.com'}
-    response.should be_showing('/teaser')
-    Subscriber.last.teaser.should == @teaser
+    subscriber = Subscriber.last
+    response.should be_showing("/teaser/#{subscriber.id}")
+    subscriber.teaser.should == @teaser
   end
   
   it 'should indicate form errors' do
     navigate_to 'http://mecompany.test.host'
     submit_form :subscriber => {:email => '@example.com'}
     response.should be_showing('/subscribe')
-    response.should have_text(/errors/)
+    response.should have_tag('.error')
   end
   
   it 'should associate the current visitor, subscriber with a subscribe' do

@@ -66,11 +66,12 @@ module ApplicationHelper
     end
   end
   
-  def teaser_view_url(account)
+  def teaser_view_url(account, subscriber = nil)
+    subscriber_id = subscriber ? subscriber.id : nil
     if Rails.env.production?
-      url_for :host => teaser_host(account), :controller => '/teasers', :action => 'show'
+      url_for :host => teaser_host(account), :controller => '/teasers', :action => 'show', :subscriber_id => subscriber_id
     else
-      url_for '/teaser'
+      teaser_url :subscriber_id => subscriber_id
     end
   end
   

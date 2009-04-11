@@ -28,11 +28,11 @@ class SessionsController < ApplicationController
     flash[:notice] = "You have been logged out."
     redirect_back_or_default('/')
   end
-
-protected
-  # Track failed login attempts
-  def note_failed_signin
-    flash[:error] = "Invalid email or password."
-    logger.warn "Failed login for '#{params[:email]}' from #{request.remote_ip} at #{Time.now.utc}"
-  end
+  
+  protected
+    # Track failed login attempts
+    def note_failed_signin
+      flash[:error] = "Invalid email or password."
+      logger.warn "Failed login for '#{params[:email]}' from #{request.remote_ip} at #{Time.now.utc}"
+    end
 end

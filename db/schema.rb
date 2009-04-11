@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090403161854) do
+ActiveRecord::Schema.define(:version => 20090410210341) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -26,6 +26,11 @@ ActiveRecord::Schema.define(:version => 20090403161854) do
   end
 
   add_index "accounts", ["email"], :name => "index_accounts_on_email"
+
+  create_table "builtin_templates", :force => true do |t|
+    t.integer "template_id"
+    t.boolean "default_template", :default => false
+  end
 
   create_table "subscribers", :force => true do |t|
     t.integer  "teaser_id"
@@ -52,8 +57,16 @@ ActiveRecord::Schema.define(:version => 20090403161854) do
     t.datetime "logo_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "template_name",     :default => "white_background"
     t.integer  "page_views",        :default => 0
+    t.integer  "template_id"
+  end
+
+  create_table "templates", :force => true do |t|
+    t.string   "name"
+    t.text     "source"
+    t.text     "styles"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "visitors", :force => true do |t|

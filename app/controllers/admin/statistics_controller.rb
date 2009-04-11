@@ -10,7 +10,7 @@ module Admin
       @subscriber_count = @teaser.subscribers.size
     end
     
-    private
+    protected
       def assign_activity_statistics
         if params.has_key?('monthly')
           @statistics = MonthlyStatistics.new(@account, @teaser)

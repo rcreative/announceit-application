@@ -1,8 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe 'admin' do
+  dataset :builtin_templates
+  
   before do
-    @account = stub_model(Account, :subdomain => 'mecompany', :update_attributes => true)
+    @account = stub_model(Account, :subdomain => 'mecompany', :update_attributes => true, :save => true)
     @teaser = stub_model(Teaser, :account => @account, :template_name => 'white_background', :update_attributes => true)
     @account.stub!(:teaser).and_return(@teaser)
     
@@ -66,9 +68,9 @@ describe 'admin' do
   end
   
   it 'should allow selecting the template background' do
-    @teaser.should_receive(:update_attributes).with('template_name' => 'dark_background')
+    @teaser.should_receive(:update_attributes).with('template_id' => template_id(:dark_background).to_s)
     navigate_to '/teaser/edit'
-    submit_form 'template_form', :teaser => {:template_name => 'dark_background'}
+    submit_form 'template_form', :teaser => {:template_id => template_id(:dark_background)}
     response.should be_showing('/teaser/edit')
   end
   

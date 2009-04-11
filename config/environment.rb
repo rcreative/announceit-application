@@ -46,6 +46,8 @@ Rails::Initializer.run(:process, AnnounceConfiguration.new) do |config|
     :version => '0.2.2',
     :lib => "db2s3",
     :source => "http://gems.github.com"
+  config.gem "radius",
+    :version => '0.5.1'
     
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.

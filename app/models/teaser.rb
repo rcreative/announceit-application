@@ -1,5 +1,6 @@
 class Teaser < ActiveRecord::Base
   belongs_to :account
+  belongs_to :template
   
   has_many :subscribers, :order => 'name, email'
   has_many :subscribes
@@ -26,6 +27,11 @@ class Teaser < ActiveRecord::Base
       )
     end
   end
+  
+  def template_with_default
+    template_without_default || BuiltinTemplate.default.template
+  end
+  alias_method_chain :template, :default
   
   def unmodified?
     !(title? || description? || logo_file_name?)

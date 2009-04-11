@@ -31,7 +31,7 @@ class AccountsController < ApplicationController
     render :edit
   end
   
-  private
+  protected
     def check_key
       redirect_to root_url unless params[:key] == CREATE_KEY
     end
