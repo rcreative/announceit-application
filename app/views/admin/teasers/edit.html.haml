@@ -1,59 +1,18 @@
 - @selected = :teaser
 - @title = "Teaser Page"
 
-.box
-  %h3 Template
-  #template
+- content_for :toolbar do
+  - form_for :teaser, :url => admin_teaser_path, :html => {:id => 'template_select_form', :method => :put} do |template|
     %p
-      %big= @teaser.template.name
-      = link_to_function 'Change', "Element.hide('template'); Element.show('change_template')"
-  #change_template{:style => 'display:none'}
-    - form_for :teaser, :url => admin_teaser_path, :html => {:id => 'template_form', :method => :put} do |template|
-      %p
-        - template_names = BuiltinTemplate.all(:include => :template).collect(&:template).collect {|t| [t.name, t.id]}
-        - template_names.concat @teaser.custom_templates.collect(&:template).collect {|t| [t.name, t.id]} unless @teaser.custom_templates.blank?
-        = template.select :template_id, template_names
-        = template.submit 'Save', :class => "button"
+      = template.label :template_id, 'Template', :class => 'inline'
+      = template.select :template_id, template_names, :class => 'big', :onchange => '$("template_select_form").submit()'
+      = template.submit 'Save'
+      / - if @teaser.custom_template?
+      /   %small= link_to_function "Save Template", "prompt('Type a name for the template:')"
+      / - else
+      /   %small= link_to_function "Customize", '$("template_select_form").submit()'
         
 - if @teaser.custom_template?
-  .box
-    %h3 Custom Template
-    %p Editing Coming Soon!
+  = render 'custom'
 - else
-  .box
-    %h3 Logo
-    #logo{:style => (@teaser.logo.exists? ? nil : 'display:none')}
-      %p
-        = image_tag @teaser.logo.url if @teaser.logo.exists?
-      %p.change
-        = link_to_function 'Change', "Element.hide('logo'); Element.show('change_logo')"
-    #change_logo{:style => (@teaser.logo.exists? ? 'display:none' : nil)}
-      - form_for :teaser, :url => admin_teaser_path, :html => {:method => :put, :multipart => true} do |logo|
-        %p.logo_uploader
-          = logo.file_field :logo
-        %p
-          = logo.submit 'Upload', :class => "button"
-          %span{:style => (@teaser.logo.exists? ? nil : 'display:none')}
-            or
-            = link_to_function 'Cancel', "Element.hide('change_logo'); Element.show('logo')", :class => 'cancel'
-            
-  .box
-    %h3 Title &amp; Description
-    #title_and_description
-      .title_and_description
-        %h4= @teaser.title
-        %p= @teaser.description
-      %p.change
-        = link_to_function 'Change', "Element.hide('title_and_description'); Element.show('change_title_and_description'); Event.stop(event)"
-    #change_title_and_description{:style=>"display: none"}
-      - form_for :teaser, :url => admin_teaser_path, :html => {:id => 'title_and_description_form', :method => :put} do |fields|
-        %p
-          = fields.label :title
-          = fields.text_field :title, :value => @teaser.title, :size => 30, :class => 'textbox big'
-        %p
-          = fields.label :description
-          ~ fields.text_area :description, :value => @teaser.description, :cols => 40, :rows => 4
-        %p
-          = fields.submit 'Save Changes', :class => "button"
-          or
-          = link_to_function 'Cancel', "Element.hide('change_title_and_description'); Element.show('title_and_description'); Event.stop(event)", :class => 'cancel'
+  = render 'builtin'

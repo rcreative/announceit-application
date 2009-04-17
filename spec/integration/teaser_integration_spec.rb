@@ -99,6 +99,8 @@ describe 'teaser page' do
       navigate_to '/teaser'
     end.should_not change(Visit, :count)
   end
+  
+  it 'should allow user to upload images'
 end
 
 describe 'subscribe' do

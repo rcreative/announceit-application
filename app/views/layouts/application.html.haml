@@ -16,5 +16,8 @@
           = link_to "View Teaser", teaser_view_url(current_account), :class=>"view_teaser", :target=>"_blank"
       = render :partial => "/layouts/navigation"
     #content
+      - if @content_for_toolbar
+        .toolbar
+          = yield :toolbar
       = yield
     = render :partial => "/layouts/footer"

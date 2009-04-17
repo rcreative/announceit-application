@@ -63,14 +63,14 @@ describe 'admin' do
   it 'should allow customizing the text for the teaser' do
     @teaser.should_receive(:update_attributes).with('title' => 'Title', 'description' => 'Description').and_return(true)
     navigate_to '/teaser/edit'
-    submit_form 'title_and_description_form', :teaser => {:title => 'Title', :description => 'Description'}
+    submit_form 'template_settings_form', :teaser => {:title => 'Title', :description => 'Description'}
     response.should be_showing('/teaser/edit')
   end
   
   it 'should allow selecting the template background' do
     @teaser.should_receive(:update_attributes).with('template_id' => template_id(:dark_background).to_s)
     navigate_to '/teaser/edit'
-    submit_form 'template_form', :teaser => {:template_id => template_id(:dark_background)}
+    submit_form 'template_select_form', :teaser => {:template_id => template_id(:dark_background)}
     response.should be_showing('/teaser/edit')
   end
   

@@ -1,0 +1,26 @@
+%h3 Template Settings
+- form_for :teaser, :url => admin_teaser_path, :html => {:id => 'template_settings_form', :method => :put, :multipart => true} do |teaser_form|
+  %fieldset
+    #logo{:style => (@teaser.logo.exists? ? nil : 'display:none')}
+      %p
+        %label Logo
+        = image_tag @teaser.logo.url, :alt => 'logo' if @teaser.logo.exists?
+      %p.change
+        = link_to_function 'Change', "Element.hide('logo'); Element.show('change_logo')"
+    #change_logo{:style => (@teaser.logo.exists? ? 'display:none' : nil)}
+      %p
+        = teaser_form.label :logo
+        %span.logo_uploader
+          = teaser_form.file_field :logo
+        - if @teaser.logo.exists?
+          or
+          = link_to_function 'Cancel', "Element.hide('change_logo'); Element.show('logo')", :class => 'cancel'
+  %fieldset
+    %p
+      = teaser_form.label :title
+      = teaser_form.text_field :title, :size => 28, :class => 'textbox big'
+    %p
+      = teaser_form.label :description
+      ~ teaser_form.text_area :description, :value => @teaser.description, :cols => 40, :rows => 4
+  %p
+    = teaser_form.submit 'Save Changes', :class => 'button'
