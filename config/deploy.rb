@@ -15,7 +15,7 @@ role :app, "173.45.235.36"
 role :web, "173.45.235.36"
 role :db,  "173.45.235.36", :primary => true
 
-before 'deploy:update', 'db:dump'
+after 'deploy:finalize_update', 'db:dump'
 
 namespace :db do
   task :backup_name, :roles => :db, :only => { :primary => true } do
