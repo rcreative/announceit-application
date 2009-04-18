@@ -1,210 +1,209 @@
-source:
-  "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\
-<html xml:lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">\
-  <head>\
-    <meta content=\"text/html; charset=utf-8\" http-equiv=\"content-type\" />\
-    <title>The Future Center of Your Projects</title>\
-    <meta content=\"Mission Control gives you a bird's eye view of your projects, pulling all of your existing tools together into one simple location so you can cut through the fog and see how things are really going.\" name=\"Description\" />\
-    <r:styles media=\"all\" />
-    <script src=\"http://www.google.com/jsapi\" type=\"text/javascript\"></script>
-    <script type=\"text/javascript\">
-      google.load(\"jquery\", \"1.3\");
-    </script>
-    <script type=\"text/javascript\">
-    $(document).ready(function() {
-      $('.text_field').focus(function() {
-        if ($(this).val() == $(this).attr('title')) {
-          $(this).removeClass('default');
-          $(this).val('');
-        }
-      });
-      $('.text_field').blur(function() {
-        if ($(this).val() == '') {
-          $(this).addClass('default');
-          $(this).val($(this).attr('title'));
-        }
-      });
-      $('.text_field').blur();
-      $('form').submit(function() {
-        $('.text_field').each(function() {
-          if($(this).val() == $(this).attr('title')) $(this).val('');
+source: >
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+      <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+      <title>The Future Center of Your Projects</title>
+      <meta content="Mission Control gives you a bird's eye view of your projects, pulling all of your existing tools together into one simple location so you can cut through the fog and see how things are really going." name="Description" />
+      <r:styles media="all" />
+      <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+      <script type="text/javascript">
+        google.load("jquery", "1.3");
+      </script>
+      <script type="text/javascript">
+      $(document).ready(function() {
+        $('.text_field').focus(function() {
+          if ($(this).val() == $(this).attr('title')) {
+            $(this).removeClass('default');
+            $(this).val('');
+          }
         });
+        $('.text_field').blur(function() {
+          if ($(this).val() == '') {
+            $(this).addClass('default');
+            $(this).val($(this).attr('title'));
+          }
+        });
+        $('.text_field').blur();
+        $('form').submit(function() {
+          $('.text_field').each(function() {
+            if($(this).val() == $(this).attr('title')) $(this).val('');
+          });
+        });
+        if (typeof pngfix != 'undefined') pngfix();
       });
-      if (typeof pngfix != 'undefined') pngfix();
-    });
-    </script>
-    <!--[if lte ie 7]>
-    <script type=\"text/javascript\">
-      var clear=\"images/clear.gif\";
-      pngfix=function(){var els=document.getElementsByTagName('*');var ip=/\.png/i;var i=els.length;while(i-- >0){var el=els[i];var es=el.style;if(el.src&&el.src.match(ip)&&!es.filter){es.height=el.height;es.width=el.width;es.filter=\"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='\"+el.src+\"',sizingMethod='crop')\";el.src=clear;}else{var elb=el.currentStyle.backgroundImage;if(elb.match(ip)){var path=elb.split('\"');var rep=(el.currentStyle.backgroundRepeat=='no-repeat')?'crop':'scale';es.filter=\"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='\"+path[1]+\"',sizingMethod='\"+rep+\"')\";es.height=el.clientHeight+'px';es.backgroundImage='none';var elkids=el.getElementsByTagName('*');if (elkids){var j=elkids.length;if(el.currentStyle.position!=\"absolute\")es.position='static';while (j-- >0)if(!elkids[j].style.position)elkids[j].style.position=\"relative\";}}}}}
-      //window.attachEvent('onload',pngfix);
-    </script>
-    <style type=\"text/css\">
-      #foreground, #midground, #background { background: none; }
-
-      h1 { height: 40px; }
-
-      .signup { margin-top: -13.25em; }
-      .signup li { padding: 4px 0; }
-      .signup li img { vertical-align: text-top; margin-top: -2px; }
-    </style>
-    <![endif]-->
-  </head>
-  <body>
-    <div id=\"page_container\">
-      <div id=\"background\">
-        <div id=\"midground\">
-          <div id=\"foreground\">
-            <div class=\"clearfix\" id=\"content\">
-              <h1>Mission Control</h1>
-              <img class=\"tower\" src=\"/mc/images/controltower.png\" />
-              <p class=\"description\" style=\"padding-bottom: 1em\">How many tools do you use on your projects? Source control, project communication, ticketing system - they can add up quickly! Mission Control gives you a bird's eye view of your projects, pulling all of your existing tools together into one simple location so you can cut through the fog and see how things are really going.</p>
-              <div class=\"signup\">
-                <r:if_error>
-                  <p style=\"color:red\">Please enter a valid email address.</p>
-                </r:if_error>
-                <r:unless_error>
-                  <r:if_success>
-                    <p style=\"color: red\">Thank you!</p>
-                  </r:if_success>
-                  <r:unless_success>
-                    <p>
-                      Sign up to find out when we launch - you might just get an invite to
-                      help us tweak the dials in the meantime.
-                    </p>
-                  </r:unless_success>
-                </r:unless_error>
-                <r:subscribe_form>
-                  <label class=\"interior\" for=\"email\">Your Email Address</label>
-                  <input class=\"text_field\" id=\"subscriber_email\" name=\"subscriber[email]\" title=\"your email address\" type=\"text\" value=\"<r:subscriber:email />\"/>
-                  <input alt=\"Sign Up for Updates\" src=\"/mc/images/btn_signup.png\" type=\"image\" />
-                </r:subscribe_form>
-                <ul>
-                  <li>
-                    &hellip;or follow us on
-                    <a class=\"twitter\" href=\"http://twitter.com/terralien\">
-                      <img alt=\"Twitter\" src=\"/mc/images/btn_twitter.png\" />
-                    </a>
-                  </li>
-                  <li>
-                    &hellip;or read our
-                    <a class=\"blog\" href=\"http://codenamemc.terralien.com/\">
-                      <img alt=\"Blog\" src=\"/mc/images/btn_blog.png\" />
-                    </a>
-                  </li>
-                </ul>
+      </script>
+      <!--[if lte ie 7]>
+      <script type="text/javascript">
+        var clear="images/clear.gif";
+        pngfix=function(){var els=document.getElementsByTagName('*');var ip=/\.png/i;var i=els.length;while(i-- >0){var el=els[i];var es=el.style;if(el.src&&el.src.match(ip)&&!es.filter){es.height=el.height;es.width=el.width;es.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+el.src+"',sizingMethod='crop')";el.src=clear;}else{var elb=el.currentStyle.backgroundImage;if(elb.match(ip)){var path=elb.split('"');var rep=(el.currentStyle.backgroundRepeat=='no-repeat')?'crop':'scale';es.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+path[1]+"',sizingMethod='"+rep+"')";es.height=el.clientHeight+'px';es.backgroundImage='none';var elkids=el.getElementsByTagName('*');if (elkids){var j=elkids.length;if(el.currentStyle.position!="absolute")es.position='static';while (j-- >0)if(!elkids[j].style.position)elkids[j].style.position="relative";}}}}}
+        //window.attachEvent('onload',pngfix);
+      </script>
+      <style type="text/css">
+        #foreground, #midground, #background { background: none; }
+        
+        h1 { height: 40px; }
+        
+        .signup { margin-top: -13.25em; }
+        .signup li { padding: 4px 0; }
+        .signup li img { vertical-align: text-top; margin-top: -2px; }
+      </style>
+      <![endif]-->
+    </head>
+    <body>
+      <div id="page_container">
+        <div id="background">
+          <div id="midground">
+            <div id="foreground">
+              <div class="clearfix" id="content">
+                <h1>Mission Control</h1>
+                <img class="tower" src="/mc/images/controltower.png" />
+                <p class="description" style="padding-bottom: 1em">How many tools do you use on your projects? Source control, project communication, ticketing system - they can add up quickly! Mission Control gives you a bird's eye view of your projects, pulling all of your existing tools together into one simple location so you can cut through the fog and see how things are really going.</p>
+                <div class="signup">
+                  <r:if_error>
+                    <p style="color:red">Please enter a valid email address.</p>
+                  </r:if_error>
+                  <r:unless_error>
+                    <r:if_success>
+                      <p style="color: red">Thank you!</p>
+                    </r:if_success>
+                    <r:unless_success>
+                      <p>
+                        Sign up to find out when we launch - you might just get an invite to
+                        help us tweak the dials in the meantime.
+                      </p>
+                    </r:unless_success>
+                  </r:unless_error>
+                  <r:subscribe_form>
+                    <label class="interior" for="email">Your Email Address</label>
+                    <input class="text_field" id="subscriber_email" name="subscriber[email]" title="your email address" type="text" value="<r:subscriber:email />"/>
+                    <input alt="Sign Up for Updates" src="/mc/images/btn_signup.png" type="image" />
+                  </r:subscribe_form>
+                  <ul>
+                    <li>
+                      &hellip;or follow us on
+                      <a class="twitter" href="http://twitter.com/terralien">
+                        <img alt="Twitter" src="/mc/images/btn_twitter.png" />
+                      </a>
+                    </li>
+                    <li>
+                      &hellip;or read our
+                      <a class="blog" href="http://codenamemc.terralien.com/">
+                        <img alt="Blog" src="/mc/images/btn_blog.png" />
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id=\"footer\">
-      &copy; 2009 Terralien, Inc. &bull; Teaser page powered by <a href=\"http://www.announceitapp.com\" style=\"color: white\">Announce It!</a>
-    </div>
-    <script type=\"text/javascript\">
-      var gaJsHost = ((\"https:\" == document.location.protocol) ? \"https://ssl.\" : \"http://www.\");
-      document.write(unescape(\"%3Cscript src='\" + gaJsHost + \"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E\"));
-    </script>
-    <script type=\"text/javascript\">
-      try {
-      var pageTracker = _gat._getTracker(\"UA-436958-8\");
-      pageTracker._trackPageview();
-      } catch(err) {}
-    </script>
-  </body>
-</html>"
-styles:
-  "/* -------------------------------------------------------------- 
+      <div id="footer">
+        &copy; 2009 Terralien, Inc. &bull; Teaser page powered by <a href="http://www.announceitapp.com" style="color: white">Announce It!</a>
+      </div>
+      <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+      </script>
+      <script type="text/javascript">
+        try {
+        var pageTracker = _gat._getTracker("UA-436958-8");
+        pageTracker._trackPageview();
+        } catch(err) {}
+      </script>
+    </body>
+  </html>
+styles: >
+  /* -------------------------------------------------------------- 
   
-   reset.css
-   * Resets default browser CSS.
+     reset.css
+     * Resets default browser CSS.
    
--------------------------------------------------------------- */
-
-html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, code,
-del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
-  vertical-align: baseline;
-}
-
-body { 
-  line-height: 1.5; 
-}
-
-/* Tables still need 'cellspacing=\"0\"' in the markup. */
-table { border-collapse: separate; border-spacing: 0; }
-caption, th, td { text-align: left; font-weight: normal; }
-table, td, th { vertical-align: middle; }
-
-/* Remove possible quote marks (\") from <q>, <blockquote>. */
-blockquote:before, blockquote:after, q:before, q:after { content: \"\"; }
-blockquote, q { quotes: \"\" \"\"; }
-
-/* Remove annoying border on linked images. */
-a img { border: none; }
-
-
-/* -------------------------------------------------------------- 
+  -------------------------------------------------------------- */
   
-   layout.css
-   
--------------------------------------------------------------- */
-/*	TYPOGRAPHY
-=============================================================================*/
-
-body { font: 13px/1.5 \"Lucida Grande\", Lucida, Verdana, sans-serif; }
-
-
-/*	LAYOUT
-=============================================================================*/
-
-body { background: #414141 url(/mc/images/bg_bluestripe.gif) 0 0 repeat-x; }
-#page_container { margin-top: 75px; background: #a8cae2 url(/mc/images/bg_sky.gif) repeat-x 0 100%; padding-bottom: 57px; }	
-#content { width: 780px; margin: 0 auto; position: relative; }	
-#footer { width: 780px; margin: 0 auto; color: #ccc; margin-top: -50px; font-size: 11px; text-align: right; }
-
-h1 {
-	background: transparent url(/mc/images/mc.png) 0 100% no-repeat;
-	width: 298px;
-	height: 60px;
-	text-indent: -5000px;
-	margin: 0 0 20px 280px; }
-
-img.tower { float: left; margin-top: -25px; position: absolute; left: 0; bottom: 0; }
-/*p { text-shadow: white 0 1px 2px; }*/
-p.description { float: left; color: #1B3F4D; width: 260px; margin-left: 280px; margin-right: 20px; display: inline; }
-.signup { float: right; color: #595959; width: 220px; }
-
-	.signup p { margin-bottom: 15px; }
-
-	.signup form { margin-bottom: 2px; }
-	.signup label { display: none; }
-	.signup .text_field { display: block; width: 212px; margin-left: 1px; margin-bottom: 5px; font-size: 14px; }
-	.text_field { color: #000; }
-	.text_field.default { color: #999; }
-
-	.signup ul { list-style: none; margin: 0 0 20px; }
-	.signup li { text-align: right; width: 220px; line-height: 27px; font-size: 11px; color: #666; }
-	.signup li a { vertical-align: text-top; }
-
-
-#background { background: transparent url(/mc/images/antennae_back.png) -20% 100% repeat-x; }
-#midground { background: transparent url(/mc/images/antennae_mid.png) -70% 100% repeat-x; }
-#foreground { background: transparent url(/mc/images/antennae_fore.png) -160% 100% repeat-x; }
-
-
-
-.clearfix:after { content: \".\"; display: block; height: 0; clear: both; visibility: hidden; }
-* html .clearfix { zoom: 1;}
-"
+  html, body, div, span, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, code,
+  del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+  }
+  
+  body { 
+    line-height: 1.5; 
+  }
+  
+  /* Tables still need 'cellspacing="0"' in the markup. */
+  table { border-collapse: separate; border-spacing: 0; }
+  caption, th, td { text-align: left; font-weight: normal; }
+  table, td, th { vertical-align: middle; }
+  
+  /* Remove possible quote marks (") from <q>, <blockquote>. */
+  blockquote:before, blockquote:after, q:before, q:after { content: ""; }
+  blockquote, q { quotes: "" ""; }
+  
+  /* Remove annoying border on linked images. */
+  a img { border: none; }
+  
+  
+  /* -------------------------------------------------------------- 
+  
+     layout.css
+  
+  -------------------------------------------------------------- */
+  /*	TYPOGRAPHY
+  =============================================================================*/
+  
+  body { font: 13px/1.5 "Lucida Grande", Lucida, Verdana, sans-serif; }
+  
+  
+  /*	LAYOUT
+  =============================================================================*/
+  
+  body { background: #414141 url(/mc/images/bg_bluestripe.gif) 0 0 repeat-x; }
+  #page_container { margin-top: 75px; background: #a8cae2 url(/mc/images/bg_sky.gif) repeat-x 0 100%; padding-bottom: 57px; }	
+  #content { width: 780px; margin: 0 auto; position: relative; }	
+  #footer { width: 780px; margin: 0 auto; color: #ccc; margin-top: -50px; font-size: 11px; text-align: right; }
+  
+  h1 {
+  	background: transparent url(/mc/images/mc.png) 0 100% no-repeat;
+  	width: 298px;
+  	height: 60px;
+  	text-indent: -5000px;
+  	margin: 0 0 20px 280px; }
+    
+  img.tower { float: left; margin-top: -25px; position: absolute; left: 0; bottom: 0; }
+  /*p { text-shadow: white 0 1px 2px; }*/
+  p.description { float: left; color: #1B3F4D; width: 260px; margin-left: 280px; margin-right: 20px; display: inline; }
+  .signup { float: right; color: #595959; width: 220px; }
+  
+  	.signup p { margin-bottom: 15px; }
+    
+  	.signup form { margin-bottom: 2px; }
+  	.signup label { display: none; }
+  	.signup .text_field { display: block; width: 212px; margin-left: 1px; margin-bottom: 5px; font-size: 14px; }
+  	.text_field { color: #000; }
+  	.text_field.default { color: #999; }
+    
+  	.signup ul { list-style: none; margin: 0 0 20px; }
+  	.signup li { text-align: right; width: 220px; line-height: 27px; font-size: 11px; color: #666; }
+  	.signup li a { vertical-align: text-top; }
+    
+    
+  #background { background: transparent url(/mc/images/antennae_back.png) -20% 100% repeat-x; }
+  #midground { background: transparent url(/mc/images/antennae_mid.png) -70% 100% repeat-x; }
+  #foreground { background: transparent url(/mc/images/antennae_fore.png) -160% 100% repeat-x; }
+  
+  
+  
+  .clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+  * html .clearfix { zoom: 1;}
