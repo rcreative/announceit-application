@@ -299,3 +299,47 @@ input.textbox {
   input.textbox:active, input.textbox:focus {
     background: #fea; }
 "
+Custom Template…:
+  source:
+    "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">
+<html xmlns=\"http://www.w3.org/1999/xhtml\">
+  <head>
+    <meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />
+    <title>Be a Part of Something Amazing</title>
+    <r:styles media=\"all\" />
+  </head>
+  <body>
+    <div id=\"logo\">
+      <r:logo />
+    </div>
+    <r:subscribe_form>
+      <r:unless_success>
+        <h1>Be a Part of Something Amazing</h1>
+        <r:unless_error>
+          <p>Enter your name and email below to be among the first to participate in our beta program.</p>
+        </r:unless_error>
+        <r:if_error>
+          <p class=\"error\">Please enter a valid email address.</p>
+        </r:if_error>
+        <fieldset>
+          <p>
+            <label for=\"subscriber_name\">Name</label>
+            <r:name_input id=\"subscriber_name\" />
+          </p>
+          <p>
+            <label for=\"subscriber_email\">Email</label>
+            <r:email_input id=\"subscriber_email\" />
+          </p>
+        </fieldset>
+        <div class=\"buttons\">
+          <input type=\"submit\" value=\"Subscribe\" />
+        </div>
+      </r:unless_success>
+      <r:if_success>
+        <h1>Thank You!</h1>
+      </r:if_success>
+    </r:subscribe_form>
+  </body>
+</html>"
+  styles:
+    ""

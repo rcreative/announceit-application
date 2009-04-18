@@ -5,7 +5,9 @@ describe 'admin' do
   
   before do
     @account = stub_model(Account, :subdomain => 'mecompany', :update_attributes => true, :save => true)
-    @teaser = stub_model(Teaser, :account => @account, :template_name => 'white_background', :update_attributes => true)
+    @teaser = stub_model(Teaser, :account => @account, :update_attributes => true)
+    @template = stub_model(Template, :update_attributes => true)
+    
     @account.stub!(:teaser).and_return(@teaser)
     
     @teaser.stub!(:subscribers).and_return([
@@ -13,8 +15,11 @@ describe 'admin' do
       stub_model(Subscriber, :email => 'two@example.com', :name => 'Two, Inc.')
     ])
     
+    @teaser.stub!(:template).and_return(@template)
+    
     Account.stub!(:authenticate).and_return(@account)
     Account.stub!(:find_by_id).and_return(@account)
+    
     login_as @account
   end
   
@@ -60,19 +65,34 @@ describe 'admin' do
     response.should have_text(/two@example\.com/)
   end
   
-  it 'should allow customizing the text for the teaser' do
+  it 'should allow customizing the text for the built-in teasers' do
     @teaser.should_receive(:update_attributes).with('title' => 'Title', 'description' => 'Description').and_return(true)
     navigate_to '/teaser/edit'
     submit_form 'template_settings_form', :teaser => {:title => 'Title', :description => 'Description'}
     response.should be_showing('/teaser/edit')
   end
   
-  it 'should allow selecting the template background' do
-    @teaser.should_receive(:update_attributes).with('template_id' => template_id(:dark_background).to_s)
+  it 'should allow selecting the template' do
+    @teaser.should_receive(:update_attributes).with('template_id' => template_id(:dark_background).to_s, 'customize_selected' => '')
     navigate_to '/teaser/edit'
     submit_form 'template_select_form', :teaser => {:template_id => template_id(:dark_background)}
     response.should be_showing('/teaser/edit')
   end
+  
+  it 'should allow modifying custom template source and style content' do
+    @teaser.custom_templates.build(:template => @template)
+    @template.should_receive(:update_attributes).with('source' => 'SM', 'styles' => 'SSM')
+    navigate_to '/teaser/edit'
+    submit_form 'template_settings_form', :template => {:source => 'SM', :styles => 'SSM'}
+  end
+  
+  it 'should not allow modifying built-in template source and style content' do
+    @template.should_not_receive(:update_attributes)
+    put '/teaser', :template => {:source => 'SM', :styles => 'SSM'}
+    response.should redirect_to('/teaser/edit')
+  end
+  
+  it 'should allow user to upload images'
   
   it 'should allow downloading a text file containing all the email addresses' do
     navigate_to '/subscribers.txt'

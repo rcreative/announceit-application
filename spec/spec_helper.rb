@@ -7,6 +7,7 @@ require 'spec/rails'
 require 'spec/integration'
 
 require 'vizres'
+Vizres::RESPONSE_URI.sub!(/localhost:3000/, 'announce.local')
 
 module ModelAttributeMethods
   def account_attributes

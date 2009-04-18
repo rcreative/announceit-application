@@ -11,5 +11,10 @@ class BuiltinTemplatesDataset < Dataset::Base
       :source => template_data['Dark Background']['source'],
       :styles => template_data['Dark Background']['styles']
     create_record :builtin_template, :template_id => id
+    
+    id = create_record :template, :customizable, :name => 'Custom Template…',
+      :source => template_data['Custom Template…']['source'],
+      :styles => template_data['Custom Template…']['styles']
+    create_record :builtin_template, :template_id => id
   end
 end

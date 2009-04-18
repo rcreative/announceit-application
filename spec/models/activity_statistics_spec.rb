@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe ActivityStatistics do
-  dataset do
+  dataset :builtin_templates do
     @account_one = Account.create!(account_attributes)
     @teaser_one = @account_one.teaser
     @vone = @teaser_one.visitors.create!

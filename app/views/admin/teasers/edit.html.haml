@@ -5,14 +5,12 @@
   - form_for :teaser, :url => admin_teaser_path, :html => {:id => 'template_select_form', :method => :put} do |template|
     %p
       = template.label :template_id, 'Template', :class => 'inline'
-      = template.select :template_id, template_names, :class => 'big', :onchange => '$("template_select_form").submit()'
-      = template.submit 'Save'
-      / - if @teaser.custom_template?
-      /   %small= link_to_function "Save Template", "prompt('Type a name for the template:')"
-      / - else
-      /   %small= link_to_function "Customize", '$("template_select_form").submit()'
+      = template.select :template_id, template_names, {}, :class => 'big', :onchange => '$("template_select_form").submit()'
+      - unless @teaser.custom_template_selected? || @teaser.custom_template_defined?
+        = template.hidden_field :customize_selected
+        %small= link_to_function "Customize", '$("teaser_customize_selected").setValue("true"); $("template_select_form").submit()'
         
-- if @teaser.custom_template?
+- if @teaser.custom_template_selected?
   = render 'custom'
 - else
   = render 'builtin'

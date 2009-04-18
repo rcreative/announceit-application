@@ -8,15 +8,6 @@
     %li
       %img{:src=>"http://s3.amazonaws.com/twitter_production/profile_images/79465363/rcreative2_bigger.png", :width=>48, :height=>48, :alt=>""}/
       = link_to_function "<span>Delete</span>", "confirm('Are you sure you want to delete this image?')", :class=>"delete"
-    %li
-      %img{:src=>"asdf", :width=>48, :height=>48, :alt=>""}/
-      = link_to_function "<span>Delete</span>", "confirm('Are you sure you want to delete this image?')", :class=>"delete"
-    %li
-      %img{:src=>"asdf", :width=>48, :height=>48, :alt=>""}/
-      = link_to_function "<span>Delete</span>", "confirm('Are you sure you want to delete this image?')", :class=>"delete"
-    %li
-      %img{:src=>"asdf", :width=>48, :height=>48, :alt=>""}/
-      = link_to_function "<span>Delete</span>", "confirm('Are you sure you want to delete this image?')", :class=>"delete"
   %p#upload
     = link_to_function "Upload Image &raquo;", "Element.hide('upload'); Element.show('uploader');"
   %form#uploader{:style=>"display: none"}
@@ -28,14 +19,14 @@
       %input.button{:type=>"submit", :value=>"Upload"} 
       or
       = link_to_function "Cancel", "Element.hide('uploader'); Element.show('upload');"
-%form#teaser_template_form{:action=>"/teaser/", :method=>"post"}
+- form_for @teaser.template, :url => admin_teaser_path, :html => {:id => 'template_settings_form'} do |template_fields|
   %fieldset#editor
     %p
-      %label{:for=>"teaser_html"} HTML
-      %textarea{:id=>"teaser_html", :rows=>15, :cols=>60, :class=>"fixed", :style=>"width:100%"}= h render :partial => "/teaser/html.erb"
+      = template_fields.label :source, 'HTML'
+      ~ template_fields.text_area :source, :rows=>15, :cols=>60, :class=>"fixed", :style=>"width:100%"
     %p
-      %label{:for=>"teaser_styles"} Styles
-      %textarea{:id=>"teaser_styles", :rows=>15, :cols=>60, :class=>"fixed", :style=>"width:100%"}= h render :partial => "/teaser/styles.erb"
+      = template_fields.label :styles
+      ~ template_fields.text_area :styles, :rows=>15, :cols=>60, :class=>"fixed", :style=>"width:100%"
   %p
-    %input.button{:type=>"submit", :value=>"Save Changes"}/
+    = template_fields.submit 'Save Changes', :class => 'button'
     %span{:style=>"color: #c00; margin-left: 1em; font-size: 90%"} Unsaved changes.

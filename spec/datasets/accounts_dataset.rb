@@ -1,4 +1,6 @@
 class AccountsDataset < Dataset::Base
+  uses :builtin_templates
+  
   def load
     create_record :account, :quentin,
       :email => 'quentin@example.com',

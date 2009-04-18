@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090410210341) do
+ActiveRecord::Schema.define(:version => 20090417191350) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -29,8 +29,11 @@ ActiveRecord::Schema.define(:version => 20090410210341) do
 
   create_table "builtin_templates", :force => true do |t|
     t.integer "template_id"
-    t.boolean "default_template", :default => false
+    t.boolean "default_template",     :default => false
+    t.boolean "default_customizable", :default => false
   end
+
+  add_index "builtin_templates", ["default_customizable"], :name => "index_builtin_templates_on_default_customizable"
 
   create_table "custom_templates", :force => true do |t|
     t.integer "teaser_id"

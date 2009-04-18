@@ -12,7 +12,18 @@ class Teaser < ActiveRecord::Base
   
   has_attached_file :logo
   
-  def custom_template?
+  validates_presence_of :template_id
+  
+  before_validation :assign_custom_template
+  before_validation_on_create :assign_default_template
+  
+  attr_accessor :customize_selected
+  
+  def custom_template_defined?
+    !!custom_templates.detect {|ct| ct.template.name == 'Custom Template…'}
+  end
+  
+  def custom_template_selected?
     !!custom_templates.detect {|t| t.template == template}
   end
   
@@ -34,12 +45,24 @@ class Teaser < ActiveRecord::Base
     end
   end
   
-  def template_with_default
-    template_without_default || BuiltinTemplate.default.template
-  end
-  alias_method_chain :template, :default
-  
   def unmodified?
     !(title? || description? || logo_file_name?)
   end
+  
+  protected
+    def assign_default_template
+      self.template = BuiltinTemplate.default.template unless template
+    end
+    
+    def assign_custom_template
+      if template_id == 0
+        customizable_template = BuiltinTemplate.customizable.template
+        self.template = Template.new(customizable_template.attributes)
+        custom_templates.build(:template => self.template)
+      elsif customize_selected == 'true' && !custom_template_defined?
+        self.template = Template.new(template.attributes)
+        template.name = 'Custom Template…'
+        custom_templates.build(:template => self.template)
+      end
+    end
 end
