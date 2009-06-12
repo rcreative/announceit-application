@@ -3,9 +3,8 @@ module Admin
     def template_names
       template_names = BuiltinTemplate.all(
         :include => :template,
-        :conditions => {
-          :default_customizable => false
-        }
+        :order => :id,
+        :conditions => { :default_customizable => false }
       ).collect(&:template).collect {|t| [t.name, t.id]}
       if @teaser.custom_templates.any?
         custom_names = @teaser.custom_templates.collect(&:template).collect {|t| [t.name, t.id]}

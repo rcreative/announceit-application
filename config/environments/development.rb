@@ -18,3 +18,11 @@ config.action_mailer.raise_delivery_errors = false
 
 config.announce.tlds << 'localhost'      # script/server
 config.announce.tlds << 'announce.local' # Phusion
+
+# http://duckpunching.com/passenger-mod_rails-for-development-now-with-debugger
+if File.exists?(File.join(RAILS_ROOT,'tmp', 'debug.txt'))
+  require 'ruby-debug'
+  Debugger.wait_connection = true
+  Debugger.start_remote
+  File.delete(File.join(RAILS_ROOT,'tmp', 'debug.txt'))
+end

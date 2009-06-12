@@ -15,6 +15,6 @@ class BuiltinTemplatesDataset < Dataset::Base
     id = create_record :template, :customizable, :name => 'Custom Template…',
       :source => template_data['Custom Template…']['source'],
       :styles => template_data['Custom Template…']['styles']
-    create_record :builtin_template, :template_id => id
+    create_record :builtin_template, :template_id => id, :default_customizable => true
   end
 end
