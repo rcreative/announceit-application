@@ -11,5 +11,8 @@ require 'tasks/rails'
 Dir["#{RAILS_ROOT}/lib/plugins/*/**/tasks/**/*.rake"].sort.each { |ext| load ext }
 Dir["#{RAILS_ROOT}/vendor/gems/*/**/tasks/**/*.rake"].sort.each { |ext| load ext }
 
-require 'dataset'
-load 'dataset.rake'
+begin
+  require 'dataset'
+  load 'dataset.rake'
+rescue
+end
