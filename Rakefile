@@ -14,5 +14,5 @@ Dir["#{RAILS_ROOT}/vendor/gems/*/**/tasks/**/*.rake"].sort.each { |ext| load ext
 begin
   require 'dataset'
   load 'dataset.rake'
-rescue
+rescue LoadError
 end
