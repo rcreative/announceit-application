@@ -78,7 +78,9 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin, :path_prefix => '' do |admin|
     admin.resource  :statistics, :member => { :graph => :get }
     admin.resources :subscribers
-    admin.resource  :teaser
+    admin.resource  :teaser do |teaser|
+      teaser.resources :images
+    end
     admin.resource  :domain
   end
   

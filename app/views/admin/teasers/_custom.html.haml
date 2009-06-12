@@ -3,8 +3,24 @@
   %p
     %label Images
   %p.instructions
-    Coming Soon! Drag and drop images below into the HTML and Styles textboxes on the left.
+    Drag and drop images below into the HTML and Styles textboxes on the left.
   %ul
+    - for image in @teaser.template.images
+      %li
+        = image_tag image.upload.url('48x48'), :width => 48, :height => 48, :alt => '', :title => h(image.upload_file_name)
+        = link_to "<span>Delete</span>", admin_teaser_image_path(image), :method => :delete, :confirm => 'Are you sure you want to delete this image?', :class=>"delete"
+  %p#upload
+    = link_to_function "Upload Image &raquo;", "Element.hide('upload'); Element.show('uploader');"
+  - form_for :image, :url => admin_teaser_images_path, :html => {:id => 'uploader', :style => 'display: none', :multipart => true} do |f|
+    %fieldset
+      %p
+        = f.label :upload, 'Choose a File:'
+        = f.file_field :upload
+    .buttons
+      %input.button{:type=>"submit", :value=>"Upload"} 
+      or
+      = link_to_function "Cancel", "Element.hide('uploader'); Element.show('upload');"
+      
 - form_for @teaser.template, :url => admin_teaser_path, :html => {:id => 'template_settings_form'} do |template_fields|
   %fieldset#editor
     %p
@@ -15,3 +31,31 @@
       ~ template_fields.text_area :styles, :rows=>15, :cols=>60, :class=>"fixed", :style=>"width:100%"
   %p
     = template_fields.submit 'Save Changes', :class => 'button'
+    
+- # Here we are cleaning up the link from the image bucket to remove the thumbnail size reference,
+- # and to create an img tag for the url.
+:javascript
+  var imageUrlPattern = /^(http:\/\/.*)\/system\/images\/uploads.*\d+$/;
+  var cleanImageUrl = function(event) {
+    var textarea = event.target, text = textarea.value, start = null, end = null;
+    
+    if (textarea.selectionStart == undefined) { // IE
+      var selectionRange = document.selection.createRange();
+      start = selectionRange.start, end = selectionRange.end;
+    } else
+      start = textarea.selectionStart, end = textarea.selectionEnd;
+      
+    var textBefore = text.substring(0, start);
+    var selectedText = text.substring(start, end);
+    var textAfter = text.substring(end, text.length);
+    
+    var match = imageUrlPattern.exec(selectedText);
+    if (match != null) {
+      var cleanValue = selectedText.gsub(match[1], '').gsub('-48x48', '-original');
+      var img = "<img src=\"" + cleanValue + "\" />";
+      textarea.value = textBefore + img + textAfter;
+    }
+  };
+  
+  $('template_source').observe('select', cleanImageUrl);
+  $('template_styles').observe('select', cleanImageUrl);

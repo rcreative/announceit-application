@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090417191350) do
+ActiveRecord::Schema.define(:version => 20090508165350) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(:version => 20090417191350) do
     t.integer "template_id"
   end
 
+  create_table "images", :force => true do |t|
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
+  end
+
   create_table "subscribers", :force => true do |t|
     t.integer  "teaser_id"
     t.string   "name"
@@ -68,6 +75,13 @@ ActiveRecord::Schema.define(:version => 20090417191350) do
     t.integer  "page_views",        :default => 0
     t.integer  "template_id"
   end
+
+  create_table "template_images", :force => true do |t|
+    t.integer "template_id"
+    t.integer "image_id"
+  end
+
+  add_index "template_images", ["template_id"], :name => "index_template_images_on_template_id"
 
   create_table "templates", :force => true do |t|
     t.string   "name"

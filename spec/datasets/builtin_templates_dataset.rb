@@ -1,6 +1,6 @@
 class BuiltinTemplatesDataset < Dataset::Base
   def load
-    template_data = YAML.load(File.read(File.join(Rails.root, 'db', 'builtin_templates.yml')))
+    template_data = YAML.load(File.read(Rails.root.join('db', 'builtin_templates.yml')))
     
     id = create_record :template, :white_background, :name => 'White Background',
       :source => template_data['White Background']['source'],

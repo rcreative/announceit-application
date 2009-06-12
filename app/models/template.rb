@@ -1,6 +1,9 @@
 require 'radius'
 
 class Template < ActiveRecord::Base
+  has_many :template_images, :dependent => :destroy
+  has_many :images, :through => :template_images
+  
   def render(locals)
     parser = Radius::Parser.new(context(locals), :tag_prefix => 'r')
     parser.parse(source)
@@ -35,6 +38,9 @@ class Template < ActiveRecord::Base
         end
         c.define_tag "email_input" do |tag|
           %(<input type="text" name="subscriber[email]" id="#{tag.attr['id']}" class="textbox" value="#{subscriber.email}" />)
+        end
+        c.define_tag "if_logo" do |tag|
+          tag.expand if teaser.logo.exists?
         end
         c.define_tag "logo" do |tag|
           %(<img src="#{teaser.logo.url}" />)

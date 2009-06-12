@@ -7,6 +7,10 @@ describe Template do
     @template = Template.new
   end
   
+  it 'should destroy template images when destroyed' do
+    Template.reflect_on_association(:template_images).options[:dependent].should == :destroy
+  end
+  
   it 'should render the source html' do
     @template.should render('hello, guys', 'hello, guys')
   end
@@ -39,6 +43,19 @@ describe Template do
       '<r:logo />',
       '<img src="logourl" />',
       :teaser => stub_model(Teaser, :logo => OpenStruct.new(:url => 'logourl'))
+    )
+  end
+  
+  it 'should render if_logo block when a teaser has a logo' do
+    @template.should render(
+      '<r:if_logo>hola</r:if_logo>',
+      'hola',
+      :teaser => stub_model(Teaser, :logo => OpenStruct.new(:exists? => true))
+    )
+    @template.should render(
+      '<r:if_logo>hola</r:if_logo>',
+      '',
+      :teaser => stub_model(Teaser, :logo => OpenStruct.new(:exists? => false))
     )
   end
   

@@ -57,6 +57,10 @@ module IntegrationExampleExtensions
   def current_account
     controller.send :current_account
   end
+  
+  def image_file
+    ActionController::TestUploadedFile.new(File.join(Rails.root, %w(spec fixtures small_image.png)), "image/png", true)
+  end
 end
 
 Spec::Runner.configure do |config|

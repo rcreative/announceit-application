@@ -15,6 +15,8 @@ describe 'admin' do
       stub_model(Subscriber, :email => 'two@example.com', :name => 'Two, Inc.')
     ])
     
+    @custom_templates = []
+    @teaser.stub!(:custom_templates).and_return(@custom_templates)
     @teaser.stub!(:template).and_return(@template)
     
     Account.stub!(:authenticate).and_return(@account)
@@ -80,7 +82,7 @@ describe 'admin' do
   end
   
   it 'should allow modifying custom template source and style content' do
-    @teaser.custom_templates.build(:template => @template)
+    @teaser.custom_templates << stub_model(CustomTemplate, :template => @template)
     @template.should_receive(:update_attributes).with('source' => 'SM', 'styles' => 'SSM')
     navigate_to '/teaser/edit'
     submit_form 'template_settings_form', :template => {:source => 'SM', :styles => 'SSM'}
@@ -92,7 +94,20 @@ describe 'admin' do
     response.should redirect_to('/teaser/edit')
   end
   
-  it 'should allow user to upload images'
+  it 'should allow user to upload images' do
+    @teaser.custom_templates << stub_model(CustomTemplate, :template => @template)
+    navigate_to '/teaser/edit'
+    submit_form '#uploader', :image => {:upload => image_file}
+    response.body.should include('small_image-48x48.png')
+    @template.images.first.upload_file_name.should match(/small_image/)
+  end
+  
+  it 'should allow user to delete images' do
+    @teaser.custom_templates << stub_model(CustomTemplate, :template => @template)
+    image = @template.images.create!(:upload => image_file)
+    delete "/teaser/images/#{image.id}"
+    response.should redirect_to('/teaser/edit')
+  end
   
   it 'should allow downloading a text file containing all the email addresses' do
     navigate_to '/subscribers.txt'

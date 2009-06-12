@@ -38,6 +38,10 @@ Rails::Initializer.run(:process, AnnounceConfiguration.new) do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
+  config.gem 'thoughtbot-paperclip',
+    :version => '2.2.9.1',
+    :lib => 'paperclip',
+    :source => 'http://gems.github.com'
   config.gem 'mislav-will_paginate',
     :version => '2.3.6',
     :lib => 'will_paginate', 
