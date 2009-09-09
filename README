@@ -1,15 +1,14 @@
 == Welcome to AnnounceIt!
 
-AnnounceIt is a Rails application for hosting teaser pages. It was designed by
-John W. Long and implemented by Adam I. Williams. We were hoping to make
-millions.
+AnnounceIt is a Ruby on Rails application for hosting teaser pages and
+collecting email addresses. It was designed by John W. Long and implemented
+by Adam I. Williams.
 
 == License
 
 AnnounceIt is released under the MIT license and is copyright (c) 2009
-Recursive Creative, LLC. A copy of the MIT license can be found in the
-LICENSE file.
-
+John W. Long and Adam I. Williams. A copy of the MIT license can be found
+in the LICENSE file.
 
 == Installation and Setup
 
