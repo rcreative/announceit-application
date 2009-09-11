@@ -25,4 +25,5 @@ config.action_controller.perform_caching             = true
 
 config.active_record.observers = :account_observer
 
+config.announce.application_teaser_url = 'http://www.announceitapp.com'
 config.announce.tlds.concat %w(announceitapp.com myteaserpage.com)

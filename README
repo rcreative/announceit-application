@@ -14,7 +14,16 @@ LICENSE file.
 == Installation and Setup
 
 AnnounceIt is a traditional Ruby on Rails application, meaning that you can
-configure and run it the way you would a normal Rails application.
+configure and run it the way you would a normal Rails application. There are a few things you should know about /this/ app:
+
+1. Review config.announce settings in each environment file
+
+2. If you don't plan to support multiple teasers, signup for an account at
+http://yourrootdomain.com/signup?key=dk3su29sw. Make your teaser have the
+subdomain of www.
+
+3. If you don't want the www subdomain, try making your teaser use a custom
+domain, and you may have to change WelcomeController.
 
 == Support
 

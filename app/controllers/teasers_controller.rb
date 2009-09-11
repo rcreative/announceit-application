@@ -25,7 +25,7 @@ class TeasersController < ApplicationController
     end
   end
   
-  protected
+  private
     def assign_account
       @account = current_account || begin
         if Rails.configuration.announce.tlds.include?(request.domain)
@@ -36,7 +36,7 @@ class TeasersController < ApplicationController
       end
       
       if @account.nil?
-        redirect_to (Rails.env.production? ? "http://www.announceitapp.com" : root_url)
+        redirect_to Rails.configuration.announce.application_teaser_url
       end
     end
     

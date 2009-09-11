@@ -18,10 +18,12 @@ test:
   username: root
   password:
   socket: /tmp/mysql.sock
-
+  
 production:
   adapter: mysql
+  pool: 5
+  encoding: utf8
   database: announce_production
-  username: announce_deploy
-  password: eh292udj29d
-  host: localhost
+  username: root
+  password:
+  socket: /tmp/mysql.sock
