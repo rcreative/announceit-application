@@ -28,8 +28,8 @@ module Spec
         end
 
         form = forms[0]
+        form_fields = css_select form, "input, select, textarea"
         values.to_fields.each do |name, value|
-          form_fields = css_select form, "input, select, textarea"
           matching_field = form_fields.detect {|field| field["name"] == name || field["name"] == "#{name}[]"}
           violated "Could not find a form field having the name '#{name}'" unless matching_field
           if options[:verify_field_values]
@@ -42,10 +42,10 @@ module Spec
             violated "Form '#{selector}' has a file field named '#{name}', but the enctype is not multipart/form-data"
           end
           if matching_field.name == "select"
-            should have_tag(matching_field, "option[value=#{value}]")
+            response.should have_tag(matching_field, "option[value=#{value}]")
           end
         end
-        form
+        [form, form_fields]
       end
 
       # Submit a form to the application after verifying it exists in the
@@ -119,35 +119,38 @@ module Spec
           options.update(args.last)
         end
         
-        form = sees_form(selector, values, options)
+        form, fields = sees_form(selector, values, options)
         violated "Form '#{selector}' is missing an 'action' attribute" if form["action"].blank?
-        submit_to form["action"], load_hidden_fields(values, form, options[:include_hidden]), form["method"], options
+        submit_to form["action"], collect_form_params(values, form, fields, options[:include_hidden]), form["method"], options
       end
       
       private
-        def load_hidden_fields(values, form, include_hidden = true)
-          hiddens = css_select(form, "input[type=hidden]")
-          return values if hiddens.blank?
-          
-          hidden_values = hiddens.inject([]) do |memo,h|
-            memo << [h['name'], h['value']]; memo
-          end
-          
+        def collect_form_params(values, form, fields, include_hidden = true)
           given_values = values.to_fields
-          form_method = hidden_values.assoc("_method")
-          given_values << form_method if form_method
-          
-          if include_hidden
-            given_values.each do |fieldvalue|
-              fieldname = fieldvalue.first
-              hidden_values.delete_if do |hiddenvalue|
-                fieldname == hiddenvalue.first
+          overridden_array_field_names, string_form_params, file_form_params = [], [], []
+          fields.each do |field|
+            field_name = field['name']
+            next if overridden_array_field_names.include?(field_name)
+            submit = given_values.select {|k,v| k == field_name}
+            if submit.blank?
+              if (field['type'] == 'hidden' && include_hidden) || field_name == '_method'
+                submit = [field['name'], field['value']]
+                string_form_params << submit
+              end
+            else
+              if submit.size == 1 && ActionController::TestUploadedFile === submit.first.last
+                file_form_params.concat(submit)
+              else
+                overridden_array_field_names << field_name if field_name =~ /\[\]/
+                string_form_params.concat(submit)
               end
             end
-            given_values.concat(hidden_values)
           end
-          
-          ActionController::UrlEncodedPairParser.new(given_values).result
+          form_params = Rack::Utils.parse_nested_query(string_form_params.collect {|k,v| "#{k}=#{CGI.escape(v.to_s)}"}.join('&'))
+          file_form_params.each do |k,v|
+            Rack::Utils.normalize_params(form_params, k, v)
+          end
+          form_params
         end
       
     end

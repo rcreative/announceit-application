@@ -2,13 +2,4 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  activerecord:
-    errors:
-      messages:
-        invalid: "invalid"
-        empty: "required"
-        blank: "required"
-        too_long: "must be no more than {{count}} characters"
-        too_short: "must be at least {{count}} characters"
-        wrong_length: "must be {{count}} characters"
-        confirmation: "must match confirmation"
+  hello: "Hello world"
